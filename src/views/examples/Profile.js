@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, {} from "react";
 
 // reactstrap components
 import {
@@ -32,6 +32,7 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
+import  {Link} from 'react-router-dom'
 
 const Profile = () => {
   return (
@@ -137,14 +138,14 @@ const Profile = () => {
                     <h3 className="mb-0">My account</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      Settings
-                    </Button>
+                    <Link to='/admin/SettingsProfile'>
+                      <Button
+                        color="primary"
+                        size="sm"
+                      >
+                        Settings
+                      </Button>
+                    </Link>
                   </Col>
                 </Row>
               </CardHeader>
@@ -329,5 +330,4 @@ const Profile = () => {
     </>
   );
 };
-
 export default Profile;
