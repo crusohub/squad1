@@ -57,6 +57,13 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/SettingsProfile",
+    name: "Settings Profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: SettingsProfile,
+    layout: "/admin",
+  },
+  {
     path: "/tables",
     name: "Tables",
     icon: "ni ni-bullet-list-67 text-red",
@@ -96,11 +103,6 @@ var routes = [
     name: "Editar Projeto",
     icon: "ni ni-circle-08 text-pink",
     component: EditProject,
-    layout: "/admin",
-  },
-  {
-    path: "/SettingsProfile",
-    component: SettingsProfile,
     layout: "/admin",
   },
 ];
