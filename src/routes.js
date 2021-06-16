@@ -26,6 +26,7 @@ import SettingsProfile from 'views/examples/SettingsProfile.js';
 import EditProject from "views/examples/EditProject.js"
 import TablesProject from "views/examples/TablesProject"
 import TablesUser from "views/examples/TablesUser"
+import NewProject from "views/examples/NewProject"
 
 var routes = [
   {
@@ -102,6 +103,13 @@ var routes = [
     path: "/SettingsProfile",
     component: SettingsProfile,
     layout: "/admin",
+  },
+  {
+    path: "/newproject",
+    name: "Novo Projeto",
+    icon: "ni ni-html5 ",
+    component: NewProject,
+    layout: "/admin"
   },
 ];
 export default routes;
