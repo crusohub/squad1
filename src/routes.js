@@ -27,6 +27,8 @@ import EditProject from "views/examples/EditProject.js"
 import TablesProject from "views/examples/TablesProject"
 import TablesUser from "views/examples/TablesUser"
 import PesquisarProject from "views/examples/PesquisarProject"
+import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
+import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
 
 var routes = [
   {
@@ -113,5 +115,19 @@ var routes = [
     component: PesquisarProject,
     layout: "/admin",
   },
+  {
+    path: "/pesquisarassociacao",
+    name: "Pesquisar Associacao",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: PesquisarAssociacao,
+    layout: "/admin",
+  },
+  {
+    path: "/cadassociacao",
+    name: "Cadastrar Associacao",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: CadastrarAssociacao,
+    layout: "/admin",
+  }
 ];
 export default routes;
