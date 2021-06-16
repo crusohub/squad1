@@ -35,7 +35,12 @@ import {
   Table,
   Container,
   Row,
+  FormGroup,
+  Input,
+  Form,
   UncontrolledTooltip,
+  CardBody,
+  Button, Col
 } from "reactstrap";
 // core components
 import Header from "components/Headers/HeaderTables";
@@ -73,12 +78,52 @@ const Tables = () => {
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Table */}
+        <Col className="order-xl-1" xl="12">
+                  <Row>
+                  <div className="col">
+            <Card className="shadow">
+                              <Form>
+                              <CardHeader className="border-0">
+                <h3 className="mb-0">Pesquisar</h3>
+                    <FormGroup>
+                    <Col>
+                      <label
+                        className="form-control-label"
+                        htmlFor="input-username"
+                      >
+                        Username
+                      </label>
+                      <Input
+                        className="form-control-alternative"
+                        defaultValue="lucky.jesse"
+                        id="input-username"
+                        placeholder="Username"
+                        type="text"
+                      />
+                      
+                      <Button
+                        className="mr-4"
+                        color="info"
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                        size="sm"
+                      >Pesquisar</Button>
+                      </Col>
+                    </FormGroup>
+                    </CardHeader>
+                  </Form>
+                  </Card>
+                  </div>
+                  </Row>
+                  </Col>
+                  <Col className="order-xl-1" xl="12">
         <Row>
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
                 <h3 className="mb-0">Card tables</h3>
               </CardHeader>
+              <CardBody className="pt-0 pt-md-4">
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
@@ -167,6 +212,7 @@ const Tables = () => {
                   
                 </tbody>
               </Table>
+              </CardBody>
               <CardFooter className="py-4">
                 <nav aria-label="...">
                   <Pagination
@@ -222,7 +268,7 @@ const Tables = () => {
             </Card>
           </div>
         </Row>
-        
+        </Col>
       </Container>
     </>
   );
