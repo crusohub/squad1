@@ -24,7 +24,8 @@ import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import SettingsProfile from 'views/examples/SettingsProfile.js';
 import EditProject from "views/examples/EditProject.js"
-
+import addProject from "views/examples/addProject"
+import associateProject from "views/examples/associateProject"
 
 var routes = [
   {
@@ -77,6 +78,13 @@ var routes = [
     layout: "/auth",
   },
   {
+    path: "/addProject",
+    name: "Add Project",
+    icon: "ni ni-fat-add text-red",
+    component: addProject,
+    layout: "/admin",
+  },
+  {
     path: "/editproject",
     name: "Editar Projeto",
     icon: "ni ni-circle-08 text-pink",
@@ -84,8 +92,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/SettingsProfile",
-    component: SettingsProfile,
+    path: "/associateProject",
+    name: "Associate Project",
+    icon: "ni ni-air-baloon text-yellow",
+    component: associateProject,
     layout: "/admin",
   },
 ];
