@@ -26,6 +26,7 @@ import SettingsProfile from 'views/examples/SettingsProfile.js';
 import EditProject from "views/examples/EditProject.js"
 import TablesProject from "views/examples/TablesProject"
 import TablesUser from "views/examples/TablesUser"
+import PesquisarProject from "views/examples/PesquisarProject"
 
 var routes = [
   {
@@ -96,6 +97,13 @@ var routes = [
     name: "Editar Projeto",
     icon: "ni ni-circle-08 text-pink",
     component: EditProject,
+    layout: "/admin",
+  },
+  {
+    path: "/pesquisarproject",
+    name: "Pesquisar Project",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: PesquisarProject,
     layout: "/admin",
   },
   {
