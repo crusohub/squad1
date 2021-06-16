@@ -24,9 +24,17 @@ import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import SettingsProfile from 'views/examples/SettingsProfile.js';
 import EditProject from "views/examples/EditProject.js"
+import addProject from "views/examples/addProject"
+import associateProject from "views/examples/associateProject"
 import TablesProject from "views/examples/TablesProject"
 import TablesUser from "views/examples/TablesUser"
+<<<<<<< HEAD
 import NewProject from "views/examples/NewProject"
+=======
+import PesquisarProject from "views/examples/PesquisarProject"
+import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
+import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
+>>>>>>> 415ac9fc4e80ac3b18ac240a18e3c21dcc9568f5
 
 var routes = [
   {
@@ -55,6 +63,13 @@ var routes = [
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
+    layout: "/admin",
+  },
+  {
+    path: "/SettingsProfile",
+    name: "Settings Profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: SettingsProfile,
     layout: "/admin",
   },
   {
@@ -93,6 +108,13 @@ var routes = [
     layout: "/auth",
   },
   {
+    path: "/addProject",
+    name: "Add Project",
+    icon: "ni ni-fat-add text-red",
+    component: addProject,
+    layout: "/admin",
+  },
+  {
     path: "/editproject",
     name: "Editar Projeto",
     icon: "ni ni-circle-08 text-pink",
@@ -100,16 +122,40 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/SettingsProfile",
-    component: SettingsProfile,
+    path: "/associateProject",
+    name: "Associate Project",
+    icon: "ni ni-air-baloon text-yellow",
+    component: associateProject,
+  },
+  {
+    path: "/pesquisarproject",
+    name: "Pesquisar Project",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: PesquisarProject,
     layout: "/admin",
   },
   {
+    path: "/pesquisarassociacao",
+    name: "Pesquisar Associacao",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: PesquisarAssociacao,
+    layout: "/admin",
+  },
+  {
+<<<<<<< HEAD
     path: "/newproject",
     name: "Novo Projeto",
     icon: "ni ni-html5 ",
     component: NewProject,
     layout: "/admin"
   },
+=======
+    path: "/cadassociacao",
+    name: "Cadastrar Associacao",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: CadastrarAssociacao,
+    layout: "/admin",
+  }
+>>>>>>> 415ac9fc4e80ac3b18ac240a18e3c21dcc9568f5
 ];
 export default routes;

@@ -35,50 +35,94 @@ import {
   Table,
   Container,
   Row,
+  FormGroup,
+  Input,
+  Form,
   UncontrolledTooltip,
+  CardBody,
+  Button, Col
 } from "reactstrap";
 // core components
 import Header from "components/Headers/HeaderTables";
 
 const Tables = () => {
-  const projectInitial = [
+  const associacaoInitial = [
     {
      "id": "1",
-     "image": "image 1",
-     "projectname": "projectname 1",
-     "status": "status 1",
-     "budget": "budget 1",
-     "completed": "completed 1"
+     "projectid": "1",
+     "userid": "1",
+     "projectname": "project 1",
+     "username": "user 1"
     },
     {
      "id": "2",
-     "image": "image 2",
-     "projectname": "projectname 2",
-     "status": "status 2",
-     "budget": "budget 2",
-     "completed": "completed 2"
+     "projectid": "1",
+     "userid": "2",
+     "projectname": "project 1",
+     "username": "user 2"
     },
     {
      "id": "3",
-     "image": "image 3",
-     "projectname": "projectname 3",
-     "status": "status 3",
-     "budget": "budget 3",
-     "completed": "completed 3"
-    }]
-    const [projects, setProjects] = useState(projectInitial)
+     "projectid": "1",
+     "userid": "3",
+     "projectname": "project 1",
+     "username": "user 3"
+    }
+   ]
+   
+    const [associacoes, setAssociacoes] = useState(associacaoInitial)
   return (
     <>
       <Header />
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Table */}
+        <Col className="order-xl-1" xl="12">
+                  <Row>
+                  <div className="col">
+            <Card className="shadow">
+                              <Form>
+                              <CardHeader className="border-0">
+                <h3 className="mb-0">Pesquisar</h3>
+                    <FormGroup>
+                    <Col>
+                      <label
+                        className="form-control-label"
+                        htmlFor="input-username"
+                      >
+                        Username
+                      </label>
+                      <Input
+                        className="form-control-alternative"
+                        defaultValue="lucky.jesse"
+                        id="input-username"
+                        placeholder="Username"
+                        type="text"
+                      />
+                      
+                      <Button
+                        className="mr-4"
+                        color="info"
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                        size="sm"
+                      >Pesquisar</Button>
+                      </Col>
+                    </FormGroup>
+                    </CardHeader>
+                  </Form>
+                  </Card>
+                  </div>
+                  </Row>
+                  </Col>
+                  <Col className="order-xl-1" xl="12">
         <Row>
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
                 <h3 className="mb-0">Card tables</h3>
               </CardHeader>
+              <CardBody className="pt-0 pt-md-4">
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
@@ -90,7 +134,7 @@ const Tables = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {projects.map((value, index) => (
+                {associacoes.map((value, index) => (
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
@@ -167,6 +211,7 @@ const Tables = () => {
                   
                 </tbody>
               </Table>
+              </CardBody>
               <CardFooter className="py-4">
                 <nav aria-label="...">
                   <Pagination
@@ -222,7 +267,7 @@ const Tables = () => {
             </Card>
           </div>
         </Row>
-        
+        </Col>
       </Container>
     </>
   );
