@@ -24,7 +24,8 @@ import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import SettingsProfile from 'views/examples/SettingsProfile.js';
 import EditProject from "views/examples/EditProject.js"
-
+import TablesProject from "views/examples/TablesProject"
+import TablesUser from "views/examples/TablesUser"
 
 var routes = [
   {
@@ -60,6 +61,20 @@ var routes = [
     name: "Tables",
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
+    layout: "/admin",
+  },
+  {
+    path: "/tablesproject",
+    name: "Project",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: TablesProject,
+    layout: "/admin",
+  },
+  {
+    path: "/tablesuser",
+    name: "User",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: TablesUser,
     layout: "/admin",
   },
   {
