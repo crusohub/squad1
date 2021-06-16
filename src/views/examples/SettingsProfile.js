@@ -1,4 +1,4 @@
-import React, { } from 'react'
+import React, { useState } from 'react'
 // reactstrap components
 import {
   Button,
@@ -16,19 +16,93 @@ import UserHeader from "components/Headers/UserHeader.js";
 
 export default function SettingsProfile(){
 
+    const [usuario, setUsuario] = useState({
+        "id": "1",
+        "username": "username 1",
+        "firstname": "firstname 123",
+        "lastname": "lastname 123",
+        "email": "usuario@gmail.com",
+        "address": "address 1",
+        "city": "city 1",
+        "country": "country 1",
+        "postalcode": "postalcode 1",
+        "about": "about 1",
+        "": "username 1as",
+        "password": "1"
+    })
+
+    const [currentPassword, setCurrentPassword] = useState("")
+    const [newPassword, setNewPassword] = useState("")
+    const [repeatNewPassword, setRepeatNewPassword] = useState("")
+    const [currentUsername, setCurrentUsername] = useState("")
+
     const handleChansePassword= (e) =>{
         e.preventDefault()
-        const currentPassword = e.target.currentPassword.value
-        const newPassword = e.target.newPassword.value
-        const repeatNewPassword = e.target.repeatNewPassword.value
-    
-        console.log(`Senha antiga: ${currentPassword} \n Nova senha: ${newPassword} \n Repetindo nova senha: ${repeatNewPassword}`)
+
+        if (currentPassword === usuario.password){
+            if(newPassword === repeatNewPassword){
+                setUsuario({
+                    "id": "1",
+                    "username": "username 1",
+                    "firstname": "firstname 123",
+                    "lastname": "lastname 123",
+                    "email": "usuario@gmail.com",
+                    "address": "address 1",
+                    "city": "city 1",
+                    "country": "country 1",
+                    "postalcode": "postalcode 1",
+                    "about": "about 1",
+                    "": "username 1as",
+                    "password": newPassword,
+                })
+                alert("Senha alterada")
+                //Quando tiver o Context adicionar aqui a 
+                //requisição http para o moki put passando o id do usuario a ser alterado e o {usuario} 
+                //com o password alterado
+                clearFieldsChangePassword()
+            }else{
+                alert("Novas senhas não coincidem")
+            }
+        }else{
+            alert("Porfavor informe a sua senha atual!")
+        }
     }
 
     const handleDelete = (e) =>{
         e.preventDefault()
-        const userName = e.target.userName.value
-        console.log(`O usuario ${userName} foi excluido`)
+        if(currentUsername === usuario.username){
+            alert("Usuario Removido")
+            //Quando tiver o Context adicionar aqui a requisição http para o moki delete  passando o id do usuario
+            clearFieldRemoveUser()
+        }else{
+            alert("Usuario informado não é valido")
+        }
+    }
+
+    const handleCurrentPassword = (e) =>{
+        setCurrentPassword(e.target.value)
+    }
+
+    const handleNewPassword = (e) =>{
+        setNewPassword(e.target.value)
+    }
+
+    const handleRepeatNewPassword = (e) =>{
+        setRepeatNewPassword(e.target.value)
+    }
+
+    function clearFieldsChangePassword(){
+        setCurrentPassword("")
+        setNewPassword("")
+        setRepeatNewPassword("")
+    }
+
+    const handelCurrentUsername = (e) => {
+        setCurrentUsername(e.target.value)
+    }
+
+    function clearFieldRemoveUser(){
+        setCurrentUsername("")
     }
 
     return (
@@ -67,6 +141,8 @@ export default function SettingsProfile(){
                                     name="currentPassword"
                                     type="password"
                                     placeholder="Senha Atual"
+                                    onChange={handleCurrentPassword}
+                                    value={currentPassword}
                                     />
                                 </FormGroup>
                             </Col>
@@ -86,6 +162,8 @@ export default function SettingsProfile(){
                                     name="newPassword"
                                     placeholder="Nova Senha"
                                     type="password"
+                                    onChange={handleNewPassword}
+                                    value={newPassword}
                                     />
                                 </FormGroup>
                             </Col>
@@ -105,6 +183,8 @@ export default function SettingsProfile(){
                                     name="repeatNewPassword"
                                     placeholder="Repita a Nova Senha"
                                     type="password"
+                                    onChange={handleRepeatNewPassword}
+                                    value={repeatNewPassword}
                                     />
                                 </FormGroup>
                             </Col>
@@ -153,6 +233,8 @@ export default function SettingsProfile(){
                                     name="userName"
                                     type="text"
                                     placeholder="Username"
+                                    onChange={handelCurrentUsername}
+                                    value={currentUsername}
                                     />
                                 </FormGroup>
                             </Col>

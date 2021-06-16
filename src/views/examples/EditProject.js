@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, {useState} from "react";
 
 // reactstrap components
 import {
@@ -33,17 +33,23 @@ import {
 import ProjectHeader from "components/Headers/ProjectHeader.js";
 
 const Profile = () => {
-  
+  const projectInitial = {
+      "id": "1",
+      "image": "image 1",
+      "projectname": "projectname 1",
+      "status": "status 1",
+      "budget": "budget 1",
+      "completed": "completed 1"
+     }
+    const [project, setProject] = useState(projectInitial)
   return (
     <>
       <ProjectHeader />
       {/* Page content */}
       <Container className="mt--7" fluid>
-        <Row>Username
-          <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-            
-          </Col>
-          <Col className="order-xl-1" xl="8">
+        <Row>
+          
+          <Col className="order-xl-1" xl="12">
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
@@ -79,7 +85,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="lucky.jesse"
+                            defaultValue={project.projectname}
                             id="input-username"
                             placeholder="Username"
                             type="text"
