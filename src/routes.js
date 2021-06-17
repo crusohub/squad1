@@ -22,15 +22,15 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
-import SettingsProfile from 'views/examples/SettingsProfile.js';
-import EditProject from "views/examples/EditProject.js"
-import addProject from "views/examples/addProject"
-import associateProject from "views/examples/associateProject"
-import TablesProject from "views/examples/TablesProject"
-import TablesUser from "views/examples/TablesUser"
-import PesquisarProject from "views/examples/PesquisarProject"
-import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
-import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
+import SettingsProfile from "views/examples/SettingsProfile.js";
+import EditProject from "views/examples/EditProject.js";
+import addProject from "views/examples/addProject";
+import associateProject from "views/examples/associateProject";
+import TablesProject from "views/examples/TablesProject";
+import PesquisarProject from "views/examples/PesquisarProject";
+import PesquisarAssociacao from "views/examples/PesquisarAssociacao";
+import CadastrarAssociacao from "views/examples/CadastrarAssociacao";
+import UserTables from "views/examples/UserTables";
 
 var routes = [
   {
@@ -83,10 +83,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tablesuser",
-    name: "User",
+    path: "/users-table",
+    name: "Users",
     icon: "ni ni-bullet-list-67 text-red",
-    component: TablesUser,
+    component: UserTables,
     layout: "/admin",
   },
   {
@@ -143,6 +143,6 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: CadastrarAssociacao,
     layout: "/admin",
-  }
+  },
 ];
 export default routes;
