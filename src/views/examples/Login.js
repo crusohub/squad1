@@ -40,7 +40,7 @@ const Login = () => {
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-3">
-              <small>Sign in with</small>
+              <small>Entrar com</small>
             </div>
             <div className="btn-wrapper text-center">
               <Button
@@ -81,7 +81,7 @@ const Login = () => {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Or sign in with credentials</small>
+              <small>Ou entre com as credenciais</small>
             </div>
             <Form role="form">
               <FormGroup className="mb-3">
@@ -122,12 +122,12 @@ const Login = () => {
                   className="custom-control-label"
                   htmlFor=" customCheckLogin"
                 >
-                  <span className="text-muted">Remember me</span>
+                  <span className="text-muted">Lembrar de mim</span>
                 </label>
               </div>
               <div className="text-center">
                 <Button className="my-4" color="primary" type="button">
-                  Sign in
+                  Entrar
                 </Button>
               </div>
             </Form>
@@ -140,7 +140,7 @@ const Login = () => {
               href="#pablo"
               onClick={(e) => e.preventDefault()}
             >
-              <small>Forgot password?</small>
+              <small>Esqueceu a senha?</small>
             </a>
           </Col>
           <Col className="text-right" xs="6">
@@ -149,7 +149,7 @@ const Login = () => {
               href="#pablo"
               onClick={(e) => e.preventDefault()}
             >
-              <small>Create new account</small>
+              <small>Criar uma nova conta</small>
             </a>
           </Col>
         </Row>
