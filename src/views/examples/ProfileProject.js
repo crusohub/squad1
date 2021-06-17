@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useState} from "react";
+import React from "react";
 
 // reactstrap components
 import {
@@ -32,25 +32,8 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
-import  {Link} from 'react-router-dom'
 
 const Profile = () => {
-  const userInitial = {
-     "id": "1",
-     "username": "username 1",
-     "firstname": "firstname 123",
-     "lastname": "lastname 123",
-     "email": "usuario@gmail.com",
-     "address": "address 1",
-     "city": "city 1",
-     "country": "country 1",
-     "postalcode": "postalcode 1",
-     "about": "about 1",
-     "": "username 1as",
-     "password": "1"
-    }
-  const [user, setUser] = useState(userInitial)
-
   return (
     <>
       <UserHeader />
@@ -118,7 +101,7 @@ const Profile = () => {
                 </Row>
                 <div className="text-center">
                   <h3>
-                    {user.firstname}
+                    Jessica Jones
                     <span className="font-weight-light">, 27</span>
                   </h3>
                   <div className="h5 font-weight-300">
@@ -154,14 +137,14 @@ const Profile = () => {
                     <h3 className="mb-0">My account</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    <Link to='/admin/SettingsProfile'>
-                      <Button
-                        color="primary"
-                        size="sm"
-                      >
-                        Settings
-                      </Button>
-                    </Link>
+                    <Button
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                      size="sm"
+                    >
+                      Settings
+                    </Button>
                   </Col>
                 </Row>
               </CardHeader>
@@ -346,4 +329,5 @@ const Profile = () => {
     </>
   );
 };
+
 export default Profile;
