@@ -69,8 +69,49 @@ const Tables = () => {
      "username": "user 3"
     }
    ]
-   
+   const usersInitial = [
+    {
+     "id": "1",
+     "username": "username 1",
+     "firstname": "firstname 123",
+     "lastname": "lastname 123",
+     "email": "usuario@gmail.com",
+     "address": "address 1",
+     "city": "city 1",
+     "country": "country 1",
+     "postalcode": "postalcode 1",
+     "about": "about 1",
+     "": "username 1as",
+     "password": "1"
+    },
+    {
+     "id": "2",
+     "username": "username 2",
+     "firstname": "firstname 2",
+     "lastname": "lastname 2",
+     "email": "email 2",
+     "address": "address 2",
+     "city": "city 2",
+     "country": "country 2",
+     "postalcode": "postalcode 2",
+     "about": "about 2"
+    },
+    {
+     "id": "3",
+     "username": "username 3",
+     "firstname": "firstname 3",
+     "lastname": "lastname 3",
+     "email": "email 3",
+     "address": "address 3",
+     "city": "city 3",
+     "country": "country 3",
+     "postalcode": "postalcode 3",
+     "about": "about 3"
+    }]
+
+   const [users, setUsers] = useState(usersInitial)
     const [associacoes, setAssociacoes] = useState(associacaoInitial)
+
   return (
     <>
       <Header />
@@ -84,7 +125,8 @@ const Tables = () => {
                               <Form>
                               <CardHeader className="border-0">
                 <h3 className="mb-0">Pesquisar</h3>
-                    <FormGroup>
+                <FormGroup>
+                <Row>
                     <Col>
                       <label
                         className="form-control-label"
@@ -97,8 +139,35 @@ const Tables = () => {
                         defaultValue="lucky.jesse"
                         id="input-username"
                         placeholder="Username"
-                        type="text"
-                      />
+                        type="select"
+                      >
+                        {users.map((value, index) => (
+                          <option>{value.username}</option>
+                        ))}
+                          
+                      </Input>
+                      </Col>
+                      </Row>
+                    <Col>
+                      <label
+                        className="form-control-label"
+                        htmlFor="input-username"
+                      >
+                        Project
+                      </label>
+                      <Input
+                        className="form-control-alternative"
+                        defaultValue="lucky.jesse"
+                        id="input-username"
+                        placeholder="Username"
+                        type="select"
+                        >
+                          {associacoes.map((value, index) => (
+                          <option>{value.username}</option>
+                        ))}
+
+                        </Input>
+                      
                       
                       <Button
                         className="mr-4"
@@ -106,7 +175,9 @@ const Tables = () => {
                         href="#pablo"
                         onClick={(e) => e.preventDefault()}
                         size="sm"
-                      >Pesquisar</Button>
+                      >Excluir</Button>
+
+
                       </Col>
                     </FormGroup>
                     </CardHeader>
