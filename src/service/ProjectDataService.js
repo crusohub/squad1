@@ -28,7 +28,7 @@ const getAllProject = (projId) =>{
 */
 
 const createProject = (projData) =>{
-    return ProjectData.post("/projeto/"+projData)
+    return ProjectData.post("/projeto/",projData)
 }
 
 /*
