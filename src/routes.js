@@ -22,9 +22,9 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
-import SettingsProfile from 'views/examples/SettingsProfile.js';
-import EditProject from "views/examples/EditProject.js"
-
+import SettingsProfile from "views/examples/SettingsProfile.js";
+import EditProject from "views/examples/EditProject.js";
+import UserTables from "views/examples/UserTables";
 
 var routes = [
   {
@@ -60,6 +60,13 @@ var routes = [
     name: "Tables",
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
+    layout: "/admin",
+  },
+  {
+    path: "/users-table",
+    name: "Users",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: UserTables,
     layout: "/admin",
   },
   {
