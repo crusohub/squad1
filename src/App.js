@@ -20,11 +20,7 @@ const App = () => {
       <Switch>
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-
-        {user.isAuthenticated === false 
-          ? <Redirect from="*" to="/auth/login" />
-          : <Redirect from="*" to="/admin" />
-        }
+        <Redirect from="/" to="/admin/index" />
       </Switch>
     </BrowserRouter>
   )
