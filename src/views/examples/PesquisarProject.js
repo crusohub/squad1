@@ -163,13 +163,13 @@ const Tables = () => {
                     <td>
                       <Badge color="" className="badge-dot mr-4">
                         <i className="bg-warning" />
-                        pending
+                        completed
                       </Badge>
                     </td>
                     
                     <td>
                       <div className="d-flex align-items-center">
-                        <span className="mr-2">60%</span>
+                        <span className="mr-2">100%</span>
                         <div>
                           <Progress
                             max="100"
