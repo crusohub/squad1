@@ -15,7 +15,9 @@ import PesquisarProject from "views/examples/PesquisarProject"
 import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
 import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
 
-var routes = [
+
+
+let routes = [
   {
     path: "/index",
     name: "Dashboard",
