@@ -175,7 +175,7 @@ const Tables = () => {
                         href="#pablo"
                         onClick={(e) => e.preventDefault()}
                         size="sm"
-                      >Excluir</Button>
+                      >Pesquisar</Button>
 
 
                       </Col>
