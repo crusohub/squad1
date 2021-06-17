@@ -1,7 +1,7 @@
 import ProjectData from "../http-common"
 
 //Pega um projeto "existente" na api através do seu id 
-const getProjectById = () =>{
+const getProjectById = (projId) =>{
     return ProjectData.get("projeto/"+projId)
 }
 
