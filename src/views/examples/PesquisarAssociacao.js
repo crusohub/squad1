@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 // reactstrap components
 import {
@@ -44,7 +44,7 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/HeaderTables";
-
+import UserDataService from "../../service/UserDataService"
 const Tables = () => {
   const associacaoInitial = [
     {
@@ -109,9 +109,17 @@ const Tables = () => {
      "about": "about 3"
     }]
 
-   const [users, setUsers] = useState(usersInitial)
-    const [associacoes, setAssociacoes] = useState(associacaoInitial)
+   const [users, setUsers] = useState([])
+   const [projects, setProjects] = useState(usersInitial)
+   const [associacoes, setAssociacoes] = useState(associacaoInitial)
 
+   useEffect(()=>{
+      UserDataService.getUsers().then(
+        response => {
+          setUsers(response.data)
+        }
+      )
+   }, [])
   return (
     <>
       <Header />
@@ -148,6 +156,7 @@ const Tables = () => {
                       </Input>
                       </Col>
                       </Row>
+                      <Row>
                     <Col>
                       <label
                         className="form-control-label"
@@ -167,18 +176,23 @@ const Tables = () => {
                         ))}
 
                         </Input>
+                        </Col>
+                      </Row>
+                      
+                      <Row>
+                      <Col>
+                            <Button 
+                                className="my-4" 
+                                color="primary" 
+                                type="submit"
+                                onClick={(e) => e.preventDefault()}
+                                >
+                                Pesquisar
+                            </Button>
+                            </Col>
+                      </Row>
                       
                       
-                      <Button
-                        className="mr-4"
-                        color="info"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        size="sm"
-                      >Pesquisar</Button>
-
-
-                      </Col>
                     </FormGroup>
                     </CardHeader>
                   </Form>
