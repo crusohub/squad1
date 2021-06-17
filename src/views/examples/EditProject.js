@@ -15,8 +15,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useState} from "react";
-
+import React, {useContext, useState} from "react";
+import {ProjectContext} from "../../contextAPI/contextProject"
 // reactstrap components
 import {
   Button,
@@ -33,15 +33,8 @@ import {
 import ProjectHeader from "components/Headers/ProjectHeader.js";
 
 const Profile = () => {
-  const projectInitial = {
-      "id": "1",
-      "image": "image 1",
-      "projectname": "projectname 1",
-      "status": "status 1",
-      "budget": "budget 1",
-      "completed": "completed 1"
-     }
-    const [project, setProject] = useState(projectInitial)
+
+    const [project, setProject] = useContext(ProjectContext)
   return (
     <>
       <ProjectHeader />
@@ -86,7 +79,7 @@ const Profile = () => {
                             className="form-control-alternative"
                             defaultValue={project.projectname}
                             id="input-username"
-                            placeholder="Username"
+                            placeholder="Nome do Projeto"
                             type="text"
                           />
                         </FormGroup>
