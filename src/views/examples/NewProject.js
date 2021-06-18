@@ -194,9 +194,8 @@ const NewProject = (props) => {
                               onClick={updateDataProject}
                               size="sm"
                             >
-                              Enviar
+                              Pesquisar
                             </Button>
-
                           </Col>
                         </Col>
                       </Row>
