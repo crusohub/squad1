@@ -40,8 +40,6 @@ const Profile = () => {
     }
   const [user, setUser] = useState(userInitial)
 
-  
-
   return (
     <>
       <UserHeader />
