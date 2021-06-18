@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useHistory, Redirect } from 'react-router-dom'
+
+import history from '../../history';
 
 export default function useAuth() {
     const user = {
@@ -10,32 +11,26 @@ export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const history = useHistory();
-
   useEffect(() => {
     const user = localStorage.getItem('user');
 
     if (user.userId > 0) {
-      // api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
       setAuthenticated(true);
     }
 
     setLoading(false);
   }, []);
   
-   const handleLogin = async () => {
+   const handleLogin = () => {
 
     localStorage.setItem('user', JSON.stringify(user));
-    // api.defaults.headers.Authorization = `Bearer ${token}`;
     setAuthenticated(true);
-    console.log(history);
-    history.push('/admin');
+    history.push('/admin/index');
   }
 
   const handleLogout = () =>  {
     setAuthenticated(false);
     localStorage.removeItem('user');
-    // api.defaults.headers.Authorization = undefined;
     history.push('/auth/login');
   }
   
