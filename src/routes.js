@@ -32,6 +32,7 @@ import PesquisarProject from "views/examples/PesquisarProject"
 import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
 import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
 import ForgotPassword from "views/examples/ForgotPassword";
+import ChangePassword from "views/examples/ChangePassword";
 
 var routes = [
   {
@@ -109,6 +110,13 @@ var routes = [
     name: "Forgot Password",
     icon: "ni ni-circle-08 text-pink",
     component: ForgotPassword,
+    layout: "/auth",
+  },
+  {
+    path: "/changepassword",
+    name: "ChangePassword",
+    icon: "ni ni-circle-08 text-pink",
+    component: ChangePassword,
     layout: "/auth",
   },
   {
