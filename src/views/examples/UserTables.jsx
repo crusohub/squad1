@@ -28,7 +28,7 @@ import Header from "components/Headers/TableHeader.js";
 const UserTables = () => {
   const [users, setUsers] = useState();
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   return (
     <>
