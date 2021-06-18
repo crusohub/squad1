@@ -80,7 +80,7 @@ const Profile = () => {
                             defaultValue={project.projectname}
                             id="input-username"
                             placeholder="Nome do Projeto"
-                            type="text"
+                            type="select"
                           />
                         </FormGroup>
                       </Col>
@@ -151,7 +151,21 @@ const Profile = () => {
                             type="number"
                           />
                         </FormGroup>
+                        
                       </Col>
+                      <label
+                            className="form-control-label"
+                            htmlFor="input-username"
+                          >
+                            Lista de projetos
+                          </label>
+                        <Input
+                            className="form-control-alternative"
+                            defaultValue={project.projectname}
+                            id="input-username"
+                            placeholder="Nome do Projeto"
+                            type="select"
+                          />
                       <Col className="text-right" xs="12">
                     <Button
                       color="primary"
