@@ -1,21 +1,6 @@
-/*!
+import { useState } from "react";
 
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React, {useState} from "react";
+import api from '../../service/UserDataService';
 
 // reactstrap components
 import {
@@ -32,24 +17,30 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
-import  {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
   const userInitial = {
-     "id": "1",
-     "username": "username 1",
-     "firstname": "firstname 123",
-     "lastname": "lastname 123",
-     "email": "usuario@gmail.com",
-     "address": "address 1",
-     "city": "city 1",
-     "country": "country 1",
-     "postalcode": "postalcode 1",
-     "about": "about 1",
-     "": "username 1as",
-     "password": "1"
+    "id": "1",
+    "username": "username 1",
+    "firstname": "firstname 123",
+    "lastname": "lastname 123",
+    "email": "usuario@gmail.com",
+    "address": "address 1",
+    "city": "city 1",
+    "country": "country 1",
+    "postalcode": "postalcode 1",
+    "about": "about 1",
+    "": "username 1as",
+    "password": "1",
+    "image": {
+      "ulrImagePerfil": "",
+      "urlImagebackground": "",
     }
+  }
   const [user, setUser] = useState(userInitial)
+
+
 
   return (
     <>
@@ -66,10 +57,7 @@ const Profile = () => {
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src={
-                          require("../../assets/img/theme/team-4-800x800.jpg")
-                            .default
-                        }
+                        src=""
                       />
                     </a>
                   </div>
@@ -182,7 +170,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="lucky.jesse"
+                            defaultValue={user.username}
                             id="input-username"
                             placeholder="Username"
                             type="text"

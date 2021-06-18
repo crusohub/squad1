@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // reactstrap components
 import {
   Button,
@@ -12,102 +12,146 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import UserHeader from "components/Headers/UserHeader.js";
+import CustomHeader from "components/Headers/CustomHeader.js";
+import UserDataService from '../../service/UserDataService'
 
 export default function SettingsProfile(){
 
-    const [usuario, setUsuario] = useState({
-        "id": "1",
-        "username": "username 1",
-        "firstname": "firstname 123",
-        "lastname": "lastname 123",
-        "email": "usuario@gmail.com",
-        "address": "address 1",
-        "city": "city 1",
-        "country": "country 1",
-        "postalcode": "postalcode 1",
-        "about": "about 1",
-        "": "username 1as",
-        "password": "1"
-    })
+    //quando tiver context, trocar para o usuario em context
+    const user = {
+        id: 1,
+        username: "User1",
+        firstname: "User",
+        lastname: "User",
+        email: "User1@u1.com",
+        address: "User There",
+        city: "There",
+        country: "Here",
+        postalcode: "55",
+        about: "Something about me",
+        date: "2020-07-22T00:27:48.012Z",
+        password: "1"
+    }
+    const [usuario, setUsuario] = useState(user)
 
+    const [password, setPassword] = useState("")
+    const [passwordValid, setPasswordValid] = useState()
+    const [isStrong, setIsStrong]  = useState(false)
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [repeatNewPassword, setRepeatNewPassword] = useState("")
     const [currentUsername, setCurrentUsername] = useState("")
-
+    
     const handleChansePassword= (e) =>{
         e.preventDefault()
-
-        if (currentPassword === usuario.password){
-            if(newPassword === repeatNewPassword){
-                setUsuario({
-                    "id": "1",
-                    "username": "username 1",
-                    "firstname": "firstname 123",
-                    "lastname": "lastname 123",
-                    "email": "usuario@gmail.com",
-                    "address": "address 1",
-                    "city": "city 1",
-                    "country": "country 1",
-                    "postalcode": "postalcode 1",
-                    "about": "about 1",
-                    "": "username 1as",
-                    "password": newPassword,
-                })
-                alert("Senha alterada")
-                //Quando tiver o Context adicionar aqui a 
-                //requisição http para o moki put passando o id do usuario a ser alterado e o {usuario} 
-                //com o password alterado
-                clearFieldsChangePassword()
+        
+        if(currentPassword !== ""){
+            if (currentPassword === user.password){
+                if(newPassword === repeatNewPassword && (isStrong)){
+                    UserDataService.updateUserData(user.id, usuario)
+                    .then(()=>{
+                        alert("Senha alterada")
+                        clearFieldsChangePassword()
+                    })
+                    .catch(error=>alert(error))
+                }else{
+                    if(newPassword !== repeatNewPassword)
+                        alert("Novas senhas não coincidem")
+                    else
+                        alert("Informe uma nova senha forte")
+                }
             }else{
-                alert("Novas senhas não coincidem")
+                console.log(currentPassword)
+                console.log(usuario.password)
+                alert("Senha não é valida")
             }
         }else{
             alert("Porfavor informe a sua senha atual!")
         }
     }
-
+    
     const handleDelete = (e) =>{
         e.preventDefault()
         if(currentUsername === usuario.username){
-            alert("Usuario Removido")
-            //Quando tiver o Context adicionar aqui a requisição http para o moki delete  passando o id do usuario
-            clearFieldRemoveUser()
+            UserDataService.deleteUser(user.id)
+            .then(()=>{
+                alert("Usuario Removido")
+                clearFieldRemoveUser()
+            })
+            .catch(error => alert(error))
         }else{
             alert("Usuario informado não é valido")
         }
     }
-
+     
     const handleCurrentPassword = (e) =>{
         setCurrentPassword(e.target.value)
     }
-
+    
     const handleNewPassword = (e) =>{
         setNewPassword(e.target.value)
+        HandlePassword(e)
     }
-
+    
     const handleRepeatNewPassword = (e) =>{
         setRepeatNewPassword(e.target.value)
     }
-
+    
     function clearFieldsChangePassword(){
         setCurrentPassword("")
         setNewPassword("")
         setRepeatNewPassword("")
     }
-
+    
     const handelCurrentUsername = (e) => {
         setCurrentUsername(e.target.value)
     }
-
+    
     function clearFieldRemoveUser(){
         setCurrentUsername("")
     }
 
+    useEffect(()=>{
+        setUsuario({
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            address: user.address,
+            city: user.city,
+            country: user.country,
+            postalcode: user.postalcode,
+            about: user.about,
+            date: user.date,
+            password: newPassword
+        })
+    },[newPassword, repeatNewPassword])
+    
+    // adicionar no onchange do input da senha
+    const HandlePassword = (e) => {
+    const { name, value } = e.target
+    setPasswordValid({ ...passwordValid, [name]: value })
+    const strength = document.querySelector(".strength")
+    let pass = e.target.value
+    if (pass.length <= 7) {
+        setPassword("Weak")
+        strength.classList.add("text-danger")
+        strength.classList.remove("text-success")
+    } else {
+        setPassword("Strong")
+        strength.classList.add("text-success")
+        strength.classList.remove("text-danger")
+        setIsStrong(true)
+    }
+  }
+
     return (
     <>
-      <UserHeader />
+      <CustomHeader 
+        urlImage="https://mcdn.wallpapersafari.com/medium/90/27/pyE8zg.jpg"
+        title="Configurações da sua conta"
+        descripion="Troque sua senha ou apague sua conta em nosso serviço"
+      />
       {/* Page content */}
       <Container className="mt--7" fluid>
             <Row>
@@ -166,6 +210,12 @@ export default function SettingsProfile(){
                                     value={newPassword}
                                     />
                                 </FormGroup>
+                                <div className="text-muted font-italic">
+                                    <small>
+                                        password strength:{" "}
+                                        <span className="strength font-weight-700">{password}</span>
+                                    </small>
+                                </div>
                             </Col>
                             </Row>
                             <Row>

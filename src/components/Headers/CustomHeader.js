@@ -1,9 +1,16 @@
 import React from "react";
+import { Container, Row, Col } from "reactstrap";
 
-// reactstrap components
-import { Button, Container, Row, Col } from "reactstrap";
 
-const UserHeader = () => {
+// PARA UTILIZAR O CUSTOMHEAER BASTA IMPORTA O COMPONENTE 
+//E CHAMAR PASSANDO AS PROPRIEDADES (urlImage="", title="", descripion="") COMO NO EXEMPLO ABAIXO
+// <CustomHeader 
+//    urlImage="AQUI DEVE IR O LINK NA WEB DA IMAGEM"
+//    title="Configurações da sua conta"
+//    descripion="Troque sua senha ou apague sua conta em nosso serviço"
+// />
+
+const UserHeader = ({urlImage, title, descripion}) => {
   return (
     <>
       <div
@@ -12,7 +19,7 @@ const UserHeader = () => {
           minHeight: "600px",
           backgroundImage:
             "url(" +
-            require("../../assets/img/theme/profile-cover.jpg").default +
+            urlImage +
             ")",
           backgroundSize: "cover",
           backgroundPosition: "center top",
@@ -24,18 +31,10 @@ const UserHeader = () => {
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Hello Jesse</h1>
+              <h1 className="display-2 text-white">{title}</h1>
               <p className="text-white mt-0 mb-5">
-                This is your profile page. You can see the progress you've made
-                with your work and manage your projects or assigned tasks
+                {descripion}
               </p>
-              <Button
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                Edit profile
-              </Button>
             </Col>
           </Row>
         </Container>

@@ -33,8 +33,8 @@ import {
 import ProjectHeader from "components/Headers/ProjectHeader.js";
 
 const Profile = () => {
-
-    const [project, setProject] = useContext(ProjectContext)
+ 
+  const [project, setProject] = useContext(ProjectContext)
   return (
     <>
       <ProjectHeader />
@@ -77,7 +77,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={project.projectname}
+                            defaultValue = {project.projectname}
                             id="input-username"
                             placeholder="Nome do Projeto"
                             type="text"
