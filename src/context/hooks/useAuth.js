@@ -14,7 +14,7 @@ export default function useAuth() {
   useEffect(() => {
     const user = localStorage.getItem('user');
 
-    if (user.userId > 0) {
+    if (user && user.userId > 0) {
       setAuthenticated(true);
     }
 
@@ -22,10 +22,9 @@ export default function useAuth() {
   }, []);
   
    const handleLogin = () => {
-
-    localStorage.setItem('user', JSON.stringify(user));
-    setAuthenticated(true);
-    history.push('/admin/index');
+     localStorage.setItem('user', JSON.stringify(user));
+     setAuthenticated(true);
+     history.push('/admin/index');
   }
 
   const handleLogout = () =>  {
