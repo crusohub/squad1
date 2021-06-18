@@ -45,6 +45,7 @@ const UserTables = () => {
   ];
 
   const [users, setUsers] = useState([]);
+  const [pageList, setPageList] = useState([]);
 
   useEffect(() => {
     chargeUsers();
@@ -53,6 +54,12 @@ const UserTables = () => {
   const chargeUsers = () => {
     UserApi.getUsers().then((response) => {
       setUsers(response.data);
+      const pages = response.data.length / 10;
+      const list = [];
+      for (let i = 0; i < pages; i++) {
+        list.push(i);
+      }
+      setPageList(list);
     });
   };
 
@@ -94,6 +101,44 @@ const UserTables = () => {
                   ))}
                 </tbody>
               </Table>
+              <CardFooter className="py-4">
+                <nav aria-label="...">
+                  <Pagination
+                    className="pagination justify-content-end mb-0"
+                    listClassName="justify-content-end mb-0"
+                  >
+                    <PaginationItem className="disabled">
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                        tabIndex="-1"
+                      >
+                        <i className="fas fa-angle-left" />
+                        <span className="sr-only">Previous</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                    {pageList.map((value) => (
+                      <PaginationItem className="active">
+                        <PaginationLink
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          {value + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className="fas fa-angle-right" />
+                        <span className="sr-only">Next</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                  </Pagination>
+                </nav>
+              </CardFooter>
             </Card>
           </div>
         </Row>
