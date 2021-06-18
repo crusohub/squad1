@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-
+import { Link } from 'react-router-dom';
 // reactstrap components
 import {
   Button,
@@ -135,13 +135,7 @@ const Login = () => {
         </Card>
         <Row className="mt-3">
           <Col xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>Forgot password?</small>
-            </a>
+          <Link to={"/auth/forgotpassword"} className="text-light" data-toggle="collapse">Forgot password?</Link>
           </Col>
           <Col className="text-right" xs="6">
             <a

@@ -31,6 +31,7 @@ import TablesUser from "views/examples/TablesUser"
 import PesquisarProject from "views/examples/PesquisarProject"
 import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
 import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
+import ForgotPassword from "views/examples/ForgotPassword";
 
 var routes = [
   {
@@ -101,6 +102,13 @@ var routes = [
     name: "Register",
     icon: "ni ni-circle-08 text-pink",
     component: Register,
+    layout: "/auth",
+  },
+  {
+    path: "/forgotpassword",
+    name: "Forgot Password",
+    icon: "ni ni-circle-08 text-pink",
+    component: ForgotPassword,
     layout: "/auth",
   },
   {
