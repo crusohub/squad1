@@ -60,11 +60,16 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue = {project.projectname}
+                            defaultValue = ""
                             id="input-username"
-                            placeholder="Nome do Projeto"
+                            placeholder=""
                             type="select"
-                          />
+                          >
+                            <option value="projeto">{project.projectname}</option>
+                            <option value="projeto1">{project.projectname1}</option>
+                            <option value="projeto2">{project.projectname2}</option>
+                            <option value="projeto3">{project.projectname3}</option>
+                          </Input>  
                         </FormGroup>
                       </Col>
                       <Col lg="6">
