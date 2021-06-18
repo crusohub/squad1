@@ -6,7 +6,7 @@ const ProjectProvider = (props) => {
     const dataProjectInitial = {
         "id": "1",
         "image": "image 1",
-        "projectname": "p",
+        "projectname": "Marcos",
         "status": "status 1",
         "budget": "budget 1",
         "completed": "completed 1"
