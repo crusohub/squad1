@@ -17,30 +17,30 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
-import  {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
   const userInitial = {
-     "id": "1",
-     "username": "username 1",
-     "firstname": "firstname 123",
-     "lastname": "lastname 123",
-     "email": "usuario@gmail.com",
-     "address": "address 1",
-     "city": "city 1",
-     "country": "country 1",
-     "postalcode": "postalcode 1",
-     "about": "about 1",
-     "": "username 1as",
-     "password": "1",
-     "image": {
-        "ulrImagePerfil": "",
-        "urlImagebackground": "",
-     }
+    "id": "1",
+    "username": "username 1",
+    "firstname": "firstname 123",
+    "lastname": "lastname 123",
+    "email": "usuario@gmail.com",
+    "address": "address 1",
+    "city": "city 1",
+    "country": "country 1",
+    "postalcode": "postalcode 1",
+    "about": "about 1",
+    "": "username 1as",
+    "password": "1",
+    "image": {
+      "ulrImagePerfil": "",
+      "urlImagebackground": "",
     }
+  }
   const [user, setUser] = useState(userInitial)
 
-  
+
 
   return (
     <>
