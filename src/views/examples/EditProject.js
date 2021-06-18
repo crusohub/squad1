@@ -1,22 +1,5 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React, {useState} from "react";
-
+import React, {useContext, useState} from "react";
+import {ProjectContext} from "../../contextAPI/contextProject"
 // reactstrap components
 import {
   Button,
@@ -33,15 +16,8 @@ import {
 import ProjectHeader from "components/Headers/ProjectHeader.js";
 
 const Profile = () => {
-  const projectInitial = {
-      "id": "1",
-      "image": "image 1",
-      "projectname": "projectname 1",
-      "status": "status 1",
-      "budget": "budget 1",
-      "completed": "completed 1"
-     }
-    const [project, setProject] = useState(projectInitial)
+ 
+  const [project, setProject] = useContext(ProjectContext)
   return (
     <>
       <ProjectHeader />
@@ -84,11 +60,16 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={project.projectname}
+                            defaultValue = ""
                             id="input-username"
-                            placeholder="Username"
-                            type="text"
-                          />
+                            placeholder=""
+                            type="select"
+                          >
+                            <option value="projeto">{project.projectname}</option>
+                            <option value="projeto1">{project.projectname1}</option>
+                            <option value="projeto2">{project.projectname2}</option>
+                            <option value="projeto3">{project.projectname3}</option>
+                          </Input>  
                         </FormGroup>
                       </Col>
                       <Col lg="6">
@@ -158,7 +139,21 @@ const Profile = () => {
                             type="number"
                           />
                         </FormGroup>
+                        
                       </Col>
+                      <label
+                            className="form-control-label"
+                            htmlFor="input-username"
+                          >
+                            Lista de projetos
+                          </label>
+                        <Input
+                            className="form-control-alternative"
+                            defaultValue={project.projectname}
+                            id="input-username"
+                            placeholder="Nome do Projeto"
+                            type="select"
+                          />
                       <Col className="text-right" xs="12">
                     <Button
                       color="primary"

@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import api from '../../service/UserDataService';
+import React from "react";
 
 // reactstrap components
 import {
@@ -17,29 +15,8 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
-import { Link } from 'react-router-dom'
 
 const Profile = () => {
-  const userInitial = {
-    "id": "1",
-    "username": "username 1",
-    "firstname": "firstname 123",
-    "lastname": "lastname 123",
-    "email": "usuario@gmail.com",
-    "address": "address 1",
-    "city": "city 1",
-    "country": "country 1",
-    "postalcode": "postalcode 1",
-    "about": "about 1",
-    "": "username 1as",
-    "password": "1",
-    "image": {
-      "ulrImagePerfil": "",
-      "urlImagebackground": "",
-    }
-  }
-  const [user, setUser] = useState(userInitial)
-
   return (
     <>
       <UserHeader />
@@ -55,12 +32,17 @@ const Profile = () => {
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src=""
+                        src={
+                          require("../../assets/img/theme/team-4-800x800.jpg")
+                            .default
+                        }
                       />
                     </a>
                   </div>
                 </Col>
               </Row>
+
+  
               <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                 <div className="d-flex justify-content-between">
                   <Button
@@ -104,7 +86,7 @@ const Profile = () => {
                 </Row>
                 <div className="text-center">
                   <h3>
-                    {user.firstname}
+                    Jessica Jones
                     <span className="font-weight-light">, 27</span>
                   </h3>
                   <div className="h5 font-weight-300">
@@ -140,14 +122,14 @@ const Profile = () => {
                     <h3 className="mb-0">My account</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    <Link to='/admin/SettingsProfile'>
-                      <Button
-                        color="primary"
-                        size="sm"
-                      >
-                        Settings
-                      </Button>
-                    </Link>
+                    <Button
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                      size="sm"
+                    >
+                      Settings
+                    </Button>
                   </Col>
                 </Row>
               </CardHeader>
@@ -168,7 +150,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={user.username}
+                            defaultValue="lucky.jesse"
                             id="input-username"
                             placeholder="Username"
                             type="text"
@@ -332,4 +314,5 @@ const Profile = () => {
     </>
   );
 };
+
 export default Profile;
