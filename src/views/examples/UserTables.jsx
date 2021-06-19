@@ -45,7 +45,9 @@ const UserTables = () => {
   ];
 
   const [users, setUsers] = useState([]);
+  const [pages, setPages] = useState(0);
   const [pageList, setPageList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     chargeUsers();
@@ -53,14 +55,40 @@ const UserTables = () => {
 
   const chargeUsers = () => {
     UserApi.getUsers().then((response) => {
-      setUsers(response.data);
-      const pages = response.data.length / 10;
+      setPages(response.data.length / 10);
       const list = [];
-      for (let i = 0; i < pages; i++) {
+      for (let i = 0; i <= pages; i++) {
         list.push(i);
       }
       setPageList(list);
+      chargeUsersPerPage(1);
     });
+  };
+
+  const chargeUsersPerPage = (value) => {
+    UserApi.getUserByPage(value, 10).then((response) => {
+      setUsers(response.data);
+    });
+  };
+
+  const handleNextPage = () => {
+    console.log(currentPage);
+    setCurrentPage(currentPage + 1);
+    chargeUsersPerPage(currentPage);
+    document.querySelector("#prevPage").classList.remove("disabled");
+  };
+
+  const handlePrevPage = () => {
+    console.log(currentPage);
+    setCurrentPage(currentPage - 1);
+    chargeUsersPerPage(currentPage);
+
+    if (currentPage <= 1) {
+      console.log(currentPage);
+      document.querySelector("#prevPage").classList.add("disabled");
+    }
+
+    console.log(currentPage);
   };
 
   return (
@@ -107,11 +135,10 @@ const UserTables = () => {
                     className="pagination justify-content-end mb-0"
                     listClassName="justify-content-end mb-0"
                   >
-                    <PaginationItem className="disabled">
+                    <PaginationItem id="prevPage" className="disabled">
                       <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        tabIndex="-1"
+                        id="LinkPrevPage"
+                        onClick={() => handlePrevPage()}
                       >
                         <i className="fas fa-angle-left" />
                         <span className="sr-only">Previous</span>
@@ -120,8 +147,8 @@ const UserTables = () => {
                     {pageList.map((value) => (
                       <PaginationItem className="active">
                         <PaginationLink
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          id="numberPage"
+                          onClick={() => chargeUsersPerPage(value + 1)}
                         >
                           {value + 1}
                         </PaginationLink>
@@ -129,8 +156,8 @@ const UserTables = () => {
                     ))}
                     <PaginationItem>
                       <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        id="nextPage"
+                        onClick={() => handleNextPage()}
                       >
                         <i className="fas fa-angle-right" />
                         <span className="sr-only">Next</span>

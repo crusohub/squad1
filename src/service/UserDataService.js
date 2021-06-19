@@ -1,4 +1,4 @@
-import AxiosInstance from '../http-common';
+import AxiosInstance from "../http-common";
 
 // Todas as requisições retornam uma promisse vocês precisaram resolve-las
 // Se houver alguma requisição faltando, ou algum erro por favor avisar.
@@ -11,13 +11,13 @@ import AxiosInstance from '../http-common';
 // Retorna o usuário que contem o ID passado na requisição.
 const getUserById = (userId) => {
   return AxiosInstance?.get(`/usuario/${userId}`);
-}
+};
 
 // Retornará Todos os usuários cadastrados,
 // cuidado como usa pode sobrecarregar o app.
 const getUsers = () => {
   return AxiosInstance?.get(`/usuario/`);
-}
+};
 
 // Função que retorna usuarios que contenham o email do passado como parametro,
 // Essa função pode retornar um array contendo n usuários,
@@ -27,7 +27,7 @@ const getUsers = () => {
 // pelo úsuario e senha compativeis.
 const getUsersByEmail = (email) => {
   return AxiosInstance?.get(`/usuario?email=${email}`);
-}
+};
 
 // Função que retorna usuarios pelo nome do usuario passado como parametro,
 // as observações aplicadas na função "getUsersByEmail"
@@ -39,26 +39,31 @@ const getUsersByEmail = (email) => {
 // pelo úsuario e senha compativeis.
 const getUserByUsersName = (username) => {
   return AxiosInstance?.get(`/usuario?username=${username}`);
-}
+};
 
 // Função para criar um novo usuário, recebe um objeto que conterá
 // os dados a serem salvo.
 const createUser = (userData) => {
   return AxiosInstance?.post(`/usuario/`, userData);
-}
+};
 
 // Função para atualizar os dados do usuário,
 // recebe o id do usuário e o objeto contendo os novos dados
 // Saudades PATCH
 const updateUserData = (userId, userData) => {
   return AxiosInstance?.put(`/usuario/${userId}`, userData);
-}
+};
 
 // Função para remover um usuário, cuidado quando usar
 // não haverá volta após a remoção.
 const deleteUser = (userId) => {
   return AxiosInstance?.delete(`/usuario/${userId}`);
-}
+};
+
+// Função para chamada de usuário por paginação
+const getUserByPage = (pageNumber, userLimit) => {
+  return AxiosInstance?.get(`/usuario?page=${pageNumber}&limit=${userLimit}`);
+};
 
 export default {
   getUserById,
@@ -68,5 +73,5 @@ export default {
   updateUserData,
   deleteUser,
   getUserByUsersName,
-
-}
+  getUserByPage,
+};
