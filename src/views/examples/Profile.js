@@ -73,7 +73,7 @@ const Profile = () => {
 return (
     <>
       <UserHeader />
-        <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
+        <Col className="order-xl-2 mb-5 mb-xl-0 center" xl="8">
             <Card className="card-profile shadow">
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
@@ -88,32 +88,11 @@ return (
                   </div>
                 </Col>
               </Row>
-              <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                <div className="d-flex justify-content-between">
-                  <Button
-                    className="mr-4"
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Connect
-                  </Button>
-                  <Button
-                    className="float-right"
-                    color="default"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Message
-                  </Button>
-                </div>
-              </CardHeader>
+
               <CardBody className="pt-0 pt-md-4">
                 <Row>
                   <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <div className="card-profile-stats d-flex justify-content-center mt-md-7">
                       <div>
                         <span className="heading">22</span>
                         <span className="description">Friends</span>
@@ -132,43 +111,40 @@ return (
                 <div className="text-center">
                   <h3>
                     {user.firstname}
-                    <span className="font-weight-light">, 27</span>
+                    <span className="font-weight-light">{userC.username}, 27</span>
                   </h3>
                   <div className="h5 font-weight-300">
                     <i className="ni location_pin mr-2" />
-                    {/* Bucharest, Romania */}
                     {userC.city}
                   </div>
-                  <div className="h5 mt-4">
+                  <div className="h3 mt-4">
                     <i className="ni business_briefcase-24 mr-2" />
-                    Solution Manager - Creative Tim Officer
+                    {userC.email}
                   </div>
                   <div>
                     <i className="ni education_hat mr-2" />
-                    University of Computer Science
+                    <b>{`${userC.city}, ${userC.country}`}</b>
                   </div>
                   <hr className="my-4" />
-                  <p>
-                    Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                    Nick Murphy — writes, performs and records all of his own
-                    music.
+                  <p className=" font-weight-500">
+                    {userC.about}
                   </p>
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    Show more
-                  </a>
                 </div>
+                <Row className="justify-content-center mt-3">
+                  <Link  to='/admin/profile-Card'>
+                    <Button
+                      color="primary"
+                      size="md"
+                    >
+                      Edit Profile
+                    </Button>
+                  </Link>
+                </Row>
               </CardBody>
             </Card>
           </Col>
      <Col className="text-right" xs="4">
-     <Link to='/admin/SettingsProfile'>
-       <Button
-         color="primary"
-         size="sm"
-       >
-         Settings
-       </Button>
-     </Link>
+     
    </Col>
    </>
     );
