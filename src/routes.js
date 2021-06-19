@@ -1,5 +1,6 @@
 import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
+import ProfileCard from "views/examples/ProfileCard.js";
 import Maps from "views/examples/Maps.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
@@ -44,6 +45,13 @@ let routes = [
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
+    layout: "/admin",
+  },
+  {
+    path: "/profile-Card",
+    name: "Edit profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: ProfileCard,
     layout: "/admin",
   },
   {

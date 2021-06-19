@@ -1,6 +1,6 @@
-import { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import api from '../../service/UserDataService';
+import imagem from '../../assets/img/theme/team-1-800x800.jpg'
 
 // reactstrap components
 import {
@@ -18,40 +18,62 @@ import {
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import { Link } from 'react-router-dom'
+import { useReducer } from "react/cjs/react.development";
 
 const Profile = () => {
-  const userInitial = {
-    "id": "1",
-    "username": "username 1",
-    "firstname": "firstname 123",
-    "lastname": "lastname 123",
-    "email": "usuario@gmail.com",
-    "address": "address 1",
-    "city": "city 1",
-    "country": "country 1",
-    "postalcode": "postalcode 1",
-    "about": "about 1",
-    "": "username 1as",
-    "password": "1",
-    "image": {
-      "ulrImagePerfil": "",
-      "urlImagebackground": "",
-    }
+  const userC = {
+    id: 2,
+    username: "User1",
+    firstname: "User",
+    lastname: "User",
+    email: "User1@u1.com",
+    address: "User There",
+    city: "There",
+    country: "Here",
+    postalcode: "55",
+    about: "Something about me",
+    date: "2020-07-22T00:27:48.012Z",
+    password: "1"
   }
-  const [user, setUser] = useState(userInitial)
 
-<<<<<<< HEAD
+  const [user, setUser] = useState([])
+/* 
+     useEffect(() => {
+      api.getUserById().then((response) =>{
+        setUser(response.data)
+      })
+     }, []);
+   */  
+  function rendelEdit(e){
+    e.preventDefault()
+    const newUser = {
+      username: e.target.inputUsuarioNome.value,
+      firstname: e.target.inputNome.value,
+      lastname: e.target.inputSobrenome.value,
+      email: e.target.inputEmail.value,
+      address: e.target.inputEndereco.value,
+      city: e.target.inputCity.value,
+      country: e.target.inputCountry.value,
+      postalcode: e.target.inputPostal.value,
+      about: e.target.inputAbout.value,
+      photo: e.target.inputPhoto.value
+    }
 
+    api.updateUserData(userC.id, newUser)
+    .then(response=>{
+      console.log(response.status)
+   /*    console.log(1) */
 
-=======
->>>>>>> 160971b9e6cf2c448a218302c25853053afe5629
-  return (
+    })
+    .catch(e=>{
+      console.log(e)
+/*       console.log(3)
+ */    })
+  }
+return (
     <>
       <UserHeader />
-      {/* Page content */}
-      <Container className="mt--7" fluid>
-        <Row>
-          <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
+        <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
             <Card className="card-profile shadow">
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
@@ -60,7 +82,7 @@ const Profile = () => {
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src=""
+                        src= 'https://i.pravatar.cc/800'
                       />
                     </a>
                   </div>
@@ -114,7 +136,8 @@ const Profile = () => {
                   </h3>
                   <div className="h5 font-weight-300">
                     <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
+                    {/* Bucharest, Romania */}
+                    {userC.city}
                   </div>
                   <div className="h5 mt-4">
                     <i className="ni business_briefcase-24 mr-2" />
@@ -137,211 +160,17 @@ const Profile = () => {
               </CardBody>
             </Card>
           </Col>
-          <Col className="order-xl-1" xl="8">
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
-                <Row className="align-items-center">
-                  <Col xs="8">
-                    <h3 className="mb-0">My account</h3>
-                  </Col>
-                  <Col className="text-right" xs="4">
-                    <Link to='/admin/SettingsProfile'>
-                      <Button
-                        color="primary"
-                        size="sm"
-                      >
-                        Settings
-                      </Button>
-                    </Link>
-                  </Col>
-                </Row>
-              </CardHeader>
-              <CardBody>
-                <Form>
-                  <h6 className="heading-small text-muted mb-4">
-                    User information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-username"
-                          >
-                            Username
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue={user.username}
-                            id="input-username"
-                            placeholder="Username"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-email"
-                          >
-                            Email address
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-email"
-                            placeholder="jesse@example.com"
-                            type="email"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
-                            First name
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="Lucky"
-                            id="input-first-name"
-                            placeholder="First name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
-                            Last name
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="Jesse"
-                            id="input-last-name"
-                            placeholder="Last name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-                  <hr className="my-4" />
-                  {/* Address */}
-                  <h6 className="heading-small text-muted mb-4">
-                    Contact information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            Address
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                            id="input-address"
-                            placeholder="Home Address"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
-                            City
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="New York"
-                            id="input-city"
-                            placeholder="City"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Country
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="United States"
-                            id="input-country"
-                            placeholder="Country"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Postal code
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-postal-code"
-                            placeholder="Postal code"
-                            type="number"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-                  <hr className="my-4" />
-                  {/* Description */}
-                  <h6 className="heading-small text-muted mb-4">About me</h6>
-                  <div className="pl-lg-4">
-                    <FormGroup>
-                      <label>About Me</label>
-                      <Input
-                        className="form-control-alternative"
-                        placeholder="A few words about you ..."
-                        rows="4"
-                        defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                        Open Source."
-                        type="textarea"
-                      />
-                    </FormGroup>
-                  </div>
-                  <Button
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Edit profile
-                  </Button>
-                </Form>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </>
-  );
-};
-export default Profile;
+     <Col className="text-right" xs="4">
+     <Link to='/admin/SettingsProfile'>
+       <Button
+         color="primary"
+         size="sm"
+       >
+         Settings
+       </Button>
+     </Link>
+   </Col>
+   </>
+    );
+  }
+  export default Profile;
