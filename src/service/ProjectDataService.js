@@ -7,8 +7,8 @@ const getProjectById = (projId) =>{
 
 //Pega todos os projetos da api
 
-const getAllProject = (projId) =>{
-    return ProjectData.get("projeto/"+projId)
+const getAllProject = () =>{
+    return ProjectData.get("projeto/")
 }
 /*
     Cria um projeto
