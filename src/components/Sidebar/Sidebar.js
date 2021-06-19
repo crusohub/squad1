@@ -20,6 +20,7 @@ import React, { useState } from "react";
 import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
+import "../../assets/css/submenu.css"
 
 // reactstrap components
 import {
@@ -73,16 +74,64 @@ const Sidebar = (props) => {
     return routes.map((prop, key) => {
       return (
         <NavItem key={key}>
-          <NavLink
-            to={prop.layout + prop.path}
-            tag={NavLinkRRD}
-            onClick={closeCollapse}
-            activeClassName="active"
-          >
-            <i className={prop.icon} />
-            {prop.name}
-          </NavLink>
-        </NavItem>
+          {prop.sub ? (
+            <UncontrolledDropdown  direction="left" >
+              <NavLink id="submenu"
+                to={prop.layout + prop.path}
+                tag={NavLinkRRD}
+                onClick={closeCollapse}
+                activeClassName="active"
+              >
+                <DropdownToggle  nav>
+                  <i className={prop.icon} />
+                  {prop.name}
+                </DropdownToggle>
+              </NavLink>
+              <DropdownMenu id="item" >
+                  {
+                    prop.sub.map((item) =>{
+                      return(
+                        <DropdownItem >
+                          <NavLink
+                            to={item.layout + item.path}
+                            tag={NavLinkRRD}
+                            onClick={closeCollapse}
+                            activeClassName="active"
+                          >
+                            <i className={item.icon}></i>
+                            {item.name}
+                          </NavLink>                                          
+                        </DropdownItem>
+                      )  
+                    })
+                  }
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          ) : (
+            <>
+            {
+              prop.name ? (
+              <NavItem key={key}>
+                <NavLink
+                  to={prop.layout + prop.path}
+                  tag={NavLinkRRD}
+                  onClick={closeCollapse}
+                  activeClassName="active"
+                >
+                  <i className={prop.icon} />
+                  {prop.name}
+                </NavLink>
+              </NavItem>
+              ) : (
+                <>
+                </>
+              )
+            }
+            </>
+
+          )
+          }
+        </NavItem >
       );
     });
   };
@@ -236,7 +285,7 @@ const Sidebar = (props) => {
           {/* Divider */}
           <hr className="my-3" />
           {/* Heading */}
-          
+
         </Collapse>
       </Container>
     </Navbar>
