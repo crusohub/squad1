@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import history from '../../history';
-
 export default function useAuth() {
     const user = {
       userId: 1,
@@ -24,13 +22,11 @@ export default function useAuth() {
    const handleLogin = () => {
      localStorage.setItem('user', JSON.stringify(user));
      setAuthenticated(true);
-     history.push('/admin/index');
   }
 
   const handleLogout = () =>  {
     setAuthenticated(false);
     localStorage.removeItem('user');
-    history.push('/auth/login');
   }
   
   return { authenticated, loading, handleLogin, handleLogout };
