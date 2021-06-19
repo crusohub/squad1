@@ -40,8 +40,11 @@ const Profile = () => {
   }
   const [user, setUser] = useState(userInitial)
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 160971b9e6cf2c448a218302c25853053afe5629
   return (
     <>
       <UserHeader />

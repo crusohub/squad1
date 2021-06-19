@@ -1,21 +1,4 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 
 // reactstrap components
 import {
@@ -30,7 +13,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import NewProjectHeader from "components/Headers/NewProjectHeader.js";
+import CustomHeader from "components/Headers/CustomHeader.js";
 import ProjectDataService from '../../service/ProjectDataService'
 
 const NewProject = (props) => {
@@ -88,14 +71,22 @@ const NewProject = (props) => {
 
   return (
     <>
-      <NewProjectHeader />
+      <CustomHeader
+        urlImage="https://picsum.photos/id/1015/367/267"
+        title="Novo projeto"
+        descripion="Criar novo projeto"
+      />
       {/* Page content */}
       {submitted ? (
         <div className="mx-auto text-center">
-          <h4>Projeto criado com sucesso!</h4>
-          <button className="btn btn-success" onClick={newProject}>
-            Criar
-          </button>
+          <Col className="order-xl-1" >
+            <CardHeader className="bg-white border-0 card-header">
+              <h4>Successfully created project!</h4>
+              <Button className="primary" color="primary" onClick={newProject} size="lg">
+                To create
+              </Button>
+            </CardHeader>
+          </Col>
         </div>
       ) : (
         <Container className="mt--7" fluid>
@@ -105,30 +96,14 @@ const NewProject = (props) => {
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
-                      <h3 className="mb-0">Novo Projeto</h3>
-                    </Col>
-                    <Col className="text-right" xs="4">
-                      <div className="input-group-alternative input-group border border-light rounded">
-                        <div className="input-group-prepend">
-                          <span className="input-group-text">
-                            <i className="fas fa-search"></i>
-                          </span>
-                        </div>
-                        <Input
-                          className="form-control "
-                          id="search"
-                          name="search"
-                          type="text"
-                          placeholder="Search"
-                        />
-                      </div>
+                      <h3 className="mb-0">New Project</h3>
                     </Col>
                   </Row>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <h6 className="heading-small text-muted mb-4">
-                      Informações do Projeto
+                      Project Information
                     </h6>
                     <div className="pl-lg-4 container">
                       <Row>
@@ -138,7 +113,7 @@ const NewProject = (props) => {
                               className="form-control-label"
                               htmlFor="projectname"
                             >
-                              Nome do Projeto
+                              Project name
                             </label>
                             <Input
                               className="form-control-alternative"
@@ -146,7 +121,7 @@ const NewProject = (props) => {
                               value={currentProject.projectname}
                               name="projectname"
                               type="text"
-                              placeholder="Nome do Projeto"
+                              placeholder="Project name"
                               onChange={handleInputChange}
                             />
                           </FormGroup>
@@ -178,21 +153,21 @@ const NewProject = (props) => {
                         </Col>
                         <Col lg="6">
                           <FormGroup>
-                            <label className="form-control-label" htmlFor="budget">Despesas</label>
+                            <label className="form-control-label" htmlFor="budget"> Budget</label>
                             <Input
                               className="form-control-alternative"
                               name="budget"
                               value={currentProject.budget}
                               id="budget"
                               type="text"
-                              placeholder="Despesas"
+                              placeholder="Budget"
                               onChange={handleInputChange}
                             />
                           </FormGroup>
                         </Col>
                         <Col lg="6">
                           <FormGroup>
-                            <label className="form-control-label" htmlFor="completed">Percentual</label>
+                            <label className="form-control-label" htmlFor="completed">completed</label>
                             <Input
                               className="form-control-alternative"
                               type="number"
@@ -204,19 +179,17 @@ const NewProject = (props) => {
                               onChange={handleInputChange}
                             />
                           </FormGroup>
-                          <Col className="text-right" xs="12">
-                            <Button
-                              color="primary"
-
-                              onClick={updateDataProject}
-                              size="sm"
-                            >
-                              Enviar
-                            </Button>
-
-                          </Col>
                         </Col>
                       </Row>
+                      <Col className="text-right " >
+                        <Button
+                          color="primary"
+                          onClick={updateDataProject}
+                          size="lg"
+                        >
+                          Save
+                        </Button>
+                      </Col>
 
                     </div>
                   </Form>

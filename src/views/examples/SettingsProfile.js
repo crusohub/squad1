@@ -129,21 +129,22 @@ export default function SettingsProfile(){
     
     // adicionar no onchange do input da senha
     const HandlePassword = (e) => {
-    const { name, value } = e.target
-    setPasswordValid({ ...passwordValid, [name]: value })
-    const strength = document.querySelector(".strength")
-    let pass = e.target.value
-    if (pass.length <= 7) {
-        setPassword("Weak")
-        strength.classList.add("text-danger")
-        strength.classList.remove("text-success")
-    } else {
-        setPassword("Strong")
-        strength.classList.add("text-success")
-        strength.classList.remove("text-danger")
-        setIsStrong(true)
+        const { name, value } = e.target
+        setPasswordValid({ ...passwordValid, [name]: value })
+        const strength = document.querySelector(".strength")
+        let pass = e.target.value
+        if (pass.length <= 7) {
+            setPassword("Weak")
+            strength.classList.add("text-danger")
+            strength.classList.remove("text-success")
+            setIsStrong(false)
+        } else {
+            setPassword("Strong")
+            strength.classList.add("text-success")
+            strength.classList.remove("text-danger")
+            setIsStrong(true)
+        }
     }
-  }
 
     return (
     <>
