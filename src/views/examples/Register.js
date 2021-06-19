@@ -41,28 +41,28 @@ const Register = () => {
   const CreatUser = (data) => {
     const policy = document.querySelector(".custom-control-input")
 
-    // if (policy.checked && passwordVerific && inputVerific && emailVerific){
-    //   var user = {
-    //     username: inputValid.username,
-    //     email: emailValid.email,
-    //     password: passwordValid.password
-    //   }
-    //   Data.createUser(user)
-    //     .then(response => {
-    //       setRegister({
-    //         id: response.user.id,
-    //         username: response.user.username,
-    //         email: response.user.email,
-    //         password: response.user.password
-    //       })
-    //     })
-    //     .catch(e => {
-    //       console.log(e)
-    //     })
-    //   setSubmit(true);
-    // }else{
-    //   alert("Something wrong with the data entered.")
-    // }
+    if (policy.checked && passwordVerific && inputVerific && emailVerific){
+      var user = {
+        username: inputValid.username,
+        email: emailValid.email,
+        password: passwordValid.password
+      }
+      Data.createUser(user)
+        .then(response => {
+          setRegister({
+            id: response.user.id,
+            username: response.user.username,
+            email: response.user.email,
+            password: response.user.password
+          })
+        })
+        .catch(e => {
+          console.log(e)
+        })
+      setSubmit(true);
+    }else{
+      alert("Something wrong with the data entered.")
+    }
 
     setSubmit(true);
   }
