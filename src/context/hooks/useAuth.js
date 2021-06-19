@@ -8,6 +8,7 @@ export default function useAuth() {
 
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isNewUser, setIsNewUser] = useState(false)
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -19,8 +20,13 @@ export default function useAuth() {
     setLoading(false);
   }, []);
   
-   const handleLogin = () => {
+   const handleLogin = (isNew) => {
      localStorage.setItem('user', JSON.stringify(user));
+    
+     if(isNew === 'newUser') {
+      setIsNewUser(true);
+     }
+
      setAuthenticated(true);
   }
 
@@ -29,5 +35,5 @@ export default function useAuth() {
     localStorage.removeItem('user');
   }
   
-  return { authenticated, loading, handleLogin, handleLogout };
+  return { authenticated, loading, handleLogin, handleLogout, isNewUser };
 }

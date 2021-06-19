@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Data from '../../service/UserDataService'
+import React, { useState, useContext } from "react";
+import Data from '../../service/UserDataService';
+
+import { Context } from '../../context/AuthContext';
 
 // reactstrap components
 import {
@@ -19,6 +20,7 @@ import {
 } from "reactstrap";
 
 const Register = () => {
+  const {handleLogin} = useContext(Context);
 
   const add = {
     id: null,
@@ -39,28 +41,30 @@ const Register = () => {
   const CreatUser = (data) => {
     const policy = document.querySelector(".custom-control-input")
 
-    if (policy.checked && passwordVerific && inputVerific && emailVerific){
-      var user = {
-        username: inputValid.username,
-        email: emailValid.email,
-        password: passwordValid.password
-      }
-      Data.createUser(user)
-        .then(response => {
-          setRegister({
-            id: response.user.id,
-            username: response.user.username,
-            email: response.user.email,
-            password: response.user.password
-          })
-        })
-        .catch(e => {
-          console.log(e)
-        })
-      setSubmit(true)
-    }else{
-      alert("Something wrong with the data entered.")
-    }
+    // if (policy.checked && passwordVerific && inputVerific && emailVerific){
+    //   var user = {
+    //     username: inputValid.username,
+    //     email: emailValid.email,
+    //     password: passwordValid.password
+    //   }
+    //   Data.createUser(user)
+    //     .then(response => {
+    //       setRegister({
+    //         id: response.user.id,
+    //         username: response.user.username,
+    //         email: response.user.email,
+    //         password: response.user.password
+    //       })
+    //     })
+    //     .catch(e => {
+    //       console.log(e)
+    //     })
+    //   setSubmit(true);
+    // }else{
+    //   alert("Something wrong with the data entered.")
+    // }
+
+    setSubmit(true);
   }
 
   const HandleUser = (e) => {
@@ -112,6 +116,11 @@ const Register = () => {
     }
   }
 
+  const redirectToUserProfile = () => {
+    const isNewUser = 'newUser'
+    handleLogin(isNewUser);
+  }
+
   return (
     <>
       {submit ? (
@@ -123,7 +132,14 @@ const Register = () => {
                   <h1 className="text-success"><div className="ni ni-check-bold text-success"></div> Registered successfully</h1>
                 </div>
                 <div className="text-center text-muted mb-4">
-                  <Button href="/auth/login" className="mt-4" color="primary" type="button" >Login</Button>
+                  <Button 
+                    className="mt-4" 
+                    color="primary"
+                    type="button"
+                    onClick={redirectToUserProfile}
+                  >
+                    Login
+                  </Button>
                 </div>
               </CardBody>
             </Card>
