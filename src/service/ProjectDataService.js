@@ -1,14 +1,14 @@
 import ProjectData from "../http-common"
 
 //Pega um projeto "existente" na api através do seu id 
-const getProjectById = () =>{
-    return ProjectData.get(`projeto/${id}`)
+const getProjectById = (projId) =>{
+    return ProjectData.get("projeto/"+projId)
 }
 
 //Pega todos os projetos da api
 
 const getAllProject = () =>{
-    return ProjectData.get(`projeto/`)
+    return ProjectData.get("projeto/")
 }
 /*
     Cria um projeto
@@ -27,8 +27,8 @@ const getAllProject = () =>{
 
 */
 
-const createProject = (assData) =>{
-    return ProjectData.post(`/projeto/${assData}`)
+const createProject = (projData) =>{
+    return ProjectData.post("/projeto/",projData)
 }
 
 /*
@@ -36,18 +36,18 @@ const createProject = (assData) =>{
 
     Obs: Os campos existente na api estão no comentario anterior !
 */
-const updateProject = (assId, assData) =>{
-    return ProjectData.put(`/projeto/${assId}`,assData)
+const updateProject = (projId, projData) =>{
+    return ProjectData.put("/projeto/"+ projId, projData)
 }
 
 //Deleta Projeto 
-const deleteProject = (assId) =>{
-    return ProjectData.delete(`/projeto/${assId}`)
+const deleteProject = (projId) =>{
+    return ProjectData.delete("/projeto/"+projId)
 }
 
 
-const deleteAllAssociation = (assId) =>{
-}
+//const deleteAllAssociation = (assId) =>{
+//}
 
 
 export default {

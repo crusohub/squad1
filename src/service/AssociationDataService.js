@@ -1,8 +1,8 @@
 import AssociationData from "../http-common"
 
 //Pega uma associação  entre usuario e projeto "existentes" na api através do seu id 
-const getAssociationById = () =>{
-    return AssociationData.get(`associacao/${id}`)
+const getAssociationById = (assId) =>{
+    return AssociationData.get("associacao/"+assId)
 }
 
 // Pega todas as associações existentes 
@@ -26,7 +26,7 @@ const getAllAssociation = () =>{
     */
 
 const createAssociation = (assData) =>{
-    return AssociationData.post(`/associacao/${assData}`)
+    return AssociationData.post("/associacao/"+assData)
 }
 
 /*
@@ -35,19 +35,19 @@ const createAssociation = (assData) =>{
     Obs: Os campos existente na api estão no comentario anterior !
 */
 const updateAssociation = (assId, assData) =>{
-    return AssociationData.put(`/associacao/${assId}`,assData)
+    return AssociationData.put("/associacao/"+assId, assData)
 }
 
 
 // Deleta a associação por completo
 
 const deleteAssociation = (assId) =>{
-    return AssociationData.delete(`/associacao/${assId}`)
+    return AssociationData.delete("/associacao/"+assId)
 }
 
 
-const deleteAllAssociation = (assId) =>{
-}
+//const deleteAllAssociation = (assId) =>{
+//}
 
 
 export default {

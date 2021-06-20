@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {ProjectContext} from "../../contextAPI/contextProject"
+import {ProjectContext} from "../../context/contextProject";
 // reactstrap components
 import {
   Button,
@@ -16,8 +16,8 @@ import {
 import ProjectHeader from "components/Headers/ProjectHeader.js";
 
 const Profile = () => {
-
-    const [project, setProject] = useContext(ProjectContext)
+ 
+  const [project, setProject] = useContext(ProjectContext)
   return (
     <>
       <ProjectHeader />
@@ -60,11 +60,16 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={project.projectname}
+                            defaultValue = ""
                             id="input-username"
-                            placeholder="Nome do Projeto"
-                            type="text"
-                          />
+                            placeholder=""
+                            type="select"
+                          >
+                            <option value="projeto">{project.projectname}</option>
+                            <option value="projeto1">{project.projectname1}</option>
+                            <option value="projeto2">{project.projectname2}</option>
+                            <option value="projeto3">{project.projectname3}</option>
+                          </Input>  
                         </FormGroup>
                       </Col>
                       <Col lg="6">
@@ -134,7 +139,21 @@ const Profile = () => {
                             type="number"
                           />
                         </FormGroup>
+                        
                       </Col>
+                      <label
+                            className="form-control-label"
+                            htmlFor="input-username"
+                          >
+                            Lista de projetos
+                          </label>
+                        <Input
+                            className="form-control-alternative"
+                            defaultValue={project.projectname}
+                            id="input-username"
+                            placeholder="Nome do Projeto"
+                            type="select"
+                          />
                       <Col className="text-right" xs="12">
                     <Button
                       color="primary"

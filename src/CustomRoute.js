@@ -6,8 +6,9 @@ import { Context } from './context/AuthContext';
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
+
 function CustomRoute({ isPrivate, ...rest }) {
-  const { loading, authenticated } = useContext(Context);
+  const { loading, authenticated, isNewUser } = useContext(Context);
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -17,6 +18,15 @@ function CustomRoute({ isPrivate, ...rest }) {
     return <Redirect to="/auth/login"/>
   }
 
+  if(rest.isAuth && authenticated) {
+
+    if(isNewUser) {
+      return <Redirect to="/admin/user-profile" />
+    }
+
+   return <Redirect to="/" />
+  }
+
   return <Route {...rest} />;
 }
 
@@ -24,7 +34,7 @@ export default function Routes() {
   return (
     <Switch>
       <CustomRoute isPrivate path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <CustomRoute path="/auth" render={(props) => <AuthLayout {...props} />} />
+      <CustomRoute isAuth path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Redirect from="/" to="/admin/index" />
     </Switch>
   );
