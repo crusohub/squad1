@@ -13,14 +13,18 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import ProjectHeader from "components/Headers/ProjectHeader.js";
+import CustomtHeader from "components/Headers/CustomHeader";
 
 const Profile = () => {
  
   const [project, setProject] = useContext(ProjectContext)
   return (
     <>
-      <ProjectHeader />
+      <CustomtHeader 
+      urlImage = "https://media.eadbox.com/system/uploads/course/logo/5c49f59accd2280026467052/Adriana_Derobio_Gestao_Projetos_Card_Plataforma.png"
+      title = "Edit Project"
+      descripion = "Edit Project"
+      />
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>

@@ -12,7 +12,7 @@ import {
   Button, Col
 } from "reactstrap";
 // core components
-import Header from "components/Headers/HeaderTables";
+import CustomHeader from "components/Headers/CustomHeader";
 
 const Tables = () => {
   
@@ -85,7 +85,11 @@ const Tables = () => {
 
   return (
     <>
-      <Header />
+      <CustomHeader
+      urlImage = "http://www.eosconsultores.com.br/wp-content/uploads/2017/09/gerente-1024x512.jpg"
+      title = "Register Association"
+      descripion = "Register Association" 
+      />
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Table */}

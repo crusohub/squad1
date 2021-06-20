@@ -14,12 +14,16 @@ import {
   Col,
 } from "reactstrap";
 // core components
-import UserHeader from "components/Headers/UserHeader.js";
+import CustomHeader from "components/Headers/CustomHeader";
 
 const Profile = () => {
   return (
     <>
-      <UserHeader />
+      <CustomHeader 
+      urlImage = "https://blog.braip.com/wp-content/uploads/2021/03/cadastro-de-perfil.png"
+      title = "Profile Project"
+      descripion ="Profile Project"
+      />
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
