@@ -1,5 +1,9 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import api from '../../service/UserDataService';
+/* import { browserHistory } from 'react-router';
+ *//* import { useHistory } from "react-router-dom";
+history.push()
+ */
 // reactstrap components
 import {
   Button,
@@ -13,40 +17,81 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import ProjectHeader from "components/Headers/ProjectHeader.js";
+// core components
+import UserHeader from "components/Headers/UserHeader.js";
+import { Link } from 'react-router-dom'
+import { useReducer } from "react/cjs/react.development";
 
-const Profile = () => {
+const ProfileCard = () => {
+  const userC = {
+    id: 2,
+    username: "User1",
+    firstname: "User",
+    lastname: "User",
+    email: "User1@u1.com",
+    address: "User There",
+    city: "There",
+    country: "Here",
+    postalcode: "55",
+    about: "Something about me",
+    date: "2020-07-22T00:27:48.012Z",
+    password: "1"
+  }
+
+  const [user, setUser] = useState([])
+/* 
+     useEffect(() => {
+      api.getUserById().then((response) =>{
+        setUser(response.data)
+      })
+     }, []);
+   */  
+  function rendelEdit(e){
+    e.preventDefault()
+    const newUser = {
+      username: e.target.inputUsuarioNome.value,
+      idade: e.target.inputidade.value,
+      firstname: e.target.inputNome.value,
+      lastname: e.target.inputSobrenome.value,
+      email: e.target.inputEmail.value,
+      address: e.target.inputEndereco.value,
+      city: e.target.inputCity.value,
+      country: e.target.inputCountry.value,
+      postalcode: e.target.inputPostal.value,
+      about: e.target.inputAbout.value,
+      photo: e.target.inputPhoto.value
+    }
+
+    api.updateUserData(userC.id, newUser)
+    .then(response=>{
+      console.log(response.status)
+/*       browserHistory.push("/dashboard")
+ */   /*    console.log(1) */
+
+    })
+    .catch(e=>{
+      console.log(e)
+/*       console.log(3)
+ */    })
+  }
   
   return (
     <>
-      <ProjectHeader />
+      <UserHeader />
       {/* Page content */}
       <Container className="mt--7" fluid>
-        <Row>Username
-          <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-            
-          </Col>
-          <Col className="order-xl-1" xl="8">
+        <Row className="mt-5 justify-content-center">
+          <Col className="order-xl-1" xl="12">
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Editar Projeto</h3>
-                  </Col>
-                  <Col className="text-right" xs="4">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      Settings
-                    </Button>
+                    <h3 className="mb-0">My account</h3>
                   </Col>
                 </Row>
               </CardHeader>
               <CardBody>
-                <Form>
+                <Form onSubmit={rendelEdit}>
                   <h6 className="heading-small text-muted mb-4">
                     User information
                   </h6>
@@ -56,15 +101,15 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-username"
+                            htmlFor="inputUsuarioNome"
                           >
-                            Name Project
+                            Username
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="lucky.jesse"
-                            id="input-username"
-                            placeholder="Username"
+                            defaultValue={userC.username}
+                            id="inputUsuarioNome"
+                            placeholder="name"
                             type="text"
                           />
                         </FormGroup>
@@ -73,13 +118,14 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-email"
+                            htmlFor="inputEmail"
                           >
                             Email address
                           </label>
                           <Input
                             className="form-control-alternative"
-                            id="input-email"
+                            id="inputEmail"
+                            defaultValue={user.email}
                             placeholder="jesse@example.com"
                             type="email"
                           />
@@ -91,14 +137,14 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-first-name"
+                            htmlFor="inputNome"
                           >
                             First name
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Lucky"
-                            id="input-first-name"
+                            id="inputNome"
+                            defaultValue={userC.firstname}
                             placeholder="First name"
                             type="text"
                           />
@@ -108,16 +154,51 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-last-name"
+                            htmlFor="inputSobrenome"
                           >
                             Last name
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Jesse"
-                            id="input-last-name"
+                            id="inputSobrenome"
+                            defaultValue={userC.lastname}
                             placeholder="Last name"
                             type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md="12">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="inputPhoto"
+                          >
+                            Photo
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            id="inputPhoto"
+                            defaultValue={userC.photo}
+                            placeholder="Insert your photo"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="6">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="inputEmail"
+                          >
+                            age
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            id="inputidade"
+                            defaultValue={user.idade}
+                            type="date"
                           />
                         </FormGroup>
                       </Col>
@@ -134,14 +215,14 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-address"
+                            htmlFor="inputEndereco"
                           >
                             Address
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                            id="input-address"
+                            id="inputEndereco"
+                            defaultValue={userC.address}
                             placeholder="Home Address"
                             type="text"
                           />
@@ -153,14 +234,14 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-city"
+                            htmlFor="inputCity"
                           >
                             City
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="New York"
-                            id="input-city"
+                            id="inputCity"
+                            defaultValue={userC.city}
                             placeholder="City"
                             type="text"
                           />
@@ -170,14 +251,14 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-country"
+                            htmlFor="inputCountry"
                           >
                             Country
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="United States"
-                            id="input-country"
+                            id="inputCountry"
+                            defaultValue={userC.country}
                             placeholder="Country"
                             type="text"
                           />
@@ -187,13 +268,14 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-country"
+                            htmlFor="inputPostal"
                           >
                             Postal code
                           </label>
                           <Input
                             className="form-control-alternative"
-                            id="input-postal-code"
+                            id="inputPostal"
+                            defaultValue={userC.postalcode}
                             placeholder="Postal code"
                             type="number"
                           />
@@ -211,12 +293,19 @@ const Profile = () => {
                         className="form-control-alternative"
                         placeholder="A few words about you ..."
                         rows="4"
-                        defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                        Open Source."
+                        id="inputAbout"
+                        defaultValue={userC.About}
                         type="textarea"
                       />
                     </FormGroup>
                   </div>
+                  <Button
+                    color="info"
+/*                     href="#pablo"
+ */                    type="submit"
+                  >
+                    Edit profile
+                  </Button>
                 </Form>
               </CardBody>
             </Card>
@@ -226,5 +315,4 @@ const Profile = () => {
     </>
   );
 };
-
-export default Profile;
+export default ProfileCard;
