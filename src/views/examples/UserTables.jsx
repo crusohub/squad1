@@ -20,30 +20,6 @@ import React, { useEffect, useState } from "react";
 import UserApi from "../../service/UserDataService";
 
 const UserTables = () => {
-  const TestList = [
-    {
-      name: "John",
-      email: "jimns@gmail.com",
-      country: "USA",
-      adress: "San Francisco,CA",
-      age: 27,
-    },
-    {
-      name: "Misty",
-      email: "kalene@outlook.com",
-      country: "United Kingdom",
-      adress: "London",
-      age: 22,
-    },
-    {
-      name: "Christopher",
-      email: "baumt@yahoo.com.br",
-      country: "Canada",
-      adress: "Toronto",
-      age: 36,
-    },
-  ];
-
   const [users, setUsers] = useState([]);
   const [pages, setPages] = useState(0);
   const [pageList, setPageList] = useState([]);
@@ -53,15 +29,24 @@ const UserTables = () => {
     chargeUsers();
   }, []);
 
+  useEffect(()=>{
+    chargeUsersPerPage()
+  }, [currentPage]);
+
   const chargeUsers = () => {
     UserApi.getUsers().then((response) => {
-      setPages(response.data.length / 10);
+      const pageLength = response.data.length / 10;
+      (response.data.length % 10 === 0)
+        ? setPages(pageLength)
+        : setPages(pageLength + 1)
+        
       const list = [];
       for (let i = 0; i <= pages; i++) {
         list.push(i);
+        console.log(list);
       }
       setPageList(list);
-      chargeUsersPerPage(1);
+      chargeUsersPerPage(1)
     });
   };
 
@@ -119,12 +104,12 @@ const UserTables = () => {
                 </thead>
                 <tbody>
                   {users.map((users, index) => (
-                    <tr>
-                      <th scope="row">{users.username}</th>
-                      <td>{users.email}</td>
-                      <td>{users.city}</td>
-                      <td>{users.country}</td>
-                      <td>{users.address}</td>
+                    <tr key={index}>
+                      <th  scope="row">{users.username}</th>
+                      <td >{users.email}</td>
+                      <td >{users.city}</td>
+                      <td >{users.country}</td>
+                      <td >{users.address}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -144,6 +129,7 @@ const UserTables = () => {
                         <span className="sr-only">Previous</span>
                       </PaginationLink>
                     </PaginationItem>
+
                     {pageList.map((value) => (
                       <PaginationItem className="active">
                         <PaginationLink
@@ -154,6 +140,7 @@ const UserTables = () => {
                         </PaginationLink>
                       </PaginationItem>
                     ))}
+
                     <PaginationItem>
                       <PaginationLink
                         id="nextPage"
