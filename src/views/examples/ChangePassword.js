@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Data from '../../service/UserDataService'
 
 // reactstrap components
@@ -45,6 +45,9 @@ const ChangePassword = () => {
   const [compareVerific, setCompareVerific] = useState(false)
   const [valuePassword , setValuePassword] = useState("")
   const [user , setUser] = useState("")
+  const [users, setUsers] = useState([]);
+  const [userId, setUserId] = useState('');
+  const [newUser, setNewUser] = useState({});
 
   const HandlePassword = (e) => {
     const { name, value } = e.target
@@ -65,12 +68,6 @@ const ChangePassword = () => {
     }
     if(pass.length == 0)
     setPassword("")
-    
-    Data.getUserByUsersName("DuAzes")//"DuAzes"
-    .then(res => {
-      const user = res.data  
-      console.log(user)
-    })
   }
 
   const HandleConfirm = (e) =>{
@@ -96,16 +93,40 @@ const ChangePassword = () => {
   const HandleUser = (e) =>{
     const { name, value } = e.target
     setPasswordValid({ ...passwordValid, [name]: value })
-    const user = document.querySelector(".user")
-    let pass = e.target.value
-    setUser(pass)
+    let userName = e.target.value
+    setUser(userName);
+
+    function filterUser(value) {
+      if(value.username === userName) {
+        return value.id
+      }
+      return
+    }
+
+    const user = users.filter(value => filterUser(value));
+    if(user[0]) {
+      setUserId(user[0].id);
+      const newUser = {...user[0], password: valuePassword }
+      setNewUser(newUser);
+    }
+
+  }
+
+  function SubmitPassword(event){
+    event.preventDefault();
+    const data = {...newUser, password: valuePassword}
+
+    // Data.updateUserData(userId, data)
     
   }
 
-  function SubmitPassword(){
-    
-    
-  }
+  
+
+  useEffect(() => {
+    Data.getUsers().then(result => {
+      setUsers(result.data)
+    })
+  }, [])
 
   return (
     <>
@@ -127,7 +148,7 @@ const ChangePassword = () => {
           <div className="text-center text-muted mb-4">
             <small>Change Password</small>
           </div>
-          <Form role="form">
+          <Form role="form" onSubmit={SubmitPassword}>
           <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -197,7 +218,7 @@ const ChangePassword = () => {
                 className="my-4" 
                 color="primary" 
                 type="submit"
-                onSubmit={SubmitPassword}>
+              >
                 Change
               </Input>
             </div>
