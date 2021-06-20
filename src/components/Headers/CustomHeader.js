@@ -1,26 +1,22 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 
-
-// PARA UTILIZAR O CUSTOMHEAER BASTA IMPORTA O COMPONENTE 
+// PARA UTILIZAR O CUSTOMHEAER BASTA IMPORTA O COMPONENTE
 //E CHAMAR PASSANDO AS PROPRIEDADES (urlImage="", title="", descripion="") COMO NO EXEMPLO ABAIXO
-// <CustomHeader 
+// <CustomHeader
 //    urlImage="AQUI DEVE IR O LINK NA WEB DA IMAGEM"
 //    title="Configurações da sua conta"
 //    descripion="Troque sua senha ou apague sua conta em nosso serviço"
 // />
 
-const UserHeader = ({urlImage, title, descripion}) => {
+const UserHeader = ({ urlImage, title, descripion }) => {
   return (
     <>
       <div
         className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
         style={{
-          minHeight: "600px",
-          backgroundImage:
-            "url(" +
-            urlImage +
-            ")",
+          minHeight: "500px",
+          backgroundImage: "url(" + urlImage + ")",
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}
@@ -32,9 +28,7 @@ const UserHeader = ({urlImage, title, descripion}) => {
           <Row>
             <Col lg="7" md="10">
               <h1 className="display-2 text-white">{title}</h1>
-              <p className="text-white mt-0 mb-5">
-                {descripion}
-              </p>
+              <p className="text-white mt-0 mb-5">{descripion}</p>
             </Col>
           </Row>
         </Container>
