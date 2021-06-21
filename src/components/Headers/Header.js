@@ -70,8 +70,7 @@ const Header = () => {
     SavedView?.setIndex(SavedView?.index + 1);
   }
 
-  const setUsersInRange = useCallback(
-    async (data) => {
+  const setUsersInRange = useCallback((data) => {
         setTotalUsers(data?.length ?? 0);
         let countUsersCreateOnDay = 0;
         let countUsersCreateInWeek = 0;
@@ -92,8 +91,7 @@ const Header = () => {
         setCountUsersInRange([countUsersCreateOnDay, countUsersCreateInWeek, countUsersCreateInMonth, countUsersCreateInYear]);
   }, [checkUserInTime]);
 
-  const setProjectsInRange = useCallback(
-    async (data) => {
+  const setProjectsInRange = useCallback((data) => {
         setTotalProjects(data?.length ?? 0);
         let countProjectCreateOnDay = 0;
         let countProjectCreateInWeek = 0;
@@ -115,8 +113,7 @@ const Header = () => {
     }, [checkUserInTime]);
 
 
-  const setConnectionsInRange = useCallback(
-    async (data) => {
+  const setConnectionsInRange = useCallback((data) => {
         setTotalConnections(data?.length ?? 0);
         let countConnectionsCreateOnDay = 0;
         let countConnectionsCreateInWeek = 0;
@@ -137,37 +134,38 @@ const Header = () => {
         });
   }, [checkUserInTime]);
 
-  const getUsers = async () => {
+  const getUsers = () => {
     try {
-      setUsersInRange(await SavedView?.users);
+      setUsersInRange(SavedView?.users);
+      //console.log(SavedView?.users);
     } catch (error) {
-      setUsersInRange(await SavedView?.users);
+      setUsersInRange(SavedView?.users);
     }
   }
 
-  const getProjects = async () => {
+  const getProjects = () => {
     try {
-      setProjectsInRange(await SavedView?.projects);
+      setProjectsInRange(SavedView?.projects);
     } catch (error) {
-      setProjectsInRange(await SavedView?.projects);
+      setProjectsInRange(SavedView?.projects);
     }
   }
 
-  const getConnections = async () => {
+  const getConnections = () => {
     try {
-      setConnectionsInRange(await SavedView?.connections);
+      setConnectionsInRange(SavedView?.connections);
     } catch (error) {
-      setConnectionsInRange(await SavedView?.connections);
+      setConnectionsInRange(SavedView?.connections);
     }
   }
 
   const getAssociations = useCallback(
     async () => {
       try {
-        const associations = await SavedView?.associations; 
+        const associations = SavedView?.associations; 
         setQtdUsersInProjects(associations?.length ?? 0);
       } catch (error) {
-        setQtdUsersInProjects(await SavedView?.associations?.length ?? 0);
+        setQtdUsersInProjects(SavedView?.associations?.length ?? 0);
       }
     }, [SavedView?.associations]);
 

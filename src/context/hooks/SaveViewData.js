@@ -12,13 +12,7 @@ const SaveViewProvider = ({ children  }) => {
   const [associations, setAssociations] = useState([]);
   const [connections, setConnections] = useState([]);
   const [index, setIndex] = useState(0);
-
-  const setInfo = useCallback(() => {
-    setUsers(getUsers() ?? users);
-    setProjects(getProjects() ?? projects);
-    setConnections(getConnections() ?? connections);
-    setAssociations(getAssociations() ?? associations);
-  }, []);
+  const TIME_IN_MILISECONDS = 120000;
 
   const SaveViewData = {
     users,
@@ -35,28 +29,36 @@ const SaveViewProvider = ({ children  }) => {
 
   const getUsers = async () => {
     const { data } = await UserDataService?.getUsers(); 
-    return data;
+    setUsers(data ?? users);
   }
 
   const getProjects = async () => {
     const { data } = await ProjectDataService?.getAllProject();
-    return data;
+    setProjects(data ?? projects);
   }
 
   const getConnections = async () => {
     const { data } = await ConexaoDataService?.getConnections(); 
-    return data;
+    setConnections(data ?? connections);
   }
 
   const getAssociations = async () => {
     const { data } = await AssociationDataService?.getAllAssociation();
-    return data;
+    setAssociations(data ?? associations);
   }
 
+  const setInfo = useCallback( async () => {
+    getUsers();
+    getProjects();
+    getConnections();
+    getAssociations();
+  }, []);
+
   useEffect(() => {
-    setTimeout(() => { setInfo(); }, 1);
-    setInterval(() => { setInfo(); }, 90000);
+    setTimeout(() => { setInfo(); console.log("Timeout")}, 1);
+    setInterval(() => { setInfo(); console.log("interval")}, TIME_IN_MILISECONDS);
   }, [setInfo]);
+
 
   return (
       <SaveView.Provider value={SaveViewData}>
