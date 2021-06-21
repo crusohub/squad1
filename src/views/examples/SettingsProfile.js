@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 // reactstrap components
 import {
   Button,
@@ -14,6 +14,7 @@ import {
 } from "reactstrap";
 import CustomHeader from "components/Headers/CustomHeader.js";
 import UserDataService from '../../service/UserDataService'
+// import {  Context } from '../../context/hooks/useAuth';
 
 export default function SettingsProfile(){
 
@@ -32,6 +33,8 @@ export default function SettingsProfile(){
         date: "2020-07-22T00:27:48.012Z",
         password: "1"
     }
+    // const { user } = useContext(Context);
+
     const [usuario, setUsuario] = useState(user)
 
     const [password, setPassword] = useState("")
@@ -150,8 +153,8 @@ export default function SettingsProfile(){
     <>
       <CustomHeader 
         urlImage="https://mcdn.wallpapersafari.com/medium/90/27/pyE8zg.jpg"
-        title="Configurações da sua conta"
-        descripion="Troque sua senha ou apague sua conta em nosso serviço"
+        title="Your Account Settings"
+        descripion="Change your password or delete your account on our service"
       />
       {/* Page content */}
       <Container className="mt--7" fluid>
@@ -161,14 +164,14 @@ export default function SettingsProfile(){
                     <CardHeader className="bg-white border-0">
                         <Row className="align-items-center">
                         <Col xs="8">
-                            <h3 className="mb-0">Trocar Senha</h3>
+                            <h3 className="mb-0">Change Password</h3>
                         </Col>    
                         </Row>
                     </CardHeader>
                     <CardBody>
                         <Form onSubmit={handleChansePassword}>
                         <h6 className="heading-small text-muted mb-4">
-                            Dados para para Troca de Senha
+                            Data for Password Change
                         </h6>
                         <div className="pl-lg-4">
                             <Row>
@@ -178,7 +181,7 @@ export default function SettingsProfile(){
                                     className="form-control-label"
                                     htmlFor="currentPassword"
                                     >
-                                    Senha Atual
+                                    Current Password
                                 </label>
                                 <Input
                                     className="form-control-alternative"
@@ -199,7 +202,7 @@ export default function SettingsProfile(){
                                     className="form-control-label"
                                     htmlFor="newPassword"
                                     >
-                                    Nova Senha
+                                    New Password
                                 </label>
                                 <Input
                                     className="form-control-alternative"
@@ -226,7 +229,7 @@ export default function SettingsProfile(){
                                     className="form-control-label"
                                     htmlFor="repeatNewPassword"
                                     >
-                                    Confirmar Nova Senha
+                                    Confirm New Password
                                 </label>
                                 <Input
                                     className="form-control-alternative"
@@ -246,7 +249,7 @@ export default function SettingsProfile(){
                                 color="primary" 
                                 type="submit"
                                 >
-                                Alterar Senha
+                                Change Password
                             </Button>
                         </Form>
                     </CardBody>
@@ -259,14 +262,14 @@ export default function SettingsProfile(){
                     <CardHeader className="bg-white border-0">
                         <Row className="align-items-center">
                         <Col xs="8">
-                            <h3 className="mb-0">Exclusão de Usuario</h3>
+                            <h3 className="mb-0">User Exclusion</h3>
                         </Col>    
                         </Row>
                     </CardHeader>
                     <CardBody>
                         <Form onSubmit={handleDelete}>
                         <h6 className="heading-small text-muted mb-4">
-                           Dados para Exclusão de Usuario
+                            User Exclusion Data
                         </h6>
                         <div className="pl-lg-4">
                             <Row>
@@ -276,7 +279,7 @@ export default function SettingsProfile(){
                                     className="form-control-label"
                                     htmlFor="userName"
                                     >
-                                    Informe o seu username
+                                    Enter your username
                                 </label>
                                 <Input
                                     className="form-control-alternative"
@@ -296,7 +299,7 @@ export default function SettingsProfile(){
                                 color="primary" 
                                 type="submit"
                                 >
-                                Deletar
+                                Delete
                             </Button>
                         </Form>
                     </CardBody>
