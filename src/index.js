@@ -5,12 +5,15 @@ import App from './App';
 
 import { AuthProvider} from './context/AuthContext';
 import { ProjectProvider } from './contextAPI/contextProject'
+import ViewData from './context/hooks/SaveViewData';
 
 ReactDOM.render(
   <AuthProvider>
-  <ProjectProvider>
-    <App />
-  </ProjectProvider>  
+    <ProjectProvider>
+      <ViewData>
+        <App />
+      </ViewData>
+    </ProjectProvider>  
   </AuthProvider>
   ,document.getElementById("root")
 );
