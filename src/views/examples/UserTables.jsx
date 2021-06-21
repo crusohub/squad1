@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 
 // core components
-import Header from "components/Headers/TableHeader.js";
+import CustomHeader from "components/Headers/CustomHeader.js";
 import React, { useEffect, useState } from "react";
 import UserApi from "../../service/UserDataService";
 
@@ -65,7 +65,11 @@ const UserTables = () => {
 
   return (
     <>
-      <Header />
+      <CustomHeader
+        title="List of Users Registered"
+        descripion="Here you can edit all of your info displayed"
+        urlImage="https://digitalpixel.com.br/wp-content/uploads/2016/08/users-870x342.jpg"
+      />
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Dark table */}
