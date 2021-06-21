@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
 // reactstrap components
 import {
   Badge,
   Card,
   CardHeader,
   CardFooter,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
   Media,
   Pagination,
   PaginationItem,
@@ -19,20 +12,64 @@ import {
   Table,
   Container,
   Row,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 // core components
-import Header from "components/Headers/TableHeader.js";
+import CustomHeader from "components/Headers/CustomHeader.js";
+import React, { useEffect, useState } from "react";
+import UserApi from "../../service/UserDataService";
 
 const UserTables = () => {
-  const [users, setUsers] = useState();
+  const TestList = [
+    {
+      name: "John",
+      email: "jimns@gmail.com",
+      country: "USA",
+      adress: "San Francisco,CA",
+      age: 27,
+    },
+    {
+      name: "Misty",
+      email: "kalene@outlook.com",
+      country: "United Kingdom",
+      adress: "London",
+      age: 22,
+    },
+    {
+      name: "Christopher",
+      email: "baumt@yahoo.com.br",
+      country: "Canada",
+      adress: "Toronto",
+      age: 36,
+    },
+  ];
 
-  useEffect(() => {}, []);
+  const [users, setUsers] = useState([]);
+  const [pageList, setPageList] = useState([]);
+
+  useEffect(() => {
+    chargeUsers();
+  }, []);
+
+  const chargeUsers = () => {
+    UserApi.getUsers().then((response) => {
+      setUsers(response.data);
+      const pages = response.data.length / 10;
+      const list = [];
+      for (let i = 0; i < pages; i++) {
+        list.push(i);
+      }
+      setPageList(list);
+    });
+  };
 
   return (
     <>
-      <Header />
+      <CustomHeader
+        title="List of Users Registered"
+        descripion="Here you can edit all of your info displayed"
+        urlImage="https://digitalpixel.com.br/wp-content/uploads/2016/08/users-870x342.jpg"
+      />
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Dark table */}
@@ -50,175 +87,62 @@ const UserTables = () => {
                   <tr>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
+                    <th scope="col">City</th>
                     <th scope="col">Country</th>
-                    <th scope="col">Adress</th>
-                    <th scope="col">Age</th>
+                    <th scope="col">Address</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#dropdownButton"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Edit
-                          </DropdownItem>
-
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Remove
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#dropdownButton"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Edit
-                          </DropdownItem>
-
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Remove
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#dropdownButton"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Edit
-                          </DropdownItem>
-
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Remove
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#dropdownButton"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Edit
-                          </DropdownItem>
-
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Remove
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#dropdownButton"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Edit
-                          </DropdownItem>
-
-                          <DropdownItem onClick={(e) => e.preventDefault()}>
-                            <Link to="" />
-                            Remove
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
+                  {users.map((users, index) => (
+                    <tr>
+                      <th scope="row">{users.username}</th>
+                      <td>{users.email}</td>
+                      <td>{users.city}</td>
+                      <td>{users.country}</td>
+                      <td>{users.address}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
+              <CardFooter className="py-4">
+                <nav aria-label="...">
+                  <Pagination
+                    className="pagination justify-content-end mb-0"
+                    listClassName="justify-content-end mb-0"
+                  >
+                    <PaginationItem className="disabled">
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                        tabIndex="-1"
+                      >
+                        <i className="fas fa-angle-left" />
+                        <span className="sr-only">Previous</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                    {pageList.map((value) => (
+                      <PaginationItem className="active">
+                        <PaginationLink
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          {value + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className="fas fa-angle-right" />
+                        <span className="sr-only">Next</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                  </Pagination>
+                </nav>
+              </CardFooter>
             </Card>
           </div>
         </Row>

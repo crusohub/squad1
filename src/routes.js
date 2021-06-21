@@ -1,5 +1,6 @@
 import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
+import ProfileCard from "views/examples/ProfileCard.js";
 import Maps from "views/examples/Maps.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
@@ -15,6 +16,8 @@ import NewProject from "views/examples/NewProject"
 import PesquisarProject from "views/examples/PesquisarProject"
 import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
 import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
+import ForgotPassword from "views/examples/ForgotPassword";
+import ChangePassword from "views/examples/ChangePassword";
 
 
 let routes = [
@@ -47,6 +50,13 @@ let routes = [
     layout: "/admin",
   },
   {
+    path: "/profile-Card",
+    name: "Edit profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: ProfileCard,
+    layout: "/admin",
+  },
+  {
     path: "/SettingsProfile",
     name: "Settings Profile",
     icon: "ni ni-single-02 text-yellow",
@@ -66,6 +76,43 @@ let routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: TablesProject,
     layout: "/admin",
+    sub: [
+      {
+        path: "/tablesproject",
+        name: "All Projects",
+        icon: "ni ni-bullet-list-67 text-red",
+        component: TablesProject,
+        layout: "/admin",
+      },
+      {
+        path: "/pesquisarproject",
+        name: "Search Project",
+        icon: "ni ni-bullet-list-67 text-red",
+        component: PesquisarProject,
+        layout: "/admin",
+      },
+      {
+        path: "/newproject",
+        name: "New Projetc",
+        icon: "ni ni-html5 ",
+        component: NewProject,
+        layout: "/admin",
+      },
+      {
+        path: "/addProject",
+        name: "Add Project",
+        icon: "ni ni-fat-add text-red",
+        component: addProject,
+        layout: "/admin",
+      },
+      {
+        path: "/editproject",
+        name: "Edit Projeto",
+        icon: "ni ni-circle-08 text-pink",
+        component: EditProject,
+        layout: "/admin",
+      }
+    ],
   },
   {
     path: "/users-table",
@@ -76,16 +123,26 @@ let routes = [
   },
   {
     path: "/login",
-    name: "Login",
-    icon: "ni ni-key-25 text-info",
     component: Login,
     layout: "/auth",
   },
   {
     path: "/register",
-    name: "Register",
-    icon: "ni ni-circle-08 text-pink",
     component: Register,
+    layout: "/auth",
+  },
+  {
+    path: "/forgotpassword",
+    name: "Forgot Password",
+    icon: "ni ni-circle-08 text-pink",
+    component: ForgotPassword,
+    layout: "/auth",
+  },
+  {
+    path: "/changepassword",
+    name: "ChangePassword",
+    icon: "ni ni-circle-08 text-pink",
+    component: ChangePassword,
     layout: "/auth",
   },
   {
@@ -107,33 +164,60 @@ let routes = [
     name: "Associate Project",
     icon: "ni ni-air-baloon text-yellow",
     component: associateProject,
+    layout: "/admin",
+    sub:[
+      {
+        path: "/associateProject",
+        name: "Associate Project",
+        icon: "ni ni-air-baloon text-yellow",
+        component: associateProject,
+        layout: "/admin",
+      },
+      {
+        path: "/pesquisarassociacao",
+        name: "Search Association",
+        icon: "ni ni-bullet-list-67 text-red",
+        component: PesquisarAssociacao,
+        layout: "/admin",
+      },
+      {
+        path: "/cadassociacao",
+        name: "Register Association",
+        icon: "ni ni-bullet-list-67 text-red",
+        component: CadastrarAssociacao,
+        layout: "/admin",
+      },
+
+    ],
   },
   {
     path: "/pesquisarproject",
-    name: "Pesquisar Project",
-    icon: "ni ni-bullet-list-67 text-red",
     component: PesquisarProject,
     layout: "/admin",
   },
   {
     path: "/pesquisarassociacao",
-    name: "Pesquisar Associacao",
-    icon: "ni ni-bullet-list-67 text-red",
     component: PesquisarAssociacao,
     layout: "/admin",
   },
   {
     path: "/cadassociacao",
-    name: "Cadastrar Associacao",
-    icon: "ni ni-bullet-list-67 text-red",
     component: CadastrarAssociacao,
     layout: "/admin",
   },
   {
     path: "/newproject",
-    name: "Novo Projeto",
-    icon: "ni ni-html5 ",
     component: NewProject,
+    layout: "/admin",
+  },
+  {
+    path: "/addProject",
+    component: addProject,
+    layout: "/admin",
+  },
+  {
+    path: "/editproject",
+    component: EditProject,
     layout: "/admin",
   },
 ];
