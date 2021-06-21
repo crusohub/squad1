@@ -55,7 +55,7 @@ const SaveViewProvider = ({ children  }) => {
 
   useEffect(() => {
     setTimeout(() => { setInfo(); }, 1);
-    setInterval(() => { setInfo(); }, 120000);
+    setInterval(() => { setInfo(); }, 60000);
   }, [setInfo]);
 
   return (
