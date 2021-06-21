@@ -76,12 +76,12 @@ const ChangePassword = () => {
     const confirm = document.querySelector(".confirm")
     let pass = e.target.value
     if (pass == valuePassword) {
-        setCompareVerific(false)
+        setCompareVerific(true)
         setCompare("Compatible Password")
         confirm.classList.add("text-success")
         confirm.classList.remove("text-danger")
     } else {
-        setCompareVerific(true)
+        setCompareVerific(false)
         setCompare("Unsupported passwords")
         confirm.classList.add("text-danger")
         confirm.classList.remove("text-success")
@@ -113,11 +113,14 @@ const ChangePassword = () => {
   }
 
   function SubmitPassword(event){
-    event.preventDefault();
-    const data = {...newUser, password: valuePassword}
-
-    // Data.updateUserData(userId, data)
-    
+    event.preventDefault()
+    if (compareVerific && passwordVerific == true){
+      const data = {...newUser, password: valuePassword}
+      Data.updateUserData(userId, data)
+    }else{
+      alert("Complete all the fields correctly")
+    }
+    event.target.reset();
   }
 
   
@@ -157,6 +160,7 @@ const ChangePassword = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    required
                     className="user"
                     value={user}
                     name="login"
@@ -175,6 +179,7 @@ const ChangePassword = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    required
                     name="password"
                     placeholder="New Password "
                     type="password"
@@ -199,6 +204,7 @@ const ChangePassword = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    required
                     name="confirm_password"
                     placeholder="Confirm Password"
                     type="password"
