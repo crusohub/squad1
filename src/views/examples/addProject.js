@@ -13,13 +13,17 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import ProjectHeader from "components/Headers/ProjectHeader.js";
+import CustomHeader from "components/Headers/CustomHeader";
 
 const Profile = () => {
   
   return (
     <>
-      <ProjectHeader />
+      <CustomHeader
+      urlImage = "https://blog.braip.com/wp-content/uploads/2021/03/cadastro-de-perfil.png"
+      title = "Add Project"
+      descripion = "Add Project" 
+      />
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>Username

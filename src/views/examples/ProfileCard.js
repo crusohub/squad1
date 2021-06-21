@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import api from '../../service/UserDataService';
+import api from "../../service/UserDataService";
 /* import { browserHistory } from 'react-router';
- *//* import { useHistory } from "react-router-dom";
+ */ /* import { useHistory } from "react-router-dom";
 history.push()
  */
 // reactstrap components
@@ -18,8 +18,8 @@ import {
   Col,
 } from "reactstrap";
 // core components
-import UserHeader from "components/Headers/UserHeader.js";
-import { Link } from 'react-router-dom'
+import CustomHeader from "components/Headers/CustomHeader.js";
+import { Link } from "react-router-dom";
 import { useReducer } from "react/cjs/react.development";
 
 const ProfileCard = () => {
@@ -35,19 +35,19 @@ const ProfileCard = () => {
     postalcode: "55",
     about: "Something about me",
     date: "2020-07-22T00:27:48.012Z",
-    password: "1"
-  }
+    password: "1",
+  };
 
-  const [user, setUser] = useState([])
-/* 
+  const [user, setUser] = useState([]);
+  /* 
      useEffect(() => {
       api.getUserById().then((response) =>{
         setUser(response.data)
       })
      }, []);
-   */  
-  function rendelEdit(e){
-    e.preventDefault()
+   */
+  function rendelEdit(e) {
+    e.preventDefault();
     const newUser = {
       username: e.target.inputUsuarioNome.value,
       idade: e.target.inputidade.value,
@@ -59,25 +59,30 @@ const ProfileCard = () => {
       country: e.target.inputCountry.value,
       postalcode: e.target.inputPostal.value,
       about: e.target.inputAbout.value,
-      photo: e.target.inputPhoto.value
-    }
+      photo: e.target.inputPhoto.value,
+    };
 
-    api.updateUserData(userC.id, newUser)
-    .then(response=>{
-      console.log(response.status)
-/*       browserHistory.push("/dashboard")
- */   /*    console.log(1) */
-
-    })
-    .catch(e=>{
-      console.log(e)
-/*       console.log(3)
- */    })
+    api
+      .updateUserData(userC.id, newUser)
+      .then((response) => {
+        console.log(response.status); /*    console.log(1) */
+        /*       browserHistory.push("/dashboard")
+         */
+      })
+      .catch((e) => {
+        console.log(e);
+        /*       console.log(3)
+         */
+      });
   }
-  
+
   return (
     <>
-      <UserHeader />
+      <CustomHeader
+        title="Edit your info"
+        descripion="Here you can edit all of your info displayed"
+        urlImage="https://grandnode.pl/content/images/thumbs/5d9353e778d6ca29e83524a6_theme-editor.png"
+      />
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row className="mt-5 justify-content-center">
@@ -301,8 +306,8 @@ const ProfileCard = () => {
                   </div>
                   <Button
                     color="info"
-/*                     href="#pablo"
- */                    type="submit"
+                    /*                     href="#pablo"
+                     */ type="submit"
                   >
                     Edit profile
                   </Button>
