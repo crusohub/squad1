@@ -1,5 +1,6 @@
 import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
+import ProfileCard from "views/examples/ProfileCard.js";
 import Maps from "views/examples/Maps.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
@@ -15,6 +16,8 @@ import NewProject from "views/examples/NewProject"
 import PesquisarProject from "views/examples/PesquisarProject"
 import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
 import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
+import ForgotPassword from "views/examples/ForgotPassword";
+import ChangePassword from "views/examples/ChangePassword";
 
 
 let routes = [
@@ -44,6 +47,13 @@ let routes = [
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
+    layout: "/admin",
+  },
+  {
+    path: "/profile-Card",
+    name: "Edit profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: ProfileCard,
     layout: "/admin",
   },
   {
@@ -121,7 +131,34 @@ let routes = [
     component: Register,
     layout: "/auth",
   },
-
+  {
+    path: "/forgotpassword",
+    name: "Forgot Password",
+    icon: "ni ni-circle-08 text-pink",
+    component: ForgotPassword,
+    layout: "/auth",
+  },
+  {
+    path: "/changepassword",
+    name: "ChangePassword",
+    icon: "ni ni-circle-08 text-pink",
+    component: ChangePassword,
+    layout: "/auth",
+  },
+  {
+    path: "/addProject",
+    name: "Add Project",
+    icon: "ni ni-fat-add text-red",
+    component: addProject,
+    layout: "/admin",
+  },
+  {
+    path: "/editproject",
+    name: "Editar Projeto",
+    icon: "ni ni-circle-08 text-pink",
+    component: EditProject,
+    layout: "/admin",
+  },
   {
     path: "/associateProject",
     name: "Associate Project",

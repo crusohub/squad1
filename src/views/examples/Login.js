@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
+import { Link } from 'react-router-dom';
 
 import {  Context } from '../../context/AuthContext';
 
@@ -18,8 +19,29 @@ import {
   Col,
 } from "reactstrap";
 
+
 const Login = () => {
   const { handleLogin } = useContext(Context);
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+
+
+const handleSubmit=(e) =>{
+  e.preventDefault()
+  handleLogin(email, password)
+}  
+  
+const handleEmail=(e) => {
+  setEmail(e.target.value)
+
+ }
+
+const handlePassword=(e) =>{
+  setPassword(e.target.value)
+
+}
+
+
 
   return (
     <>
@@ -29,7 +51,7 @@ const Login = () => {
             <div className="text-center text-muted mb-4">
               <small>Entre com as credenciais</small>
             </div>
-            <Form role="form">
+            <Form role="form" onSubmit={handleSubmit}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -41,6 +63,9 @@ const Login = () => {
                     placeholder="Email"
                     type="email"
                     autoComplete="new-email"
+                    name="email"
+                    onChange={handleEmail}
+                    value={email}
                   />
                 </InputGroup>
               </FormGroup>
@@ -55,6 +80,9 @@ const Login = () => {
                     placeholder="Senha"
                     type="password"
                     autoComplete="new-password"
+                    name="password"
+                    onChange={handlePassword}
+                    value={password}
                   />
                 </InputGroup>
               </FormGroup>
@@ -72,11 +100,11 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button 
-                  className="my-4" 
-                  color="primary" 
-                  type="button"
-                  onClick={handleLogin}
+                <Button
+                  className="my-4"
+                  color="primary"
+                  type="submit"
+                 
                 >
                   Entrar
                 </Button>
@@ -86,6 +114,7 @@ const Login = () => {
         </Card>
         <Row className="mt-3">
           <Col xs="6">
+          <Link to={"/auth/forgotpassword"} className="text-light" data-toggle="collapse">Forgot password?</Link>
             <a
               className="text-light"
               href="#pablo"

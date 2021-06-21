@@ -1,6 +1,6 @@
-import { useState } from "react";
-
-import api from '../../service/UserDataService';
+import React, { useEffect, useState } from "react";
+import api from "../../service/UserDataService";
+import imagem from "../../assets/img/theme/team-1-800x800.jpg";
 
 // reactstrap components
 import {
@@ -16,319 +16,134 @@ import {
   Col,
 } from "reactstrap";
 // core components
-import UserHeader from "components/Headers/UserHeader.js";
-import { Link } from 'react-router-dom'
+import CustomHeader from "components/Headers/CustomHeader.js";
+import { Link } from "react-router-dom";
+import { useReducer } from "react/cjs/react.development";
 
 const Profile = () => {
-  const userInitial = {
-    "id": "1",
-    "username": "username 1",
-    "firstname": "firstname 123",
-    "lastname": "lastname 123",
-    "email": "usuario@gmail.com",
-    "address": "address 1",
-    "city": "city 1",
-    "country": "country 1",
-    "postalcode": "postalcode 1",
-    "about": "about 1",
-    "": "username 1as",
-    "password": "1",
-    "image": {
-      "ulrImagePerfil": "",
-      "urlImagebackground": "",
-    }
-  }
-  const [user, setUser] = useState(userInitial)
+  const userC = {
+    id: 2,
+    username: "User1",
+    firstname: "User",
+    lastname: "User",
+    email: "User1@u1.com",
+    address: "User There",
+    city: "There",
+    country: "Here",
+    postalcode: "55",
+    about: "Something about me",
+    date: "2020-07-22T00:27:48.012Z",
+    password: "1",
+  };
 
+  const [user, setUser] = useState([]);
+  /* 
+     useEffect(() => {
+      api.getUserById().then((response) =>{
+        setUser(response.data)
+      })
+     }, []);
+   */
+  function rendelEdit(e) {
+    e.preventDefault();
+    const newUser = {
+      username: e.target.inputUsuarioNome.value,
+      firstname: e.target.inputNome.value,
+      lastname: e.target.inputSobrenome.value,
+      email: e.target.inputEmail.value,
+      address: e.target.inputEndereco.value,
+      city: e.target.inputCity.value,
+      country: e.target.inputCountry.value,
+      postalcode: e.target.inputPostal.value,
+      about: e.target.inputAbout.value,
+      photo: e.target.inputPhoto.value,
+    };
+
+    api
+      .updateUserData(userC.id, newUser)
+      .then((response) => {
+        console.log(response.status);
+        /*    console.log(1) */
+      })
+      .catch((e) => {
+        console.log(e);
+        /*       console.log(3)
+         */
+      });
+  }
   return (
     <>
-      <UserHeader />
-      {/* Page content */}
-      <Container className="mt--7" fluid>
-        <Row>
-          <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-            <Card className="card-profile shadow">
-              <Row className="justify-content-center">
-                <Col className="order-lg-2" lg="3">
-                  <div className="card-profile-image">
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                      <img
-                        alt="..."
-                        className="rounded-circle"
-                        src=""
-                      />
-                    </a>
-                  </div>
-                </Col>
-              </Row>
-              <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                <div className="d-flex justify-content-between">
-                  <Button
-                    className="mr-4"
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Connect
-                  </Button>
-                  <Button
-                    className="float-right"
-                    color="default"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Message
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardBody className="pt-0 pt-md-4">
-                <Row>
-                  <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                      <div>
-                        <span className="heading">22</span>
-                        <span className="description">Friends</span>
-                      </div>
-                      <div>
-                        <span className="heading">10</span>
-                        <span className="description">Photos</span>
-                      </div>
-                      <div>
-                        <span className="heading">89</span>
-                        <span className="description">Comments</span>
-                      </div>
-                    </div>
-                  </div>
-                </Row>
-                <div className="text-center">
-                  <h3>
-                    {user.firstname}
-                    <span className="font-weight-light">, 27</span>
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
-                  </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    Solution Manager - Creative Tim Officer
+      <CustomHeader
+        title="Edit your info"
+        descripion="Here you can edit all of your info displayed"
+        urlImage="https://grandnode.pl/content/images/thumbs/5d9353e778d6ca29e83524a6_theme-editor.png"
+      />
+      <Col className="order-xl-2 mb-5 mb-xl-0 center" xl="8">
+        <Card className="card-profile shadow">
+          <Row className="justify-content-center">
+            <Col className="order-lg-2" lg="3">
+              <div className="card-profile-image">
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  <img
+                    alt="..."
+                    className="rounded-circle"
+                    src="https://i.pravatar.cc/800"
+                  />
+                </a>
+              </div>
+            </Col>
+          </Row>
+
+          <CardBody className="pt-0 pt-md-4">
+            <Row>
+              <div className="col">
+                <div className="card-profile-stats d-flex justify-content-center mt-md-7">
+                  <div>
+                    <span className="heading">22</span>
+                    <span className="description">Friends</span>
                   </div>
                   <div>
-                    <i className="ni education_hat mr-2" />
-                    University of Computer Science
+                    <span className="heading">10</span>
+                    <span className="description">Photos</span>
                   </div>
-                  <hr className="my-4" />
-                  <p>
-                    Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                    Nick Murphy — writes, performs and records all of his own
-                    music.
-                  </p>
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    Show more
-                  </a>
+                  <div>
+                    <span className="heading">89</span>
+                    <span className="description">Comments</span>
+                  </div>
                 </div>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col className="order-xl-1" xl="8">
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
-                <Row className="align-items-center">
-                  <Col xs="8">
-                    <h3 className="mb-0">My account</h3>
-                  </Col>
-                  <Col className="text-right" xs="4">
-                    <Link to='/admin/SettingsProfile'>
-                      <Button
-                        color="primary"
-                        size="sm"
-                      >
-                        Settings
-                      </Button>
-                    </Link>
-                  </Col>
-                </Row>
-              </CardHeader>
-              <CardBody>
-                <Form>
-                  <h6 className="heading-small text-muted mb-4">
-                    User information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-username"
-                          >
-                            Username
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue={user.username}
-                            id="input-username"
-                            placeholder="Username"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-email"
-                          >
-                            Email address
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-email"
-                            placeholder="jesse@example.com"
-                            type="email"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
-                            First name
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="Lucky"
-                            id="input-first-name"
-                            placeholder="First name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
-                            Last name
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="Jesse"
-                            id="input-last-name"
-                            placeholder="Last name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-                  <hr className="my-4" />
-                  {/* Address */}
-                  <h6 className="heading-small text-muted mb-4">
-                    Contact information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            Address
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                            id="input-address"
-                            placeholder="Home Address"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
-                            City
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="New York"
-                            id="input-city"
-                            placeholder="City"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Country
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue="United States"
-                            id="input-country"
-                            placeholder="Country"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
-                            Postal code
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-postal-code"
-                            placeholder="Postal code"
-                            type="number"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-                  <hr className="my-4" />
-                  {/* Description */}
-                  <h6 className="heading-small text-muted mb-4">About me</h6>
-                  <div className="pl-lg-4">
-                    <FormGroup>
-                      <label>About Me</label>
-                      <Input
-                        className="form-control-alternative"
-                        placeholder="A few words about you ..."
-                        rows="4"
-                        defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                        Open Source."
-                        type="textarea"
-                      />
-                    </FormGroup>
-                  </div>
-                </Form>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+              </div>
+            </Row>
+            <div className="text-center">
+              <h3>
+                {user.firstname}
+                <span className="font-weight-light">{userC.username}, 27</span>
+              </h3>
+              <div className="h5 font-weight-300">
+                <i className="ni location_pin mr-2" />
+                {userC.city}
+              </div>
+              <div className="h3 mt-4">
+                <i className="ni business_briefcase-24 mr-2" />
+                {userC.email}
+              </div>
+              <div>
+                <i className="ni education_hat mr-2" />
+                <b>{`${userC.city}, ${userC.country}`}</b>
+              </div>
+              <hr className="my-4" />
+              <p className=" font-weight-500">{userC.about}</p>
+            </div>
+            <Row className="justify-content-center mt-3">
+              <Link to="/admin/profile-Card">
+                <Button color="primary" size="md">
+                  Edit Profile
+                </Button>
+              </Link>
+            </Row>
+          </CardBody>
+        </Card>
+      </Col>
+      <Col className="text-right" xs="4"></Col>
     </>
   );
 };

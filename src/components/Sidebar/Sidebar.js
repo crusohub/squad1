@@ -248,7 +248,7 @@ const Sidebar = (props) => {
                   ) : (
                     <a href={logo.outterLink}>
                       <img alt={logo.imgAlt} src={logo.imgSrc} />
-                    </a>
+                    </a>  
                   )}
                 </Col>
               ) : null}

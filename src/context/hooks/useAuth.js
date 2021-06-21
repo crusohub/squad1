@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import history from '../../history';
-
 export default function useAuth() {
     const user = {
       userId: 1,
@@ -10,6 +8,7 @@ export default function useAuth() {
 
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isNewUser, setIsNewUser] = useState(false)
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -21,17 +20,20 @@ export default function useAuth() {
     setLoading(false);
   }, []);
   
-   const handleLogin = () => {
+   const handleLogin = (isNew) => {
      localStorage.setItem('user', JSON.stringify(user));
+    
+     if(isNew === 'newUser') {
+      setIsNewUser(true);
+     }
+
      setAuthenticated(true);
-     history.push('/admin/index');
   }
 
   const handleLogout = () =>  {
     setAuthenticated(false);
     localStorage.removeItem('user');
-    history.push('/auth/login');
   }
   
-  return { authenticated, loading, handleLogin, handleLogout };
+  return { authenticated, loading, handleLogin, handleLogout, isNewUser };
 }
