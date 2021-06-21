@@ -28,6 +28,7 @@ import {
 // core components
 import CustomHeader from "components/Headers/CustomHeader";
 import UserDataService from "../../service/UserDataService"
+import ProjectDataService from "../../service/ProjectDataService"
 const Tables = () => {
   const associacaoInitial = [
     {
@@ -97,12 +98,28 @@ const Tables = () => {
    const [associacoes, setAssociacoes] = useState(associacaoInitial)
 
    useEffect(()=>{
-      UserDataService.getUsers().then(
-        response => {
-          setUsers(response.data)
-        }
-      )
+      getAllProject()
+      getAllusers()
    }, [])
+
+   const getAllusers = () => {
+    UserDataService.getUsers().then(
+      response => {
+        setUsers(response.data)
+      }
+    )
+
+   }
+
+   const getAllProject = () => {
+    ProjectDataService.getAllProject().then(
+      response => {
+        setProjects(response.data)
+      }
+    )
+
+   }
+
   return (
     <>
       <CustomHeader 
@@ -157,8 +174,8 @@ const Tables = () => {
                         placeholder="Username"
                         type="select"
                         >
-                          {associacoes.map((value, index) => (
-                          <option>{value.username}</option>
+                          {projects.map((value, index) => (
+                          <option>{value.projectname}</option>
                         ))}
 
                         </Input>
