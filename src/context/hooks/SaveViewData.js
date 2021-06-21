@@ -14,10 +14,10 @@ const SaveViewProvider = ({ children  }) => {
   const [index, setIndex] = useState(0);
 
   const setInfo = useCallback(() => {
-    setUsers(getUsers());
-    setProjects(getProjects());
-    setConnections(getConnections());
-    setAssociations(getAssociations());
+    setUsers(getUsers() ?? users);
+    setProjects(getProjects() ?? projects);
+    setConnections(getConnections() ?? connections);
+    setAssociations(getAssociations() ?? associations);
   }, []);
 
   const SaveViewData = {
@@ -55,7 +55,7 @@ const SaveViewProvider = ({ children  }) => {
 
   useEffect(() => {
     setTimeout(() => { setInfo(); }, 1);
-    setInterval(() => { setInfo(); }, 60000);
+    setInterval(() => { setInfo(); }, 90000);
   }, [setInfo]);
 
   return (
