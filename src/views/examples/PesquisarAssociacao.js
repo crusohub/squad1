@@ -1,21 +1,4 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 // reactstrap components
 import {
@@ -43,8 +26,8 @@ import {
   Button, Col
 } from "reactstrap";
 // core components
-import Header from "components/Headers/HeaderTables";
-
+import CustomHeader from "components/Headers/CustomHeader";
+import UserDataService from "../../service/UserDataService"
 const Tables = () => {
   const associacaoInitial = [
     {
@@ -109,12 +92,23 @@ const Tables = () => {
      "about": "about 3"
     }]
 
-   const [users, setUsers] = useState(usersInitial)
-    const [associacoes, setAssociacoes] = useState(associacaoInitial)
+   const [users, setUsers] = useState([])
+   const [projects, setProjects] = useState(usersInitial)
+   const [associacoes, setAssociacoes] = useState(associacaoInitial)
 
+   useEffect(()=>{
+      UserDataService.getUsers().then(
+        response => {
+          setUsers(response.data)
+        }
+      )
+   }, [])
   return (
     <>
-      <Header />
+      <CustomHeader 
+      urlImage = "https://proxy.organicadigital.com/img-36724f4a253b9870.png?thumb=701x"
+      title = "Search Association"
+      descripion = "Search Association"/>
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Table */}
@@ -148,6 +142,7 @@ const Tables = () => {
                       </Input>
                       </Col>
                       </Row>
+                      <Row>
                     <Col>
                       <label
                         className="form-control-label"
@@ -167,18 +162,23 @@ const Tables = () => {
                         ))}
 
                         </Input>
+                        </Col>
+                      </Row>
+                      
+                      <Row>
+                      <Col>
+                            <Button 
+                                className="my-4" 
+                                color="primary" 
+                                type="submit"
+                                onClick={(e) => e.preventDefault()}
+                                >
+                                Pesquisar
+                            </Button>
+                            </Col>
+                      </Row>
                       
                       
-                      <Button
-                        className="mr-4"
-                        color="info"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        size="sm"
-                      >Excluir</Button>
-
-
-                      </Col>
                     </FormGroup>
                     </CardHeader>
                   </Form>
