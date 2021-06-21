@@ -115,13 +115,6 @@ const handlePassword=(e) =>{
         <Row className="mt-3">
           <Col xs="6">
           <Link to={"/auth/forgotpassword"} className="text-light" data-toggle="collapse">Forgot password?</Link>
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>Esqueceu a senha?</small>
-            </a>
           </Col>
           <Col className="text-right" xs="6">
             <a
