@@ -43,7 +43,6 @@ const UserTables = () => {
       const list = [];
       for (let i = 0; i < pages; i++) {
         list.push(i);
-        console.log(list);
       }
       setPageList(list);
       setCurrentPage(1);
@@ -57,21 +56,11 @@ const UserTables = () => {
   };
 
   const handleNextPage = () => {
-    console.log(currentPage);
     setCurrentPage(currentPage + 1);
-    document.querySelector("#prevPage").classList.remove("disabled");
   };
 
   const handlePrevPage = () => {
-    console.log(currentPage);
     setCurrentPage(currentPage - 1);
-
-    if (currentPage <= 1) {
-      console.log(currentPage);
-      document.querySelector("#prevPage").classList.add("disabled");
-    }
-
-    console.log(currentPage);
   };
 
   return (
@@ -122,7 +111,10 @@ const UserTables = () => {
                     className="pagination justify-content-end mb-0"
                     listClassName="justify-content-end mb-0"
                   >
-                    <PaginationItem id="prevPage" className="disabled">
+                    <PaginationItem
+                      id="prevPage"
+                      className={currentPage <= 1 ? "disabled" : ""}
+                    >
                       <PaginationLink
                         id="LinkPrevPage"
                         onClick={() => handlePrevPage()}
@@ -147,9 +139,14 @@ const UserTables = () => {
                       </PaginationItem>
                     ))}
 
-                    <PaginationItem>
+                    <PaginationItem
+                      id="nextPage"
+                      className={
+                        currentPage == pageList.length ? "disabled" : ""
+                      }
+                    >
                       <PaginationLink
-                        id="nextPage"
+                        id="LinkNextPage"
                         onClick={() => handleNextPage()}
                       >
                         <i className="fas fa-angle-right" />
