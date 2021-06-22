@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../service/UserDataService";
+import { Context } from "../../context/AuthContext";
+
 /* import { browserHistory } from 'react-router';
  */ /* import { useHistory } from "react-router-dom";
 history.push()
@@ -23,7 +25,7 @@ import { Link } from "react-router-dom";
 import { useReducer } from "react/cjs/react.development";
 
 const ProfileCard = () => {
-  const userC = {
+  /*  const userC = {
     id: 2,
     username: "User1",
     firstname: "User",
@@ -36,10 +38,12 @@ const ProfileCard = () => {
     about: "Something about me",
     date: "2020-07-22T00:27:48.012Z",
     password: "1",
-  };
+  }; */
 
-  const [user, setUser] = useState([]);
-  /* 
+  const [user, setUser] = useState(0);
+
+  /*   const [user, setUser] = useState([]);
+   */ /* 
      useEffect(() => {
       api.getUserById().then((response) =>{
         setUser(response.data)
@@ -63,7 +67,7 @@ const ProfileCard = () => {
     };
 
     api
-      .updateUserData(userC.id, newUser)
+      .updateUserData(user.id, newUser)
       .then((response) => {
         console.log(response.status); /*    console.log(1) */
         /*       browserHistory.push("/dashboard")
@@ -112,7 +116,7 @@ const ProfileCard = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={userC.username}
+                            defaultValue={user.username}
                             id="inputUsuarioNome"
                             placeholder="name"
                             type="text"
@@ -149,7 +153,7 @@ const ProfileCard = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputNome"
-                            defaultValue={userC.firstname}
+                            defaultValue={user.firstname}
                             placeholder="First name"
                             type="text"
                           />
@@ -166,7 +170,7 @@ const ProfileCard = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputSobrenome"
-                            defaultValue={userC.lastname}
+                            defaultValue={user.lastname}
                             placeholder="Last name"
                             type="text"
                           />
@@ -185,7 +189,7 @@ const ProfileCard = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputPhoto"
-                            defaultValue={userC.photo}
+                            defaultValue={user.photo}
                             placeholder="Insert your photo"
                             type="text"
                           />
@@ -227,7 +231,7 @@ const ProfileCard = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputEndereco"
-                            defaultValue={userC.address}
+                            defaultValue={user.address}
                             placeholder="Home Address"
                             type="text"
                           />
@@ -246,7 +250,7 @@ const ProfileCard = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputCity"
-                            defaultValue={userC.city}
+                            defaultValue={user.city}
                             placeholder="City"
                             type="text"
                           />
@@ -263,7 +267,7 @@ const ProfileCard = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputCountry"
-                            defaultValue={userC.country}
+                            defaultValue={user.country}
                             placeholder="Country"
                             type="text"
                           />
@@ -280,7 +284,7 @@ const ProfileCard = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputPostal"
-                            defaultValue={userC.postalcode}
+                            defaultValue={user.postalcode}
                             placeholder="Postal code"
                             type="number"
                           />
@@ -299,7 +303,7 @@ const ProfileCard = () => {
                         placeholder="A few words about you ..."
                         rows="4"
                         id="inputAbout"
-                        defaultValue={userC.About}
+                        defaultValue={user.About}
                         type="textarea"
                       />
                     </FormGroup>
