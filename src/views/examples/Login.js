@@ -1,7 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from 'react-router-dom';
 
 import {  Context } from '../../context/AuthContext';
+import api from '../../service/UserDataService';
 
 // reactstrap components
 import {
@@ -24,12 +25,32 @@ const Login = () => {
   const { handleLogin } = useContext(Context);
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
-
+  const [users, setUsers] = useState([]);
 
 const handleSubmit=(e) =>{
-  e.preventDefault()
-  handleLogin(email, password)
-}  
+  e.preventDefault();
+  // email: duan@duan.com
+  // senha: 111
+  const filteredUser = users.filter(user => filterUser(user));
+
+  if(filteredUser[0]) {
+    if (filteredUser[0].password === password) {
+      handleLogin();
+    }
+
+    alert('Incorrect email or password');
+    setPassword('');
+    return;
+  } 
+
+  return;
+}
+
+const filterUser = (user) => {
+  if(user && user.email === email) {
+    return user;
+  }
+}
   
 const handleEmail=(e) => {
   setEmail(e.target.value)
@@ -41,7 +62,11 @@ const handlePassword=(e) =>{
 
 }
 
-
+useEffect(()=>{
+  api.getUsers().then(res =>
+    setUsers(res.data)
+  );
+}, []);
 
   return (
     <>

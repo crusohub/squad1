@@ -87,11 +87,6 @@ const ForgotPassword = () => {
                   type="email"
                   autoComplete="new-email"
                 />
-                {/* <Input
-                  name="input_userId"
-                  type="hidden"
-                  value={}
-                /> */}
               </InputGroup>
             </FormGroup>
             <div className="text-center">
