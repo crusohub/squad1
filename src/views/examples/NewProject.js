@@ -73,8 +73,8 @@ const NewProject = (props) => {
     <>
       <CustomHeader
         urlImage="https://picsum.photos/id/1015/367/267"
-        title="Novo projeto"
-        descripion="Criar novo projeto"
+        title="New Project"
+        descripion="Create New Project"
       />
       {/* Page content */}
       {submitted ? (
