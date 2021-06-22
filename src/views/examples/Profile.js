@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../service/UserDataService";
 import imagem from "../../assets/img/theme/team-1-800x800.jpg";
+import AuthContext from "context/AuthContext"
 
 // reactstrap components
 import {
@@ -21,7 +22,7 @@ import { Link } from "react-router-dom";
 import { useReducer } from "react/cjs/react.development";
 
 const Profile = () => {
-  const userC = {
+ /*  const user = {
     id: 2,
     username: "User1",
     firstname: "User",
@@ -34,10 +35,11 @@ const Profile = () => {
     about: "Something about me",
     date: "2020-07-22T00:27:48.012Z",
     password: "1",
-  };
+  }; */
+  const [user, setUser] = useContext(AuthContext);
 
-  const [user, setUser] = useState([]);
-  /* 
+/*   const [user, setUser] = useState([]);
+ */  /* 
      useEffect(() => {
       api.getUserById().then((response) =>{
         setUser(response.data)
@@ -60,7 +62,7 @@ const Profile = () => {
     };
 
     api
-      .updateUserData(userC.id, newUser)
+      .updateUserData(user.id, newUser)
       .then((response) => {
         console.log(response.status);
         /*    console.log(1) */
@@ -116,22 +118,22 @@ const Profile = () => {
             <div className="text-center">
               <h3>
                 {user.firstname}
-                <span className="font-weight-light">{userC.username}, 27</span>
+                <span className="font-weight-light">{user.username}, 27</span>
               </h3>
               <div className="h5 font-weight-300">
                 <i className="ni location_pin mr-2" />
-                {userC.city}
+                {user.city}
               </div>
               <div className="h3 mt-4">
                 <i className="ni business_briefcase-24 mr-2" />
-                {userC.email}
+                {user.email}
               </div>
               <div>
                 <i className="ni education_hat mr-2" />
-                <b>{`${userC.city}, ${userC.country}`}</b>
+                <b>{`${user.city}, ${user.country}`}</b>
               </div>
               <hr className="my-4" />
-              <p className=" font-weight-500">{userC.about}</p>
+              <p className=" font-weight-500">{user.about}</p>
             </div>
             <Row className="justify-content-center mt-3">
               <Link to="/admin/profile-Card">
