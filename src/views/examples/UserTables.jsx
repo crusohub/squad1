@@ -29,29 +29,29 @@ const UserTables = () => {
     chargeUsers();
   }, []);
 
-  useEffect(()=>{
-    chargeUsersPerPage()
+  useEffect(() => {
+    chargeUsersPerPage();
   }, [currentPage]);
 
   const chargeUsers = () => {
     UserApi.getUsers().then((response) => {
-      const pageLength = response.data.length / 10;
-      (response.data.length % 10 === 0)
-        ? setPages(pageLength)
-        : setPages(pageLength + 1)
-        
+      // const pageLength = response.data.length / 10;
+      // (response.data.length % 10 === 0)
+      //   ? setPages(pageLength)
+      //   : setPages(pageLength + 1)
+      setPages(Math.ceil(response.data.length / 10));
       const list = [];
-      for (let i = 0; i <= pages; i++) {
+      for (let i = 0; i < pages; i++) {
         list.push(i);
         console.log(list);
       }
       setPageList(list);
-      chargeUsersPerPage(1)
+      setCurrentPage(1);
     });
   };
 
-  const chargeUsersPerPage = (value) => {
-    UserApi.getUserByPage(value, 10).then((response) => {
+  const chargeUsersPerPage = () => {
+    UserApi.getUserByPage(currentPage, 10).then((response) => {
       setUsers(response.data);
     });
   };
@@ -59,14 +59,12 @@ const UserTables = () => {
   const handleNextPage = () => {
     console.log(currentPage);
     setCurrentPage(currentPage + 1);
-    chargeUsersPerPage(currentPage);
     document.querySelector("#prevPage").classList.remove("disabled");
   };
 
   const handlePrevPage = () => {
     console.log(currentPage);
     setCurrentPage(currentPage - 1);
-    chargeUsersPerPage(currentPage);
 
     if (currentPage <= 1) {
       console.log(currentPage);
@@ -109,11 +107,11 @@ const UserTables = () => {
                 <tbody>
                   {users.map((users, index) => (
                     <tr key={index}>
-                      <th  scope="row">{users.username}</th>
-                      <td >{users.email}</td>
-                      <td >{users.city}</td>
-                      <td >{users.country}</td>
-                      <td >{users.address}</td>
+                      <th scope="row">{users.username}</th>
+                      <td>{users.email}</td>
+                      <td>{users.city}</td>
+                      <td>{users.country}</td>
+                      <td>{users.address}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -135,10 +133,14 @@ const UserTables = () => {
                     </PaginationItem>
 
                     {pageList.map((value) => (
-                      <PaginationItem className="active">
+                      <PaginationItem
+                        className={
+                          currentPage == value + 1 ? "active" : "disabled"
+                        }
+                      >
                         <PaginationLink
                           id="numberPage"
-                          onClick={() => chargeUsersPerPage(value + 1)}
+                          onClick={() => setCurrentPage(value + 1)}
                         >
                           {value + 1}
                         </PaginationLink>
