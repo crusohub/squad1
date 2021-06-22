@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../service/UserDataService";
-import AuthContext from "context/AuthContext"
+import { Context } from "../../context/AuthContext";
 
 /* import { browserHistory } from 'react-router';
  */ /* import { useHistory } from "react-router-dom";
@@ -25,7 +25,7 @@ import { Link } from "react-router-dom";
 import { useReducer } from "react/cjs/react.development";
 
 const ProfileCard = () => {
- /*  const userC = {
+  /*  const userC = {
     id: 2,
     username: "User1",
     firstname: "User",
@@ -40,10 +40,10 @@ const ProfileCard = () => {
     password: "1",
   }; */
 
-  const [user, setUser] = useContext(AuthContext);
+  const [user, setUser] = useState(0);
 
-/*   const [user, setUser] = useState([]);
- */  /* 
+  /*   const [user, setUser] = useState([]);
+   */ /* 
      useEffect(() => {
       api.getUserById().then((response) =>{
         setUser(response.data)

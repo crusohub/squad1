@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../service/UserDataService";
 import imagem from "../../assets/img/theme/team-1-800x800.jpg";
-import AuthContext from "context/AuthContext"
+import { Context } from "../../context/AuthContext";
 
 // reactstrap components
 import {
@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import { useReducer } from "react/cjs/react.development";
 
 const Profile = () => {
- /*  const user = {
+  /*  const user = {
     id: 2,
     username: "User1",
     firstname: "User",
@@ -36,10 +36,10 @@ const Profile = () => {
     date: "2020-07-22T00:27:48.012Z",
     password: "1",
   }; */
-  const [user, setUser] = useContext(AuthContext);
+  const [user, setUser] = useState(0);
 
-/*   const [user, setUser] = useState([]);
- */  /* 
+  /*   const [user, setUser] = useState([]);
+   */ /* 
      useEffect(() => {
       api.getUserById().then((response) =>{
         setUser(response.data)
