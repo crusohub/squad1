@@ -119,14 +119,14 @@ let routes = [
       },
       {
         path: "/newproject",
-        name: "New Projetc",
+        name: "New Project",
         icon: "ni ni-fat-add text-red",
         component: NewProject,
         layout: "/admin",
       },
       {
         path: "/editproject",
-        name: "Edit Projeto",
+        name: "Edit Project",
         icon: "ni ni-settings text-red",
         component: EditProject,
         layout: "/admin",
