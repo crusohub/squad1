@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 
 export default function useAuth() {
-    const user = {
-      userId: 1,
-      theme: 'light',
-    }
-
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [isNewUser, setIsNewUser] = useState(false)
+  const [isNewUser, setIsNewUser] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+
+  const user = {
+    userId: currentUser.id,
+    theme: 'light',
+  }
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -21,13 +22,13 @@ export default function useAuth() {
   }, []);
   
    const handleLogin = (isNew) => {
-     localStorage.setItem('user', JSON.stringify(user));
-    
-     if(isNew === 'newUser') {
-      setIsNewUser(true);
-     }
+    localStorage.setItem('user', JSON.stringify(user));
 
-     setAuthenticated(true);
+    if(isNew === 'newUser') {
+      setIsNewUser(true);
+    }
+
+    setAuthenticated(true);
   }
 
   const handleLogout = () =>  {
@@ -35,5 +36,5 @@ export default function useAuth() {
     localStorage.removeItem('user');
   }
   
-  return { authenticated, loading, handleLogin, handleLogout, isNewUser };
+  return { authenticated, loading, handleLogin, handleLogout, isNewUser, setCurrentUser, currentUser };
 }
