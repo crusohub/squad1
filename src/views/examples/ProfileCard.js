@@ -142,11 +142,6 @@ const ProfileCard = () => {
                   Edit Profile
                 </Button>
               </Link>
-            {/*   <Link to="/admin/SettingsProfile">
-                <Button color="primary" size="md">
-                  Settings Profile
-                </Button>
-              </Link> */}
             </Row>
           </CardBody>
         </Card>
