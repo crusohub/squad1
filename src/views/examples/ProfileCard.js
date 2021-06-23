@@ -5,7 +5,7 @@ import { Context } from "../../context/AuthContext";
 /* import { browserHistory } from 'react-router';
  */ /* import { useHistory } from "react-router-dom";
 history.push()
- */
+*/
 // reactstrap components
 import {
   Button,
@@ -44,12 +44,12 @@ const ProfileCard = () => {
 
   /*   const [user, setUser] = useState([]);
    */ /* 
-     useEffect(() => {
-      api.getUserById().then((response) =>{
-        setUser(response.data)
-      })
-     }, []);
-   */
+  useEffect(() => {
+   api.getUserById().then((response) =>{
+     setUser(response.data)
+   })
+  }, []);
+*/
   function rendelEdit(e) {
     e.preventDefault();
     const newUser = {
@@ -308,13 +308,20 @@ const ProfileCard = () => {
                       />
                     </FormGroup>
                   </div>
-                  <Button
-                    color="info"
-                    /*                     href="#pablo"
-                     */ type="submit"
-                  >
-                    Edit profile
-                  </Button>
+
+                  <Row className="justify-content-center mt-3">
+                    <Button color="primary" size="md" type="submit"
+                    /* color="info" */
+                    /*href="#pablo"*/
+                    >
+                      Edit profile
+                    </Button>
+                    <Link to="/admin/user-profile">
+                      <Button color="primary" size="md">
+                        Profile
+                      </Button>
+                    </Link>
+                  </Row>
                 </Form>
               </CardBody>
             </Card>
