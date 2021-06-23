@@ -138,8 +138,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputSobrenome"
-                            defaultValue={user.lastname}
-                            placeholder="Last name"
+                            defaultValue={currentUser.lastname}
                             type="text"
                           />
                         </FormGroup>
@@ -157,8 +156,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputPhoto"
-                            defaultValue={user.photo}
-                            placeholder="Insert your photo"
+                            defaultValue={currentUser.photo}
                             type="text"
                           />
                         </FormGroup>
@@ -174,7 +172,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputidade"
-                            defaultValue={user.idade}
+                            defaultValue={currentUser.idade}
                             type="date"
                           />
                         </FormGroup>
@@ -199,8 +197,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputEndereco"
-                            defaultValue={user.address}
-                            placeholder="Home Address"
+                            defaultValue={currentUser.address}
                             type="text"
                           />
                         </FormGroup>
@@ -218,8 +215,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputCity"
-                            defaultValue={user.city}
-                            placeholder="City"
+                            defaultValue={currentUser.city}
                             type="text"
                           />
                         </FormGroup>
@@ -235,8 +231,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputCountry"
-                            defaultValue={user.country}
-                            placeholder="Country"
+                            defaultValue={currentUser.country}
                             type="text"
                           />
                         </FormGroup>
@@ -252,8 +247,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputPostal"
-                            defaultValue={user.postalcode}
-                            placeholder="Postal code"
+                            defaultValue={currentUser.postalcode}
                             type="number"
                           />
                         </FormGroup>
@@ -268,10 +262,10 @@ const Profile = () => {
                       <label>About Me</label>
                       <Input
                         className="form-control-alternative"
-                        placeholder="A few words about you ..."
-                        rows="4"
+/*                         placeholder="A few words about you ..."
+ */                        rows="4"
                         id="inputAbout"
-                        defaultValue={user.About}
+                        defaultValue={currentUser.About}
                         type="textarea"
                       />
                     </FormGroup>
