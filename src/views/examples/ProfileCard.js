@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import api from "../../service/UserDataService";
 import imagem from "../../assets/img/theme/team-1-800x800.jpg";
 import { Context } from "../../context/AuthContext";
@@ -19,61 +19,10 @@ import {
 // core components
 import CustomHeader from "components/Headers/CustomHeader.js";
 import { Link } from "react-router-dom";
-import { useReducer } from "react/cjs/react.development";
 
 const ProfileCard = () => {
-  /*  const user = {
-    id: 2,
-    username: "User1",
-    firstname: "User",
-    lastname: "User",
-    email: "User1@u1.com",
-    address: "User There",
-    city: "There",
-    country: "Here",
-    postalcode: "55",
-    about: "Something about me",
-    date: "2020-07-22T00:27:48.012Z",
-    password: "1",
-  }; */
-  const [user, setUser] = useState(0);
-
-  /*   const [user, setUser] = useState([]);
-   */ /* 
-    useEffect(() => {
-     api.getUserById().then((response) =>{
-       setUser(response.data)
-     })
-    }, []);
-  */
-  function rendelEdit(e) {
-    e.preventDefault();
-    const newUser = {
-      username: e.target.inputUsuarioNome.value,
-      firstname: e.target.inputNome.value,
-      lastname: e.target.inputSobrenome.value,
-      email: e.target.inputEmail.value,
-      address: e.target.inputEndereco.value,
-      city: e.target.inputCity.value,
-      country: e.target.inputCountry.value,
-      postalcode: e.target.inputPostal.value,
-      about: e.target.inputAbout.value,
-      date: user.date,
-      photo: e.target.inputPhoto.value,
-    };
-
-    api
-      .updateUserData(user.id, newUser)
-      .then((response) => {
-        console.log(response.status);
-        /*    console.log(1) */
-      })
-      .catch((e) => {
-        console.log(e);
-        /*       console.log(3)
-         */
-      });
-  }
+  const { currentUser } = useContext(Context)
+  
   return (
     <>
       <CustomHeader
@@ -90,7 +39,7 @@ const ProfileCard = () => {
                   <img
                     alt="..."
                     className="rounded-circle"
-                    src="https://i.pravatar.cc/800"
+                    src={currentUser ? currentUser.photo : 'https://i.pravatar.cc/800'}
                   />
                 </a>
               </div>
@@ -118,27 +67,30 @@ const ProfileCard = () => {
             </Row>
             <div className="text-center">
               <h3>
-                {user.firstname}
-                <span className="font-weight-light">{user.username}, 27</span>
+                {currentUser.firstname}
+                <span className="font-weight-light">{currentUser.username}, 27</span>
               </h3>
               <div className="h5 font-weight-300">
                 <i className="ni location_pin mr-2" />
-                {user.city}
+                {currentUser.city}
               </div>
               <div className="h3 mt-4">
                 <i className="ni business_briefcase-24 mr-2" />
-                {user.email}
+                {currentUser.email}
               </div>
               <div>
                 <i className="ni education_hat mr-2" />
-                <b>{`${user.city}, ${user.country}`}</b>
+                <b>{`${currentUser.city}, ${currentUser.country}`}</b>
               </div>
               <hr className="my-4" />
-              <p className=" font-weight-500">{user.about}</p>
+              <p className=" font-weight-500">{currentUser.about}</p>
             </div>
             <Row className="justify-content-center mt-3">
               <Link to="/admin/user-profile">
-                <Button color="primary" size="md">
+                <Button 
+                  color="primary" 
+                  size="md"
+                >
                   Edit Profile
                 </Button>
               </Link>

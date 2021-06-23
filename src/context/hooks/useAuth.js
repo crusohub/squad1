@@ -9,12 +9,13 @@ export default function useAuth() {
   const user = {
     userId: currentUser.id,
     theme: 'light',
+    authenticated
   }
 
   useEffect(() => {
     const user = localStorage.getItem('user');
 
-    if (user && user.userId > 0) {
+    if (user && user.authenticated) {
       setAuthenticated(true);
     }
 

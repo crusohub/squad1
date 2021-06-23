@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import api from "../../service/UserDataService";
 import { Context } from "../../context/AuthContext";
 
@@ -21,10 +21,11 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [user, setUser] = useState(0);
+  const { currentUser } = useContext(Context);
 
-  function rendelEdit(e) {
-    e.preventDefault();
-    const newUser = {
+  function handleEdit(e) {
+    // e.preventDefault();
+    const updatedData = {
       username: e.target.inputUsuarioNome.value,
       idade: e.target.inputidade.value,
       firstname: e.target.inputNome.value,
@@ -40,16 +41,13 @@ const Profile = () => {
     };
 
     api
-      .updateUserData(user.id, newUser)
-      .then((response) => {
-        console.log(response.status); /*    console.log(1) */
-        /*       browserHistory.push("/dashboard")
-         */
-      })
-      .catch((e) => {
-        console.log(e);
-        /*       console.log(3)
-         */
+      .updateUserData(currentUser.id, updatedData)
+        .then((response) => {
+          alert('Seus dados foram atualizados com sucesso!');
+        })
+        .catch((e) => {
+          alert('Nao conseguimos atualizar seus dados!');
+          console.log(e);
       });
   }
 
@@ -73,7 +71,7 @@ const Profile = () => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <Form onSubmit={rendelEdit}>
+                <Form onSubmit={handleEdit}>
                   <h6 className="heading-small text-muted mb-4">
                     User information
                   </h6>
@@ -89,9 +87,8 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={user.username}
+                            defaultValue={currentUser.username}
                             id="inputUsuarioNome"
-                            placeholder="name"
                             type="text"
                           />
                         </FormGroup>
@@ -107,8 +104,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputEmail"
-                            defaultValue={user.email}
-                            placeholder="jesse@example.com"
+                            defaultValue={currentUser.email}
                             type="email"
                           />
                         </FormGroup>
@@ -126,8 +122,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="inputNome"
-                            defaultValue={user.firstname}
-                            placeholder="First name"
+                            defaultValue={currentUser.firstname}
                             type="text"
                           />
                         </FormGroup>
@@ -284,8 +279,6 @@ const Profile = () => {
 
                   <Row className="justify-content-center mt-3">
                     <Button color="primary" size="md" type="submit"
-                    /* color="info" */
-                    /*href="#pablo"*/
                     >
                       Confirm
                     </Button>
