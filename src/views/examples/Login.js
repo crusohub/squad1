@@ -8,7 +8,6 @@ import api from '../../service/UserDataService';
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   FormGroup,
   Form,
@@ -22,7 +21,7 @@ import {
 
 
 const Login = () => {
-  const { handleLogin } = useContext(Context);
+  const { handleLogin, setCurrentUser } = useContext(Context);
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [users, setUsers] = useState([]);
@@ -35,7 +34,9 @@ const handleSubmit=(e) =>{
 
   if(filteredUser[0]) {
     if (filteredUser[0].password === password) {
+      setCurrentUser(filteredUser[0]);
       handleLogin();
+      return;
     }
 
     alert('Incorrect email or password');
@@ -43,6 +44,7 @@ const handleSubmit=(e) =>{
     return;
   } 
 
+  alert('Fill in the fields correctly');
   return;
 }
 
@@ -54,12 +56,10 @@ const filterUser = (user) => {
   
 const handleEmail=(e) => {
   setEmail(e.target.value)
-
  }
 
 const handlePassword=(e) =>{
   setPassword(e.target.value)
-
 }
 
 useEffect(()=>{
