@@ -58,6 +58,7 @@ const Profile = () => {
       country: e.target.inputCountry.value,
       postalcode: e.target.inputPostal.value,
       about: e.target.inputAbout.value,
+      date: user.date,
       photo: e.target.inputPhoto.value,
     };
 
@@ -139,6 +140,12 @@ const Profile = () => {
               <Link to="/admin/profile-Card">
                 <Button color="primary" size="md">
                   Edit Profile
+                </Button>
+              </Link>
+              
+              <Link to="/admin/SettingsProfile">
+                <Button color="primary" size="md">
+                Settings Profile
                 </Button>
               </Link>
             </Row>

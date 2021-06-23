@@ -62,6 +62,7 @@ const ProfileCard = () => {
       city: e.target.inputCity.value,
       country: e.target.inputCountry.value,
       postalcode: e.target.inputPostal.value,
+      date: user.date,
       about: e.target.inputAbout.value,
       photo: e.target.inputPhoto.value,
     };
