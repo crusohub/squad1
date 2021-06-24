@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import api from "../../service/UserDataService";
-/* import { browserHistory } from 'react-router';
- */ /* import { useHistory } from "react-router-dom";
-history.push()
- */
+import imagem from "../../assets/img/theme/team-1-800x800.jpg";
+import { Context } from "../../context/AuthContext";
+
 // reactstrap components
 import {
   Button,
@@ -20,303 +19,86 @@ import {
 // core components
 import CustomHeader from "components/Headers/CustomHeader.js";
 import { Link } from "react-router-dom";
-import { useReducer } from "react/cjs/react.development";
 
 const ProfileCard = () => {
-  const userC = {
-    id: 2,
-    username: "User1",
-    firstname: "User",
-    lastname: "User",
-    email: "User1@u1.com",
-    address: "User There",
-    city: "There",
-    country: "Here",
-    postalcode: "55",
-    about: "Something about me",
-    date: "2020-07-22T00:27:48.012Z",
-    password: "1",
-  };
-
-  const [user, setUser] = useState([]);
-  /* 
-     useEffect(() => {
-      api.getUserById().then((response) =>{
-        setUser(response.data)
-      })
-     }, []);
-   */
-  function rendelEdit(e) {
-    e.preventDefault();
-    const newUser = {
-      username: e.target.inputUsuarioNome.value,
-      idade: e.target.inputidade.value,
-      firstname: e.target.inputNome.value,
-      lastname: e.target.inputSobrenome.value,
-      email: e.target.inputEmail.value,
-      address: e.target.inputEndereco.value,
-      city: e.target.inputCity.value,
-      country: e.target.inputCountry.value,
-      postalcode: e.target.inputPostal.value,
-      about: e.target.inputAbout.value,
-      photo: e.target.inputPhoto.value,
-    };
-
-    api
-      .updateUserData(userC.id, newUser)
-      .then((response) => {
-        console.log(response.status); /*    console.log(1) */
-        /*       browserHistory.push("/dashboard")
-         */
-      })
-      .catch((e) => {
-        console.log(e);
-        /*       console.log(3)
-         */
-      });
-  }
-
+  const { currentUser } = useContext(Context)
+  
   return (
     <>
       <CustomHeader
-        title="Edit your info"
-        descripion="Here you can edit all of your info displayed"
+        title="Profile, Welcome."
+        descripion="Here you can see all your information."
         urlImage="https://grandnode.pl/content/images/thumbs/5d9353e778d6ca29e83524a6_theme-editor.png"
       />
-      {/* Page content */}
-      <Container className="mt--7" fluid>
-        <Row className="mt-5 justify-content-center">
-          <Col className="order-xl-1" xl="12">
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
-                <Row className="align-items-center">
-                  <Col xs="8">
-                    <h3 className="mb-0">My account</h3>
-                  </Col>
-                </Row>
-              </CardHeader>
-              <CardBody>
-                <Form onSubmit={rendelEdit}>
-                  <h6 className="heading-small text-muted mb-4">
-                    User information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputUsuarioNome"
-                          >
-                            Username
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue={userC.username}
-                            id="inputUsuarioNome"
-                            placeholder="name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputEmail"
-                          >
-                            Email address
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputEmail"
-                            defaultValue={user.email}
-                            placeholder="jesse@example.com"
-                            type="email"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputNome"
-                          >
-                            First name
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputNome"
-                            defaultValue={userC.firstname}
-                            placeholder="First name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputSobrenome"
-                          >
-                            Last name
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputSobrenome"
-                            defaultValue={userC.lastname}
-                            placeholder="Last name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputPhoto"
-                          >
-                            Photo
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputPhoto"
-                            defaultValue={userC.photo}
-                            placeholder="Insert your photo"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputEmail"
-                          >
-                            age
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputidade"
-                            defaultValue={user.idade}
-                            type="date"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
+      <Col className="order-xl-2 mb-5 mb-xl-0 center" xl="8">
+        <Card className="card-profile shadow">
+          <Row className="justify-content-center">
+            <Col className="order-lg-2" lg="3">
+              <div className="card-profile-image">
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  <img
+                    alt="..."
+                    className="rounded-circle"
+                    src={currentUser ? currentUser.photo : 'https://i.pravatar.cc/800'}
+                  />
+                </a>
+              </div>
+            </Col>
+          </Row>
+
+          <CardBody className="pt-0 pt-md-4">
+            <Row>
+              <div className="col">
+                <div className="card-profile-stats d-flex justify-content-center mt-md-7">
+                  <div>
+                    <span className="heading">22</span>
+                    <span className="description">Friends</span>
                   </div>
-                  <hr className="my-4" />
-                  {/* Address */}
-                  <h6 className="heading-small text-muted mb-4">
-                    Contact information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputEndereco"
-                          >
-                            Address
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputEndereco"
-                            defaultValue={userC.address}
-                            placeholder="Home Address"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputCity"
-                          >
-                            City
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputCity"
-                            defaultValue={userC.city}
-                            placeholder="City"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputCountry"
-                          >
-                            Country
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputCountry"
-                            defaultValue={userC.country}
-                            placeholder="Country"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="inputPostal"
-                          >
-                            Postal code
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="inputPostal"
-                            defaultValue={userC.postalcode}
-                            placeholder="Postal code"
-                            type="number"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
+                  <div>
+                    <span className="heading">10</span>
+                    <span className="description">Photos</span>
                   </div>
-                  <hr className="my-4" />
-                  {/* Description */}
-                  <h6 className="heading-small text-muted mb-4">About me</h6>
-                  <div className="pl-lg-4">
-                    <FormGroup>
-                      <label>About Me</label>
-                      <Input
-                        className="form-control-alternative"
-                        placeholder="A few words about you ..."
-                        rows="4"
-                        id="inputAbout"
-                        defaultValue={userC.About}
-                        type="textarea"
-                      />
-                    </FormGroup>
+                  <div>
+                    <span className="heading">89</span>
+                    <span className="description">Comments</span>
                   </div>
-                  <Button
-                    color="info"
-                    /*                     href="#pablo"
-                     */ type="submit"
-                  >
-                    Edit profile
-                  </Button>
-                </Form>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+                </div>
+              </div>
+            </Row>
+            <div className="text-center">
+              <h3>
+                {currentUser.firstname}
+                <span className="font-weight-light">{currentUser.username}, 27</span>
+              </h3>
+              <div className="h5 font-weight-300">
+                <i className="ni location_pin mr-2" />
+                {currentUser.city}
+              </div>
+              <div className="h3 mt-4">
+                <i className="ni business_briefcase-24 mr-2" />
+                {currentUser.email}
+              </div>
+              <div>
+                <i className="ni education_hat mr-2" />
+                <b>{`${currentUser.city}, ${currentUser.country}`}</b>
+              </div>
+              <hr className="my-4" />
+              <p className=" font-weight-500">{currentUser.about}</p>
+            </div>
+            <Row className="justify-content-center mt-3">
+              <Link to="/admin/user-profile">
+                <Button 
+                  color="primary" 
+                  size="md"
+                >
+                  Edit Profile
+                </Button>
+              </Link>
+            </Row>
+          </CardBody>
+        </Card>
+      </Col>
+      <Col className="text-right" xs="4"></Col>
     </>
   );
 };

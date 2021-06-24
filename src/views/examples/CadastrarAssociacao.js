@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 // reactstrap components
 import {
@@ -13,6 +13,9 @@ import {
 } from "reactstrap";
 // core components
 import CustomHeader from "components/Headers/CustomHeader";
+import UserDataService from "../../service/UserDataService"
+import ProjectDataService from "../../service/ProjectDataService"
+
 
 const Tables = () => {
   
@@ -79,10 +82,32 @@ const Tables = () => {
      "about": "about 3"
     }]
 
-  const [users, setUsers] = useState(usersInitial)
-  const [projects, setProjects] = useState(projectInitial)
-  
+  const [users, setUsers] = useState([])
+  const [projects, setProjects] = useState([])
 
+  useEffect(()=>{
+    getAllProject()
+    getAllusers()
+ }, [])
+ 
+ const getAllusers = () => {
+  UserDataService.getUsers().then(
+    response => {
+      setUsers(response.data)
+    }
+  )
+
+ }
+
+ const getAllProject = () => {
+  ProjectDataService.getAllProject().then(
+    response => {
+      setProjects(response.data)
+    }
+  )
+
+ }
+ 
   return (
     <>
       <CustomHeader
@@ -99,7 +124,7 @@ const Tables = () => {
             <Card className="shadow">
                               <Form>
                               <CardHeader className="border-0">
-                <h3 className="mb-0">Pesquisar</h3>
+                <h3 className="mb-0">Associate</h3>
                     <FormGroup>
                     <Row>
                     <Col>
@@ -134,10 +159,14 @@ const Tables = () => {
                       <Input
                         className="form-control-alternative"
                         defaultValue="lucky.jesse"
-                        id="input-username"
-                        placeholder="Username"
-                        type="text"
-                      />
+                        id="input-projectid"
+                        placeholder="projectname"
+                        type="select"
+                      >
+                        {projects.map((value, index) => (
+                          <option>{value.projectname}</option>
+                        ))}
+                      </Input>
                       </Col>
                       </Row>
                       <Row>
@@ -148,7 +177,8 @@ const Tables = () => {
                         href="#pablo"
                         onClick={(e) => e.preventDefault()}
                         size="sm"
-                      >Enviar</Button>
+                        style={{top: 20}}
+                      >Save</Button>
                       </Col></Row>
                     </FormGroup>
                     </CardHeader>
