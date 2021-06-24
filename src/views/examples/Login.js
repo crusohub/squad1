@@ -21,7 +21,7 @@ import {
 
 
 const Login = () => {
-  const { handleLogin, setCurrentUser } = useContext(Context);
+  const { handleLogin } = useContext(Context);
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [users, setUsers] = useState([]);
@@ -34,8 +34,7 @@ const handleSubmit=(e) =>{
 
   if(filteredUser[0]) {
     if (filteredUser[0].password === password) {
-      setCurrentUser(filteredUser[0]);
-      handleLogin();
+      handleLogin('', filteredUser[0]);
       return;
     }
 
@@ -56,7 +55,7 @@ const filterUser = (user) => {
   
 const handleEmail=(e) => {
   setEmail(e.target.value)
- }
+}
 
 const handlePassword=(e) =>{
   setPassword(e.target.value)

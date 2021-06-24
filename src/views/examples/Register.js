@@ -59,11 +59,11 @@ const Register = () => {
         .catch(e => {
           console.log(e)
         })
+
       setSubmit(true);
     }else{
       alert("Something wrong with the data entered.")
     }
-
     setSubmit(true);
   }
 
@@ -86,7 +86,6 @@ const Register = () => {
     }else{
       setEmailVerific(true)
     }
-    
   }
 
   const HandlePassword = (e) => {
@@ -117,8 +116,8 @@ const Register = () => {
   }
 
   const redirectToUserProfile = () => {
-    const isNewUser = 'newUser'
-    handleLogin(isNewUser);
+    const isNewUser = 'newUser';
+    handleLogin(isNewUser, register);
   }
 
   return (
