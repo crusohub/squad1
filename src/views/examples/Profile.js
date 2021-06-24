@@ -27,7 +27,6 @@ const Profile = () => {
     // e.preventDefault();
     const updatedData = {
       username: e.target.inputUsuarioNome.value,
-      idade: e.target.inputidade.value,
       firstname: e.target.inputNome.value,
       lastname: e.target.inputSobrenome.value,
       email: e.target.inputEmail.value,
@@ -35,9 +34,9 @@ const Profile = () => {
       city: e.target.inputCity.value,
       country: e.target.inputCountry.value,
       postalcode: e.target.inputPostal.value,
-      /* date: user.date, */
-      date: e.target.inputidade.value,
       about: e.target.inputAbout.value,
+      idade: e.target.inputidade.value,
+      date: user.date,
       photo: e.target.inputPhoto.value,
     };
 
@@ -47,7 +46,7 @@ const Profile = () => {
           alert('Seus dados foram atualizados com sucesso!');
         })
         .catch((e) => {
-          alert('Nao conseguimos atualizar seus dados!');
+          alert('Não conseguimos atualizar seus dados!');
           console.log(e);
       });
   }
