@@ -35,7 +35,8 @@ const Profile = () => {
       city: e.target.inputCity.value,
       country: e.target.inputCountry.value,
       postalcode: e.target.inputPostal.value,
-      date: user.date,
+      /* date: user.date, */
+      date: e.target.inputidade.value,
       about: e.target.inputAbout.value,
       photo: e.target.inputPhoto.value,
     };

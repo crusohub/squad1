@@ -68,7 +68,7 @@ const ProfileCard = () => {
             <div className="text-center">
               <h3>
                 {currentUser.firstname}
-                <span className="font-weight-light">{currentUser.username}, 27</span>
+                <span className="font-weight-light">{currentUser.username}, 26</span>
               </h3>
               <div className="h5 font-weight-300">
                 <i className="ni location_pin mr-2" />
