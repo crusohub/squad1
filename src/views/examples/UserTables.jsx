@@ -26,14 +26,31 @@ const UserTables = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    chargeUsers();
+    // chargeUsers();
+    chargePagination();
   }, []);
 
   useEffect(() => {
     chargeUsersPerPage();
   }, [currentPage]);
 
-  const chargeUsers = () => {
+  const chargePagination = async () => {
+    try {
+      const getUsers = await UserApi.getUsers();
+      setPages(Math.ceil(getUsers.data.length / 10));
+      const list = [];
+      for (let i = 0; i < pages; i++) {
+        list.push(i);
+      }
+      setPageList(list);
+      setCurrentPage(1);
+      // console.log("async");
+    } catch {
+      console.error({ message: "Deu ruim" });
+    }
+  };
+
+  /*   const chargeUsers = () => {
     UserApi.getUsers().then((response) => {
       // const pageLength = response.data.length / 10;
       // (response.data.length % 10 === 0)
@@ -47,11 +64,12 @@ const UserTables = () => {
       setPageList(list);
       setCurrentPage(1);
     });
-  };
+  }; */
 
   const chargeUsersPerPage = () => {
     UserApi.getUserByPage(currentPage, 10).then((response) => {
       setUsers(response.data);
+      // console.log("per page");
     });
   };
 
@@ -113,7 +131,7 @@ const UserTables = () => {
                   >
                     <PaginationItem
                       id="prevPage"
-                      className={currentPage <= 1 ? "disabled" : ""}
+                      className={currentPage <= 1 ? "disabled" : "active"}
                     >
                       <PaginationLink
                         id="LinkPrevPage"
@@ -126,9 +144,8 @@ const UserTables = () => {
 
                     {pageList.map((value) => (
                       <PaginationItem
-                        className={
-                          currentPage == value + 1 ? "active" : "disabled"
-                        }
+                        className={currentPage == value + 1 ? "active" : ""}
+                        // style="color:blue"
                       >
                         <PaginationLink
                           id="numberPage"
@@ -142,7 +159,7 @@ const UserTables = () => {
                     <PaginationItem
                       id="nextPage"
                       className={
-                        currentPage == pageList.length ? "disabled" : ""
+                        currentPage == pageList.length ? "disabled" : "active"
                       }
                     >
                       <PaginationLink

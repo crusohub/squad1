@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import {  Context } from '../../context/AuthContext';
-import api from '../../service/UserDataService';
+import { Context } from "../../context/AuthContext";
+import api from "../../service/UserDataService";
 
 // reactstrap components
 import {
@@ -19,54 +19,51 @@ import {
   Col,
 } from "reactstrap";
 
-
 const Login = () => {
   const { handleLogin, setCurrentUser } = useContext(Context);
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [users, setUsers] = useState([]);
 
-const handleSubmit=(e) =>{
-  e.preventDefault();
-  // email: duan@duan.com
-  // senha: 111
-  const filteredUser = users.filter(user => filterUser(user));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // email: duan@duan.com
+    // senha: 111
+    const filteredUser = users.filter((user) => filterUser(user));
 
-  if(filteredUser[0]) {
-    if (filteredUser[0].password === password) {
-      setCurrentUser(filteredUser[0]);
-      handleLogin();
+    if (filteredUser[0]) {
+      if (filteredUser[0].password === password) {
+        setCurrentUser(filteredUser[0]);
+        handleLogin();
+        return;
+      }
+
+      alert("Incorrect email or password");
+      setPassword("");
       return;
     }
 
-    alert('Incorrect email or password');
-    setPassword('');
+    alert("Fill in the fields correctly");
     return;
-  } 
+  };
 
-  alert('Fill in the fields correctly');
-  return;
-}
+  const filterUser = (user) => {
+    if (user && user.email === email) {
+      return user;
+    }
+  };
 
-const filterUser = (user) => {
-  if(user && user.email === email) {
-    return user;
-  }
-}
-  
-const handleEmail=(e) => {
-  setEmail(e.target.value)
- }
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
 
-const handlePassword=(e) =>{
-  setPassword(e.target.value)
-}
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
 
-useEffect(()=>{
-  api.getUsers().then(res =>
-    setUsers(res.data)
-  );
-}, []);
+  useEffect(() => {
+    api.getUsers().then((res) => setUsers(res.data));
+  }, []);
 
   return (
     <>
@@ -74,7 +71,7 @@ useEffect(()=>{
         <Card className="bg-secondary shadow border-0">
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Entre com as credenciais</small>
+              <small>Get in with your credentials</small>
             </div>
             <Form role="form" onSubmit={handleSubmit}>
               <FormGroup className="mb-3">
@@ -102,7 +99,7 @@ useEffect(()=>{
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Senha"
+                    placeholder="Password"
                     type="password"
                     autoComplete="new-password"
                     name="password"
@@ -121,17 +118,12 @@ useEffect(()=>{
                   className="custom-control-label"
                   htmlFor=" customCheckLogin"
                 >
-                  <span className="text-muted">Lembrar de mim</span>
+                  <span className="text-muted">Remember me</span>
                 </label>
               </div>
               <div className="text-center">
-                <Button
-                  className="my-4"
-                  color="primary"
-                  type="submit"
-                 
-                >
-                  Entrar
+                <Button className="my-4" color="primary" type="submit">
+                  Login
                 </Button>
               </div>
             </Form>
@@ -139,16 +131,22 @@ useEffect(()=>{
         </Card>
         <Row className="mt-3">
           <Col xs="6">
-          <Link to={"/auth/forgotpassword"} className="text-light" data-toggle="collapse">Forgot password?</Link>
+            <Link
+              to={"/auth/forgotpassword"}
+              className="text-light"
+              data-toggle="collapse"
+            >
+              Forgot password?
+            </Link>
           </Col>
           <Col className="text-right" xs="6">
-            <a
+            <Link
+              to={"/auth/register"}
               className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
+              data-toggle="collapse"
             >
-              <small>Criar uma nova conta</small>
-            </a>
+              Create new account
+            </Link>
           </Col>
         </Row>
       </Col>
