@@ -48,19 +48,19 @@ let routes = [
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
     layout: "/admin",
-    sub:[
+    sub: [
       {
-        path: "/user-profile",
+        path: "/profile-Card",
         name: "User Profile",
-        icon: "ni ni-single-02 text-yellow",
-        component: Profile,
+        icon: "ni ni-settings text-yellow",
+        component: ProfileCard,
         layout: "/admin",
       },
       {
-        path: "/profile-Card",
+        path: "/user-profile",
         name: "Edit profile",
-        icon: "ni ni-settings text-yellow",
-        component: ProfileCard,
+        icon: "ni ni-single-02 text-yellow",
+        component: Profile,
         layout: "/admin",
       },
       {
@@ -119,14 +119,14 @@ let routes = [
       },
       {
         path: "/newproject",
-        name: "New Projetc",
+        name: "New Project",
         icon: "ni ni-fat-add text-red",
         component: NewProject,
         layout: "/admin",
       },
       {
         path: "/editproject",
-        name: "Edit Projeto",
+        name: "Edit Project",
         icon: "ni ni-settings text-red",
         component: EditProject,
         layout: "/admin",
@@ -164,7 +164,7 @@ let routes = [
     icon: "ni ni-air-baloon text-yellow",
     component: associateProject,
     layout: "/admin",
-    sub:[
+    sub: [
       {
         path: "/associateProject",
         name: "Associate Project",

@@ -28,7 +28,9 @@ import {
 // core components
 import CustomHeader from "components/Headers/CustomHeader";
 import UserDataService from "../../service/UserDataService"
+import AssociationDataService from "../../service/AssociationDataService"
 import ProjectDataService from "../../service/ProjectDataService"
+
 const Tables = () => {
   const associacaoInitial = [
     {
@@ -95,7 +97,7 @@ const Tables = () => {
 
    const [users, setUsers] = useState([])
    const [projects, setProjects] = useState(usersInitial)
-   const [associacoes, setAssociacoes] = useState(associacaoInitial)
+   const [associacoes, setAssociacoes] = useState()
 
    useEffect(()=>{
       getAllProject()
@@ -119,6 +121,16 @@ const Tables = () => {
     )
 
    }
+
+   // const deleteProject = (projId) =>{
+    //return ProjectData.delete("/projeto/"+projId)
+
+   const AssociationDelete = () => {
+    console.log(AssociationDelete)
+    if (window.confirm('Deseja excluir?')){
+      AssociationDataService.delete(AssociationDelete.id);
+    }
+  };
 
   return (
     <>
@@ -222,7 +234,7 @@ const Tables = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {associacoes.map((value, index) => (
+                {projects.map((value, index) => (
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
@@ -281,13 +293,7 @@ const Tables = () => {
                         <DropdownMenu className="dropdown-menu-arrow" right>
                           <DropdownItem
                             href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Edit
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            onClick={AssociationDelete}
                           >
                             Remove
                           </DropdownItem>
