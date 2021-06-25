@@ -1,7 +1,6 @@
 
 const Chart = require("chart.js");
 
-
 Chart.elements.Rectangle.prototype.draw = function () {
   var ctx = this._chart.ctx;
   var vm = this._view;
@@ -288,7 +287,18 @@ function parseOptions(parent, options) {
 }
 
 // Example 1 of Chart inside src/views/Index.js (Sales value - Card)
-let chartExample1 = {
+var UsersFromThisYear = [];
+var UsersFromLastYear = [];
+var projectsInThisYear = [];
+var projectsInLastYear = [];
+const setDataFromChart = (getDataUsersFromThisYear = [0], getDataUsersFromLastYear = [0], getDataProjectsFromThisYear = [0], getDataProjectsFromLastYear = [0]) => {
+  UsersFromThisYear = getDataUsersFromThisYear;
+  UsersFromLastYear = getDataUsersFromLastYear;
+  projectsInThisYear = getDataProjectsFromThisYear;
+  projectsInLastYear = getDataProjectsFromLastYear;
+}
+
+let chartLine = {
   options: {
     scales: {
       yAxes: [
@@ -299,9 +309,7 @@ let chartExample1 = {
           },
           ticks: {
             callback: function (value) {
-              if (!(value % 10)) {
-                return "$" + value + "k";
-              }
+                return value;
             },
           },
         },
@@ -311,14 +319,12 @@ let chartExample1 = {
       callbacks: {
         label: function (item, data) {
           var label = data.datasets[item.datasetIndex].label || "";
-          var yLabel = item.yLabel;
-          var content = "";
+          var content = item.yLabel;
 
           if (data.datasets.length > 1) {
             content += label;
           }
 
-          content += "$" + yLabel + "k";
           return content;
         },
       },
@@ -326,22 +332,23 @@ let chartExample1 = {
   },
   data1: (canvas) => {
     return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       datasets: [
         {
-          label: "Performance",
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
+          label: "Growth",
+          data: UsersFromThisYear,
         },
       ],
     };
   },
   data2: (canvas) => {
     return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       datasets: [
         {
-          label: "Performance",
-          data: [0, 20, 5, 25, 10, 30, 15, 40, 40],
+          label: "Growth",
+          data: UsersFromLastYear, 
+          //data: [0, 20, 5, 25, 10, 30, 15, 40, 40],
         },
       ],
     };
@@ -349,15 +356,14 @@ let chartExample1 = {
 };
 
 // Example 2 of Chart inside src/views/Index.js (Total orders - Card)
-let chartExample2 = {
+let chartBar = {
   options: {
     scales: {
       yAxes: [
         {
           ticks: {
             callback: function (value) {
-              if (!(value % 10)) {
-                //return '$' + value + 'k'
+              if(!(value % 1)) {
                 return value;
               }
             },
@@ -369,32 +375,46 @@ let chartExample2 = {
       callbacks: {
         label: function (item, data) {
           var label = data.datasets[item.datasetIndex].label || "";
-          var yLabel = item.yLabel;
-          var content = "";
+          var content = item.yLabel;
           if (data.datasets.length > 1) {
             content += label;
           }
-          content += yLabel;
           return content;
         },
       },
     },
   },
-  data: {
-    labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Sales",
-        data: [25, 20, 30, 22, 17, 29],
-        maxBarThickness: 10,
-      },
-    ],
+  data1: (canvas) => {
+    return {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [
+        {
+          label: "Projects",
+          data: projectsInThisYear,
+          maxBarThickness: 7,
+        },
+      ],
+    };
+  },
+  data2: (canvas) => {
+    return {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [
+        {
+          label: "Projects",
+          data: projectsInLastYear,
+          maxBarThickness: 7,
+        },
+      ],
+    };
   },
 };
 
+
 module.exports = {
+  setDataFromChart,
   chartOptions, // used inside src/views/Index.js
   parseOptions, // used inside src/views/Index.js
-  chartExample1, // used inside src/views/Index.js
-  chartExample2, // used inside src/views/Index.js
+  chartLine, // used inside src/views/Index.js
+  chartBar, // used inside src/views/Index.js
 };
