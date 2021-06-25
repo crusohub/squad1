@@ -32,7 +32,7 @@ const Profile = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Editar Projeto</h3>
+                    <h3 className="mb-0">Edit Project</h3>
                   </Col>
                   <Col className="text-right" xs="4">
                     <Button
@@ -59,44 +59,16 @@ const Profile = () => {
                             className="form-control-label"
                             htmlFor="input-username"
                           >
-                            Nome do projeto
+                            Project Name
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue=""
+                            defaultValue={project.projectname1}
                             id="input-username"
                             placeholder=""
-                            type="select"
-                          >
-                            <option value="projeto">
-                              {project.projectname}
-                            </option>
-                            <option value="projeto1">
-                              {project.projectname1}
-                            </option>
-                            <option value="projeto2">
-                              {project.projectname2}
-                            </option>
-                            <option value="projeto3">
-                              {project.projectname3}
-                            </option>
+                            type="text"
+                          >               
                           </Input>
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-email"
-                          >
-                            E-mail
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-email"
-                            placeholder="jesse@example.com"
-                            type="email"
-                          />
                         </FormGroup>
                       </Col>
                     </Row>
@@ -123,19 +95,19 @@ const Profile = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col lg="6">
+                      <Col lg="6" xs="12">
                         <FormGroup>
                           <label
                             className="form-control-label"
                             htmlFor="input-last-name"
                           >
-                            Despesas
+                            Expenses
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="Jesse"
                             id="input-last-name"
-                            placeholder="Last name"
+                            placeholder="expenses"
                             type="number"
                           />
                         </FormGroup>
@@ -146,30 +118,18 @@ const Profile = () => {
                             className="form-control-label"
                             htmlFor="input-last-name"
                           >
-                            Percentual
+                            Percentage
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="Jesse"
                             id="input-last-name"
-                            placeholder="Last name"
+                            placeholder="percentage
+                            "
                             type="number"
                           />
                         </FormGroup>
                       </Col>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-username"
-                      >
-                        Lista de projetos
-                      </label>
-                      <Input
-                        className="form-control-alternative"
-                        defaultValue={project.projectname}
-                        id="input-username"
-                        placeholder="Nome do Projeto"
-                        type="select"
-                      />
                       <Col className="text-right" xs="12">
                         <Button
                           color="primary"
