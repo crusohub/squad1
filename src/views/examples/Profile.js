@@ -20,11 +20,10 @@ import CustomHeader from "components/Headers/CustomHeader.js";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const [user, setUser] = useState(0);
   const { currentUser } = useContext(Context);
 
   function handleEdit(e) {
-    // e.preventDefault();
+    e.preventDefault();
     const updatedData = {
       username: e.target.inputUsuarioNome.value,
       firstname: e.target.inputNome.value,
@@ -36,7 +35,6 @@ const Profile = () => {
       postalcode: e.target.inputPostal.value,
       about: e.target.inputAbout.value,
       idade: e.target.inputidade.value,
-      date: user.date,
       photo: e.target.inputPhoto.value,
     };
 
@@ -259,13 +257,14 @@ const Profile = () => {
                   <h6 className="heading-small text-muted mb-4">About me</h6>
                   <div className="pl-lg-4">
                     <FormGroup>
-                      <label>About Me</label>
+                      <label className="form-control-label"
+                            htmlFor="inputAbout">About Me</label>
                       <Input
                         className="form-control-alternative"
 /*                         placeholder="A few words about you ..."
  */                        rows="4"
                         id="inputAbout"
-                        defaultValue={currentUser.About}
+                        defaultValue={currentUser.about}
                         type="textarea"
                       />
                     </FormGroup>
