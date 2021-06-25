@@ -20,10 +20,6 @@ import React, { useState, useEffect, useCallback } from "react";
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 import { useSaveView } from '../../context/hooks/SaveViewData';
-//import UserDataService from '../../service/UserDataService';
-//import ProjectDataService from '../../service/ProjectDataService';
-//import ConexaoDataService from '../../service/ConexaoDataService';
-//import AssociationDataService from '../../service/AssociationDataService';
 
 const Header = () => {
 

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
 // javascipt plugin for creating charts
@@ -26,25 +26,76 @@ import {
 import {
   chartOptions,
   parseOptions,
-  chartExample1,
-  chartExample2,
+  chartLine,
+  chartBar,
+  setDataFromChart,
 } from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
-
+import { useSaveView } from '../context/hooks/SaveViewData';
 
 const Index = (props) => {
-  const [activeNav, setActiveNav] = useState(1);
-  const [chartExample1Data, setChartExample1Data] = useState("data1");
+
+  const SavedData = useSaveView();
+
+  const [activeNavUser, setActiveNavUser] = useState(1);
+  const [activeNavProject, setActiveNavProject] = useState(1);
+  const [setChartDataToUse, setSetChartDataToUse] = useState("data1");
+  const [setChartDataToUseInBar, setSetChartDataToUseInBar] = useState("data1");
+  const [years, setYears] = useState([0, 0]);
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
   }
 
-  const toggleNavs = (e, index) => {
+  const getDataFromChart = useCallback(() => {
+    const users = SavedData?.users;
+    const projects = SavedData?.projects;
+    const today = new Date();
+    setYears([today.getFullYear() - 1, today.getFullYear()]);
+    let lastYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let thisYear = new Array(today.getMonth() + 1).fill(0);
+    let projectInThisYear = new Array(today.getMonth() + 1).fill(0);
+    let projectInLastYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    users?.map((user) => {
+      const date = new Date(user?.date.split("T")[0].split("-").join("/"));
+      if (date?.getFullYear() === today.getFullYear() - 1) { 
+        ++lastYear[date?.getMonth()];
+      }
+      if (date?.getFullYear() === today.getFullYear()) { 
+        ++thisYear[date?.getMonth()]; 
+      }
+      return null;
+    });
+    projects?.map((project) => {
+      const date = new Date(project?.date.split("T")[0].split("-").join("/"));
+      if (date?.getFullYear() === today.getFullYear() - 1) { 
+        ++projectInLastYear[date?.getMonth()]; 
+      }
+      if (date?.getFullYear() === today.getFullYear()) { 
+        ++projectInThisYear[date?.getMonth()]; 
+      }
+      return null;
+    });
+    setDataFromChart(thisYear, lastYear, projectInThisYear, projectInLastYear);
+  }, [SavedData?.projects, SavedData?.users]);
+
+  useEffect(() => {
+    document.getElementById('buton').click();
+    document.getElementById('buton2').click();
+    getDataFromChart(); 
+  }, [getDataFromChart]);
+
+  const toggleNavsUser = (e, index) => {
     e.preventDefault();
-    setActiveNav(index);
-    setChartExample1Data("data" + index);
+    setActiveNavUser(index);
+    setSetChartDataToUse("data" + index);
+  };
+
+  const toggleNavsProject = (e, index) => {
+    e.preventDefault();
+    setActiveNavProject(index);
+    setSetChartDataToUseInBar("data" + index);
   };
   return (
     <>
@@ -58,34 +109,35 @@ const Index = (props) => {
                 <Row className="align-items-center">
                   <div className="col">
                     <h6 className="text-uppercase text-light ls-1 mb-1">
-                      Overview
+                      Overview {(activeNavUser === 1) ? years[1] : years[0]}
                     </h6>
-                    <h2 className="text-white mb-0">Sales value</h2>
+                    <h2 className="text-white mb-0">Registered users by period</h2>
                   </div>
                   <div className="col">
                     <Nav className="justify-content-end" pills>
                       <NavItem>
                         <NavLink
                           className={classnames("py-2 px-3", {
-                            active: activeNav === 1,
+                            active: activeNavUser === 1,
                           })}
                           href="#pablo"
-                          onClick={(e) => toggleNavs(e, 1)}
+                          onClick={(e) => toggleNavsUser(e, 1)}
                         >
-                          <span className="d-none d-md-block">Month</span>
+                          <span className="d-none d-md-block">This Year</span>
                           <span className="d-md-none">M</span>
                         </NavLink>
                       </NavItem>
                       <NavItem>
                         <NavLink
                           className={classnames("py-2 px-3", {
-                            active: activeNav === 2,
+                            active: activeNavUser === 2,
                           })}
+                          id="buton"
                           data-toggle="tab"
                           href="#pablo"
-                          onClick={(e) => toggleNavs(e, 2)}
+                          onClick={(e) => toggleNavsUser(e, 2)}
                         >
-                          <span className="d-none d-md-block">Week</span>
+                          <span className="d-none d-md-block">Last Year</span>
                           <span className="d-md-none">W</span>
                         </NavLink>
                       </NavItem>
@@ -97,9 +149,9 @@ const Index = (props) => {
                 {/* Chart */}
                 <div className="chart">
                   <Line
-                    data={chartExample1[chartExample1Data]}
-                    options={chartExample1.options}
-                    getDatasetAtEvent={(e) => console.log(e)}
+                    data={chartLine.[setChartDataToUse]}
+                    options={chartLine.options}
+                    //getDatasetAtEvent={(e) => console.log(e)}
                   />
                 </div>
               </CardBody>
@@ -110,10 +162,38 @@ const Index = (props) => {
               <CardHeader className="bg-transparent">
                 <Row className="align-items-center">
                   <div className="col">
+                    <Nav className="justify-content-end" pills>
+                      <NavItem>
+                        <NavLink
+                          className={classnames("py-1 px-2", {
+                            active: activeNavProject === 1,
+                          })}
+                          href="#pablo"
+                          onClick={(e) => toggleNavsProject(e, 1)}
+                        >
+                          <span className="d-none d-md-block">This Year</span>
+                          <span className="d-md-none">M</span>
+                        </NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink
+                          className={classnames("py-1 px-2", {
+                            active: activeNavProject === 2,
+                          })}
+                          id="buton2"
+                          data-toggle="tab"
+                          href="#pablo"
+                          onClick={(e) => toggleNavsProject(e, 2)}
+                        >
+                          <span className="d-none d-md-block">Last Year</span>
+                          <span className="d-md-none">W</span>
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
                     <h6 className="text-uppercase text-muted ls-1 mb-1">
-                      Performance
+                      Overview {(activeNavProject === 1) ? years[1] : years[0]}
                     </h6>
-                    <h2 className="mb-0">Total orders</h2>
+                    <h2 className="mb-0">Projects created by period</h2>
                   </div>
                 </Row>
               </CardHeader>
@@ -121,15 +201,15 @@ const Index = (props) => {
                 {/* Chart */}
                 <div className="chart">
                   <Bar
-                    data={chartExample2.data}
-                    options={chartExample2.options}
+                    data={chartBar[setChartDataToUseInBar]}
+                    options={chartBar.options}
                   />
                 </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
-        <Row className="mt-5">
+      { /*  <Row className="mt-5">
           <Col className="mb-5 mb-xl-0" xl="8">
             <Card className="shadow">
               <CardHeader className="border-0">
@@ -203,7 +283,7 @@ const Index = (props) => {
                     </td>
                   </tr>
                 </tbody>
-              </Table>
+              </Table> 
             </Card>
           </Col>
           <Col xl="4">
@@ -313,8 +393,8 @@ const Index = (props) => {
                 </tbody>
               </Table>
             </Card>
-          </Col>
-        </Row>
+          </Col>  
+        </Row> */} 
       </Container>
     </>
   );
