@@ -38,23 +38,23 @@ export default function SettingsProfile() {
                 if (newPassword === repeatNewPassword && (isStrong)) {
                     UserDataService.updateUserData(currentUser.id, usuario)
                         .then(() => {
-                            alert("Senha alterada")
+                            alert("Password Changed")
                             clearFieldsChangePassword()
                         })
                         .catch(error => alert(error))
                 } else {
                     if (newPassword !== repeatNewPassword)
-                        alert("Novas senhas não coincidem")
+                        alert("New passwords do not match")
                     else
-                        alert("Informe uma nova senha forte")
+                        alert("Enter a new strong password")
                 }
             } else {
                 console.log(currentPassword)
                 console.log(usuario.password)
-                alert("Senha não é valida")
+                alert("Password is not valid")
             }
         } else {
-            alert("Porfavor informe a sua senha atual!")
+            alert("Please enter your current password!")
         }
     }
 
@@ -63,12 +63,12 @@ export default function SettingsProfile() {
         if (currentUsername === currentUser.username) {
             UserDataService.deleteUser(currentUser.id)
                 .then(() => {
-                    alert("Usuario Removido")
+                    alert("User removed")
                     handleLogout()
                 })
                 .catch(error => alert(error))
         } else {
-            alert("Usuario informado não é valido")
+            alert("User informed is not valid")
         }
     }
 
@@ -111,7 +111,6 @@ export default function SettingsProfile() {
         })
     }, [newPassword, repeatNewPassword])
 
-    // adicionar no onchange do input da senha
     const HandlePassword = (e) => {
         const { name, value } = e.target
         setPasswordValid({ ...passwordValid, [name]: value })
@@ -231,14 +230,6 @@ export default function SettingsProfile() {
                                         type="submit"
                                     >
                                         Change Password
-                                    </Button>
-                                    <Button
-                                        className="my-4"
-                                        color="primary"
-                                        type="button"
-                                        onClick={() => console.log(currentUser)}
-                                    >
-                                        Log
                                     </Button>
                                 </Form>
                             </CardBody>
