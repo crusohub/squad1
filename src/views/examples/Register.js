@@ -20,7 +20,7 @@ import {
 } from "reactstrap";
 
 const Register = () => {
-  const {handleLogin} = useContext(Context);
+  const { handleLogin } = useContext(Context);
 
   const add = {
     id: null,
@@ -37,11 +37,14 @@ const Register = () => {
   const [inputVerific, setInputVerific] = useState(false)
   const [emailValid, setEmailValid] = useState(add.email)
   const [emailVerific, setEmailVerific] = useState(false)
+  const [emailExist, setEmailExist] = useState("")
+  const [inputExist, setInputExist] = useState("")
 
   const CreatUser = (data) => {
     const policy = document.querySelector(".custom-control-input")
-
-    if (policy.checked && passwordVerific && inputVerific && emailVerific){
+    console.log(passwordVerific, "inputVerific " + inputVerific, "emailV " + emailVerific)
+    if (policy.checked && passwordVerific && inputVerific && emailVerific) {
+      console.log(passwordVerific, "inputVerific " + inputVerific, "emailV " + emailVerific)
       var user = {
         username: inputValid.username,
         email: emailValid.email,
@@ -55,37 +58,63 @@ const Register = () => {
             email: response.user.email,
             password: response.user.password
           })
+            
         })
         .catch(e => {
           console.log(e)
         })
-
-      setSubmit(true);
-    }else{
+      setSubmit(true);  
+    } else {
       alert("Something wrong with the data entered.")
+
     }
-    setSubmit(true);
   }
 
   const HandleUser = (e) => {
     const { name, value } = e.target
     setInputValid({ ...inputValid, [name]: value })
-    let username = e.target.value
-    if(username.length <= 2){
-      setInputVerific(false)
-    }else{
-      setInputVerific(true)
-    }
+    let user= e.target.value
+    Data.getUserByUsersName(user)
+      .then(response => {
+        
+        response.data.map(em =>{
+          console.log(em.username)
+          if(em.username === user){
+            setInputVerific(false)
+            setInputExist("Existing username")
+          }else{
+            setInputVerific(true)
+            setInputExist("")
+          }
+        })
+      })
+      .catch(e => {
+        console.log(e)
+      })
+    .catch(e => {
+      console.log(e)
+    })
   }
   const HandleEmail = (e) => {
     const { name, value } = e.target
     setEmailValid({ ...emailValid, [name]: value })
     let email = e.target.value
-    if(email.length <= 5){
-      setEmailVerific(false)
-    }else{
-      setEmailVerific(true)
-    }
+    Data.getUsersByEmail(email)
+      .then(response => {
+        response.data.map(em =>{
+          console.log(em.email)
+          if(em.email === email){
+            setEmailVerific(false)
+            setEmailExist("Existing e-mail")
+          }else{
+            setEmailVerific(true)
+            setEmailExist("")
+          }
+        })
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 
   const HandlePassword = (e) => {
@@ -106,20 +135,10 @@ const Register = () => {
     }
   }
 
-  const Verificar = () => {
-    const policy = document.querySelector(".custom-control-input")
-    if (policy.checked) {
-
-    } else {
-      alert("You didn't agree with the Privacy Policy")
-    }
-  }
-
   const redirectToUserProfile = () => {
-    const isNewUser = 'newUser';
-    handleLogin(isNewUser, register);
+    const isNewUser = 'newUser'
+    handleLogin(isNewUser);
   }
-
   return (
     <>
       {submit ? (
@@ -131,8 +150,8 @@ const Register = () => {
                   <h1 className="text-success"><div className="ni ni-check-bold text-success"></div> Registered successfully</h1>
                 </div>
                 <div className="text-center text-muted mb-4">
-                  <Button 
-                    className="mt-4" 
+                  <Button
+                    className="mt-4"
                     color="primary"
                     type="button"
                     onClick={redirectToUserProfile}
@@ -160,8 +179,19 @@ const Register = () => {
                           <i className="ni ni-hat-3" />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Username" type="text" name="username" onChange={HandleUser} />
+                      <Input
+                       placeholder="Email"
+                        type="text"
+                        name="username"
+                        onChange={HandleUser}
+                      />
                     </InputGroup>
+                    <div className="text-muted font-italic">
+                      <small>
+                        {" "}
+                        <span className=" font-weight-700">{inputExist}</span>
+                      </small>
+                    </div>
                   </FormGroup>
                   <FormGroup>
                     <InputGroup className="input-group-alternative mb-3">
@@ -178,6 +208,12 @@ const Register = () => {
                         onChange={HandleEmail}
                       />
                     </InputGroup>
+                    <div className="text-muted font-italic">
+                      <small>
+                        {" "}
+                        <span className="font-weight-700">{emailExist}</span>
+                      </small>
+                    </div>
                   </FormGroup>
                   <FormGroup>
                     <InputGroup className="input-group-alternative">
