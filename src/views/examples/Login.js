@@ -1,12 +1,13 @@
-import { useContext } from "react";
-import React, { useState } from "react";
-import { Context } from '../../context/AuthContext';
+import { useState, useEffect, useContext } from "react";
+import { Link } from 'react-router-dom';
+
+import {  Context } from '../../context/AuthContext';
+import api from '../../service/UserDataService';
 
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   FormGroup,
   Form,
@@ -23,24 +24,48 @@ const Login = () => {
   const { handleLogin } = useContext(Context);
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
-
+  const [users, setUsers] = useState([]);
 
 const handleSubmit=(e) =>{
-  e.preventDefault()
-  handleLogin(email, password)
-}  
+  e.preventDefault();
+  // email: duan@duan.com
+  // senha: 111
+  const filteredUser = users.filter(user => filterUser(user));
+
+  if(filteredUser[0]) {
+    if (filteredUser[0].password === password) {
+      handleLogin('', filteredUser[0]);
+      return;
+    }
+
+    alert('Incorrect email or password');
+    setPassword('');
+    return;
+  } 
+
+  alert('Fill in the fields correctly');
+  return;
+}
+
+const filterUser = (user) => {
+  if(user && user.email === email) {
+    return user;
+  }
+}
   
 const handleEmail=(e) => {
   setEmail(e.target.value)
-
- }
+}
 
 const handlePassword=(e) =>{
   setPassword(e.target.value)
-
 }
 
-
+useEffect(()=>{
+  api.getUsers().then(res =>
+    setUsers(res.data)
+  );
+}, []);
 
   return (
     <>
@@ -113,13 +138,7 @@ const handlePassword=(e) =>{
         </Card>
         <Row className="mt-3">
           <Col xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>Esqueceu a senha?</small>
-            </a>
+          <Link to={"/auth/forgotpassword"} className="text-light" data-toggle="collapse">Forgot password?</Link>
           </Col>
           <Col className="text-right" xs="6">
             <a

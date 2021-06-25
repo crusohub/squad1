@@ -16,6 +16,8 @@ import NewProject from "views/examples/NewProject"
 import PesquisarProject from "views/examples/PesquisarProject"
 import PesquisarAssociacao from "views/examples/PesquisarAssociacao"
 import CadastrarAssociacao from "views/examples/CadastrarAssociacao"
+import ForgotPassword from "views/examples/ForgotPassword";
+import ChangePassword from "views/examples/ChangePassword";
 
 
 let routes = [
@@ -42,22 +44,48 @@ let routes = [
   },
   {
     path: "/user-profile",
-    name: "User Profile",
+    name: "User",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
     layout: "/admin",
+    sub: [
+      {
+        path: "/profile-Card",
+        name: "User Profile",
+        icon: "ni ni-settings text-yellow",
+        component: ProfileCard,
+        layout: "/admin",
+      },
+      {
+        path: "/user-profile",
+        name: "Edit profile",
+        icon: "ni ni-single-02 text-yellow",
+        component: Profile,
+        layout: "/admin",
+      },
+      {
+        path: "/SettingsProfile",
+        name: "Change Password",
+        icon: "fa fa-search text-yellow",
+        component: SettingsProfile,
+        layout: "/admin",
+      },
+      {
+        path: "/users-table",
+        name: "All Users",
+        icon: "ni ni-bullet-list-67 text-yellow",
+        component: UserTables,
+        layout: "/admin",
+      },
+    ]
   },
   {
     path: "/profile-Card",
-    name: "Edit profile",
-    icon: "ni ni-single-02 text-yellow",
     component: ProfileCard,
     layout: "/admin",
   },
   {
     path: "/SettingsProfile",
-    name: "Settings Profile",
-    icon: "ni ni-single-02 text-yellow",
     component: SettingsProfile,
     layout: "/admin",
   },
@@ -71,7 +99,7 @@ let routes = [
   {
     path: "/tablesproject",
     name: "Project",
-    icon: "ni ni-bullet-list-67 text-red",
+    icon: "ni ni-single-copy-04 text-red",
     component: TablesProject,
     layout: "/admin",
     sub: [
@@ -85,28 +113,21 @@ let routes = [
       {
         path: "/pesquisarproject",
         name: "Search Project",
-        icon: "ni ni-bullet-list-67 text-red",
+        icon: "fa fa-search text-red",
         component: PesquisarProject,
         layout: "/admin",
       },
       {
         path: "/newproject",
-        name: "New Projetc",
-        icon: "ni ni-html5 ",
+        name: "New Project",
+        icon: "ni ni-fat-add text-red",
         component: NewProject,
         layout: "/admin",
       },
       {
-        path: "/addProject",
-        name: "Add Project",
-        icon: "ni ni-fat-add text-red",
-        component: addProject,
-        layout: "/admin",
-      },
-      {
         path: "/editproject",
-        name: "Edit Projeto",
-        icon: "ni ni-circle-08 text-pink",
+        name: "Edit Project",
+        icon: "ni ni-settings text-red",
         component: EditProject,
         layout: "/admin",
       }
@@ -114,8 +135,6 @@ let routes = [
   },
   {
     path: "/users-table",
-    name: "Users",
-    icon: "ni ni-bullet-list-67 text-red",
     component: UserTables,
     layout: "/admin",
   },
@@ -129,14 +148,23 @@ let routes = [
     component: Register,
     layout: "/auth",
   },
-
+  {
+    path: "/forgotpassword",
+    component: ForgotPassword,
+    layout: "/auth",
+  },
+  {
+    path: "/changepassword",
+    component: ChangePassword,
+    layout: "/auth",
+  },
   {
     path: "/associateProject",
     name: "Associate Project",
     icon: "ni ni-air-baloon text-yellow",
     component: associateProject,
     layout: "/admin",
-    sub:[
+    sub: [
       {
         path: "/associateProject",
         name: "Associate Project",
@@ -147,14 +175,14 @@ let routes = [
       {
         path: "/pesquisarassociacao",
         name: "Search Association",
-        icon: "ni ni-bullet-list-67 text-red",
+        icon: "fa fa-search text-yellow",
         component: PesquisarAssociacao,
         layout: "/admin",
       },
       {
         path: "/cadassociacao",
         name: "Register Association",
-        icon: "ni ni-bullet-list-67 text-red",
+        icon: "ni ni-fat-add text-yellow",
         component: CadastrarAssociacao,
         layout: "/admin",
       },
