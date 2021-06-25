@@ -32,23 +32,23 @@ import AssociationDataService from "../../service/AssociationDataService"
 import ProjectDataService from "../../service/ProjectDataService"
 
 const Tables = () => {
-  const associacaoInitial = [
+  const projectInitial = [
     {
-     "id": "1",
+     "id": null,
      "projectid": "1",
      "userid": "1",
      "projectname": "project 1",
      "username": "user 1"
     },
     {
-     "id": "2",
+     "id": null,
      "projectid": "1",
      "userid": "2",
      "projectname": "project 1",
      "username": "user 2"
     },
     {
-     "id": "3",
+     "id": null,
      "projectid": "1",
      "userid": "3",
      "projectname": "project 1",
@@ -57,7 +57,7 @@ const Tables = () => {
    ]
    const usersInitial = [
     {
-     "id": "1",
+     "id": null,
      "username": "username 1",
      "firstname": "firstname 123",
      "lastname": "lastname 123",
@@ -66,12 +66,10 @@ const Tables = () => {
      "city": "city 1",
      "country": "country 1",
      "postalcode": "postalcode 1",
-     "about": "about 1",
-     "": "username 1as",
-     "password": "1"
+     "about": "about 1"
     },
     {
-     "id": "2",
+     "id":null,
      "username": "username 2",
      "firstname": "firstname 2",
      "lastname": "lastname 2",
@@ -83,7 +81,7 @@ const Tables = () => {
      "about": "about 2"
     },
     {
-     "id": "3",
+     "id": null,
      "username": "username 3",
      "firstname": "firstname 3",
      "lastname": "lastname 3",
@@ -95,9 +93,9 @@ const Tables = () => {
      "about": "about 3"
     }]
 
-   const [users, setUsers] = useState([])
-   const [projects, setProjects] = useState(usersInitial)
-   const [associacoes, setAssociacoes] = useState()
+   const [users, setUsers] = useState([usersInitial])
+   const [projects, setProjects] = useState(projectInitial)
+   const [associacoes, setAssociacoes] = useState([usersInitial, projectInitial])
 
    useEffect(()=>{
       getAllProject()
@@ -126,9 +124,10 @@ const Tables = () => {
     //return ProjectData.delete("/projeto/"+projId)
 
    const AssociationDelete = () => {
-    console.log(AssociationDelete)
     if (window.confirm('Deseja excluir?')){
-      AssociationDataService.delete(AssociationDelete.id);
+      ProjectDataService.deleteProject(projects.id)
+      UserDataService.deleteUser(users.id)
+      AssociationDataService.deleteAssociation(associacoes.id)
     }
   };
 
