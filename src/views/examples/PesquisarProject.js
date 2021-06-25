@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-
 // reactstrap components
 import {
   Badge,
@@ -53,14 +52,74 @@ const Tables = () => {
      "status": "status 3",
      "budget": "budget 3",
      "completed": "completed 3"
+    },
+    {
+     "id": "4",
+     "image": "image 3",
+     "projectname": "projectname 4",
+     "status": "status 4",
+     "budget": "budget 4",
+     "completed": "completed 4"
+    },
+    {
+     "id": "5",
+     "image": "image 5",
+     "projectname": "projectname 5",
+     "status": "status 5",
+     "budget": "budget 5",
+     "completed": "completed 5"
+
+    },
+    {
+     "id": "6",
+     "image": "image 6",
+     "projectname": "projectname 6",
+     "status": "status 6",
+     "budget": "budget 6",
+     "completed": "completed 6"
+    },
+    {
+     "id": "7",
+     "image": "image 7",
+     "projectname": "projectname 7",
+     "status": "status 7",
+     "budget": "budget 7",
+     "completed": "completed 7"
+
+    },
+    {
+     "id": "8",
+     "image": "image 8",
+     "projectname": "projectname 8",
+     "status": "status 8",
+     "budget": "budget 8",
+     "completed": "completed 8"
+    },
+    {
+     "id": "9",
+     "image": "image 9",
+     "projectname": "projectname 9",
+     "status": "status 9",
+     "budget": "budget 9",
+     "completed": "completed 9"
+
+    },
+    {
+     "id": "10",
+     "image": "image 10",
+     "projectname": "projectname 10",
+     "status": "status 10",
+     "budget": "budget 10",
+     "completed": "completed 10"
     }]
     const [projects, setProjects] = useState(projectInitial)
+    const RemoveLinha= ()=>{}
   return (
     <>
       <CustomHeader 
-      urlImage = "https://proxy.organicadigital.com/img-36724f4a253b9870.png?thumb=701x"
-      title = "Search Project"
-      descripion = "Search Project"
+      urlImage = "https://pesquisaescolar.site/wp-content/uploads/2018/03/img_5aa0432f0681a.png"
+      title = "Pesquisar Project"
+      descripion = "Pesquisar Project"
       />
       {/* Page content */}
       <Container className="mt--7" fluid>
@@ -78,7 +137,7 @@ const Tables = () => {
                         className="form-control-label"
                         htmlFor="input-username"
                       >
-                        Username
+                        Firstname
                       </label>
                       <Input
                         className="form-control-alternative"
@@ -89,12 +148,13 @@ const Tables = () => {
                       />
                       
                       <Button
-                        className="mr-4"
+                        className="mr-4 mt-3"
                         color="info"
                         href="#pablo"
                         onClick={(e) => e.preventDefault()}
                         size="sm"
                       >Pesquisar</Button>
+
                       </Col>
                     </FormGroup>
                     </CardHeader>
@@ -146,7 +206,7 @@ const Tables = () => {
                         </Media>
                       </Media>
                     </th>
-                    <td>$2,500 USD</td>
+                    <td>$4,000 USD</td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
                         <i className="bg-warning" />
@@ -156,11 +216,11 @@ const Tables = () => {
                     
                     <td>
                       <div className="d-flex align-items-center">
-                        <span className="mr-2">100%</span>
+                        <span className="mr-4">100%</span>
                         <div>
                           <Progress
                             max="100"
-                            value="60"
+                            value="100"
                             barClassName="bg-danger"
                           />
                         </div>
@@ -186,8 +246,7 @@ const Tables = () => {
                             Edit
                           </DropdownItem>
                           <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            onClick={(e) => RemoveLinha()}
                           >
                             Remove
                           </DropdownItem>
@@ -260,5 +319,9 @@ const Tables = () => {
     </>
   );
 };
+
+
+
+
 
 export default Tables;
