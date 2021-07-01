@@ -66,92 +66,54 @@ const Header = () => {
     SavedView?.setIndex(SavedView?.index + 1);
   }
 
-  const setUsersInRange = useCallback((data) => {
-        setTotalUsers(data?.length ?? 0);
-        let countUsersCreateOnDay = 0;
-        let countUsersCreateInWeek = 0;
-        let countUsersCreateInMonth = 0;
-        let countUsersCreateInYear = 0;
-        data?.map((user) => {
-          const dateHour = user?.date?.split('T');
+  const setDataInRange = useCallback((data) => {
+        let countDataCreateOnDay = 0;
+        let countDataCreateInWeek = 0;
+        let countDataCreateInMonth = 0;
+        let countDataCreateInYear = 0;
+        data?.map((element) => {
+          const dateHour = element?.date?.split('T');
           const isOnDay = checkUserInTime(dateHour[0], LAST_DAY);
           const isInWeek = checkUserInTime(dateHour[0], LAST_WEEK);
           const isInMonth = checkUserInTime(dateHour[0], LAST_MONTH);
           const isInYear = checkUserInTime(dateHour[0], LAST_YEAR);
-          countUsersCreateOnDay = (isOnDay) ? ++countUsersCreateOnDay : countUsersCreateOnDay;
-          countUsersCreateInWeek = (isInWeek) ? ++countUsersCreateInWeek : countUsersCreateInWeek;
-          countUsersCreateInMonth = (isInMonth) ? ++countUsersCreateInMonth : countUsersCreateInMonth;
-          countUsersCreateInYear = (isInYear) ? ++countUsersCreateInYear : countUsersCreateInYear;
+          countDataCreateOnDay = (isOnDay) ? ++countDataCreateOnDay : countDataCreateOnDay;
+          countDataCreateInWeek = (isInWeek) ? ++countDataCreateInWeek : countDataCreateInWeek;
+          countDataCreateInMonth = (isInMonth) ? ++countDataCreateInMonth : countDataCreateInMonth;
+          countDataCreateInYear = (isInYear) ? ++countDataCreateInYear : countDataCreateInYear;
           return null;
         });
-        setCountUsersInRange([countUsersCreateOnDay, countUsersCreateInWeek, countUsersCreateInMonth, countUsersCreateInYear]);
-  }, [checkUserInTime]);
-
-  const setProjectsInRange = useCallback((data) => {
-        setTotalProjects(data?.length ?? 0);
-        let countProjectCreateOnDay = 0;
-        let countProjectCreateInWeek = 0;
-        let countProjectCreateInMonth = 0;
-        let countProjectCreateInYear = 0;
-        data?.map((project) => {
-          const dateHour = project?.date?.split('T');
-          const isOnDay = checkUserInTime(dateHour[0], LAST_DAY);
-          const isInWeek = checkUserInTime(dateHour[0], LAST_WEEK);
-          const isInMonth = checkUserInTime(dateHour[0], LAST_MONTH);
-          const isInYear = checkUserInTime(dateHour[0], LAST_YEAR);
-          countProjectCreateOnDay = (isOnDay) ? ++countProjectCreateOnDay : countProjectCreateOnDay;
-          countProjectCreateInWeek = (isInWeek) ? ++countProjectCreateInWeek : countProjectCreateInWeek;
-          countProjectCreateInMonth = (isInMonth) ? ++countProjectCreateInMonth : countProjectCreateInMonth;
-          countProjectCreateInYear = (isInYear) ? ++countProjectCreateInYear : countProjectCreateInYear;
-          setCountProjectsInRange([countProjectCreateOnDay, countProjectCreateInWeek, countProjectCreateInMonth, countProjectCreateInYear]);
-          return null;
-        });
-    }, [checkUserInTime]);
-
-
-  const setConnectionsInRange = useCallback((data) => {
-        setTotalConnections(data?.length ?? 0);
-        let countConnectionsCreateOnDay = 0;
-        let countConnectionsCreateInWeek = 0;
-        let countConnectionsCreateInMonth = 0;
-        let countConnectionsCreateInYear = 0;
-        data?.map((user) => {
-          const dateHour = user?.date?.split('T');
-          const isOnDay = checkUserInTime(dateHour[0], LAST_DAY);
-          const isInWeek = checkUserInTime(dateHour[0], LAST_WEEK);
-          const isInMonth = checkUserInTime(dateHour[0], LAST_MONTH);
-          const isInYear = checkUserInTime(dateHour[0], LAST_YEAR);
-          countConnectionsCreateOnDay = (isOnDay) ? ++countConnectionsCreateOnDay : countConnectionsCreateOnDay;
-          countConnectionsCreateInWeek = (isInWeek) ? ++countConnectionsCreateInWeek : countConnectionsCreateInWeek;
-          countConnectionsCreateInMonth = (isInMonth) ? ++countConnectionsCreateInMonth : countConnectionsCreateInMonth;
-          countConnectionsCreateInYear = (isInYear) ? ++countConnectionsCreateInYear : countConnectionsCreateInYear;
-          setCountConnectionsInRange([countConnectionsCreateOnDay, countConnectionsCreateInWeek, countConnectionsCreateInMonth, countConnectionsCreateInYear]);
-          return null;
-        });
+        return ([countDataCreateOnDay, countDataCreateInWeek, countDataCreateInMonth, countDataCreateInYear]);
   }, [checkUserInTime]);
 
   const getUsers = () => {
     try {
-      setUsersInRange(SavedView?.users);
+      setTotalUsers(SavedView?.users?.length ?? 0);
+      setCountUsersInRange(setDataInRange(SavedView?.users));
       //console.log(SavedView?.users);
     } catch (error) {
-      setUsersInRange(SavedView?.users);
+      setTotalUsers(SavedView?.users?.length ?? 0);
+      setCountUsersInRange(setDataInRange(SavedView?.users));
     }
   }
 
   const getProjects = () => {
     try {
-      setProjectsInRange(SavedView?.projects);
+      setTotalProjects(SavedView?.projects?.length ?? 0);
+      setCountProjectsInRange(setDataInRange(SavedView?.projects));
     } catch (error) {
-      setProjectsInRange(SavedView?.projects);
+      setTotalProjects(SavedView?.projects?.length ?? 0);
+      setCountProjectsInRange(setDataInRange(SavedView?.projects));
     }
   }
 
   const getConnections = () => {
     try {
-      setConnectionsInRange(SavedView?.connections);
+      setTotalConnections(SavedView?.connections?.length ?? 0);
+      setCountConnectionsInRange(setDataInRange(SavedView?.connections));
     } catch (error) {
-      setConnectionsInRange(SavedView?.connections);
+      setTotalConnections(SavedView?.connections?.length ?? 0);
+      setCountConnectionsInRange(setDataInRange(SavedView?.connections));
     }
   }
 
